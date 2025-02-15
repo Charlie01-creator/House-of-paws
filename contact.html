@@ -3,47 +3,177 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact - House of Paws</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Contact Us - House of Paws</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+      position: relative;
+      width: 100%;
+      bottom: 0;
+    }
+
+    /* Contact Page Styles */
+    .contact {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact h2 {
+      font-size: 2.5rem;
+      color: #4CAF50;
+      text-align: center;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: space-around;
+      margin: 30px 0;
+    }
+
+    .contact-info div {
+      text-align: center;
+    }
+
+    .contact-info i {
+      font-size: 2rem;
+      color: #4CAF50;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .contact-form button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
   <header>
+    <h1>House of Paws</h1>
     <nav>
-      <div class="logo">House of Paws</div>
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
-      <ul class="nav-links">
+      <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="donate.html">Donate</a></li>
-        <li><a href="stories.html">Success Stories</a></li>
+        <li><a href="donors.html">Donor Wall</a></li>
+        <li><a href="videos.html">Videos</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <section class="contact">
-    <h1>Contact Us</h1>
-    <p>Have questions or want to get involved? Reach out to us!</p>
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" required></textarea>
+    <h2>Contact Us</h2>
+    <div class="contact-info">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <h3>Address</h3>
+        <p>123 Paws Street, Dogtown, USA</p>
+      </div>
+      <div>
+        <i class="fas fa-phone"></i>
+        <h3>Phone</h3>
+        <p>(123) 456-7890</p>
+      </div>
+      <div>
+        <i class="fas fa-envelope"></i>
+        <h3>Email</h3>
+        <p>info@houseofpaws.com</p>
+      </div>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
-    <h2>Our Address</h2>
-    <p>123 Dog Rescue Lane, Pawsville, USA</p>
-    <h2>Follow Us</h2>
-    <div class="social-links">
-      <a href="#">Facebook</a>
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
-    </div>
   </section>
 
   <footer>
-    <p>&copy; 2024 House of Paws. All rights reserved.</p>
+    <p>&copy; 2025 House of Paws. All rights reserved.</p>
   </footer>
 
-  <script src="scripts.js"></script>
+  <script>
+    // Contact Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent form submission
+
+      // Get form values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      // Validate form
+      if (name && email && message) {
+        alert(`Thank you, ${name}! Your message has been sent.`);
+        document.getElementById('contactForm').reset(); // Clear form
+      } else {
+        alert('Please fill out all fields.');
+      }
+    });
+  </script>
+
+  <!-- Font Awesome for Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>
