@@ -4,56 +4,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - House of Paws</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+      position: relative;
+      width: 100%;
+      bottom: 0;
+    }
+
+    /* About Us Page Styles */
+    .about {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      color: #4CAF50;
+    }
+
+    .about p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
   <header>
+    <h1>House of Paws</h1>
     <nav>
-      <div class="logo">House of Paws</div>
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
-      <ul class="nav-links">
+      <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="donate.html">Donate</a></li>
-        <li><a href="stories.html">Success Stories</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="donors.html">Donor Wall</a></li>
+        <li><a href="videos.html">Videos</a></li>
       </ul>
     </nav>
   </header>
 
   <section class="about">
-    <h1>About House of Paws</h1>
-    <p>Founded in 2019, House of Paws is a non-profit organization dedicated to rescuing and rehoming homeless dogs. Our mission is to provide love, care, and forever homes to dogs in need.</p>
-
-    <h2>Meet Our Dogs</h2>
-    <div class="gallery-3d">
-      <div class="gallery-container">
-        <div class="gallery-item">
-          <img src="dog1.jpg" alt="Dog 1">
-        </div>
-        <div class="gallery-item">
-          <img src="dog2.jpg" alt="Dog 2">
-        </div>
-        <div class="gallery-item">
-          <img src="dog3.jpg" alt="Dog 3">
-        </div>
-        <div class="gallery-item">
-          <img src="dog4.jpg" alt="Dog 4">
-        </div>
-        <div class="gallery-item">
-          <img src="dog5.jpg" alt="Dog 5">
-        </div>
-        <div class="gallery-item">
-          <img src="dog6.jpg" alt="Dog 6">
-        </div>
-      </div>
-    </div>
+    <h2>About Us</h2>
+    <p>Since 2019, House of Paws has been dedicated to rescuing and rehabilitating homeless dogs. Our mission is to provide a safe and loving environment for these animals while finding them forever homes.</p>
+    <p>We have supported over 100 dogs and continue to grow with the help of our generous donors.</p>
   </section>
 
   <footer>
-    <p>&copy; 2024 House of Paws. All rights reserved.</p>
+    <p>&copy; 2025 House of Paws. All rights reserved.</p>
   </footer>
 
-  <script src="scripts.js"></script>
+  <script>
+    // Add any JavaScript specific to the About Us page here
+  </script>
 </body>
 </html>
