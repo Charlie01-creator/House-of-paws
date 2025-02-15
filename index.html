@@ -9,8 +9,29 @@
     /* Home Page Styles */
     .hero {
       text-align: center;
-      padding: 100px 20px;
-      background-color: #e0f7fa;
+      padding: 150px 20px; /* Increased padding for better spacing */
+      background-image: url('25.jpg'); /* Add your image here */
+      background-size: cover;
+      background-position: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    }
+
+    .hero h2,
+    .hero p,
+    .hero button {
+      position: relative;
+      z-index: 1;
     }
 
     .hero button {
@@ -117,6 +138,7 @@
     </nav>
   </header>
 
+  <!-- Hero Section with Background Image -->
   <section class="hero">
     <h2>Help Us Save Homeless Dogs</h2>
     <p>Since 2019, we've supported over 100 dogs. Join us in our mission!</p>
