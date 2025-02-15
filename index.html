@@ -41,6 +41,32 @@
       margin-bottom: 20px;
     }
 
+    .blue-section {
+      background-image: url('images/dog-background-2.jpg'); /* Add your image here */
+      background-size: cover;
+      background-position: center;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .blue-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(30, 58, 138, 0.7); /* Royal Blue with 70% opacity */
+    }
+
+    .blue-section h2,
+    .blue-section p {
+      position: relative;
+      z-index: 1;
+    }
+
     .gallery {
       position: relative;
       width: 100%;
@@ -101,6 +127,12 @@
   <section class="image-background">
     <h2>Every Dog Deserves a Home</h2>
     <p>Your support can make a difference. Join us in our mission to rescue and rehabilitate homeless dogs.</p>
+  </section>
+
+  <!-- Blue Section with Image Background -->
+  <section class="blue-section">
+    <h2>Our Mission</h2>
+    <p>We are dedicated to providing a safe and loving environment for homeless dogs while finding them forever homes.</p>
   </section>
 
   <!-- 3D Image Gallery -->
