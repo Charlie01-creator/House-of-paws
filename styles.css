@@ -1,0 +1,50 @@
+● body {
+ font-family: Arial, sans-serif; 
+margin: 0; 
+padding: 0;
+}
+header {
+ background: #333;
+ color: white;
+ padding: 10px 20px;
+ display: flex; 
+justify-content: space-between;
+ align-items: center;
+ }
+.auth-links a { color: white;
+ text-decoration: none;
+ margin-left: 20px; 
+}
+.hero { 
+background: url('hero-image.jpg') no-repeat center center/cover;
+ color: white;
+ text-align: center; 
+padding: 50px 20px; 
+}
+.cta-button { 
+background: #ff5733; 
+color: white;
+ padding: 10px 20px; 
+text-decoration: none;
+ }
+.donation-tiers { 
+display: flex; 
+justify-content: 
+space-around; 
+padding: 20px;
+ }
+.tier { 
+background: 
+#f4f4f4; 
+padding: 15px;
+border-radius: 5px; 
+text-align: center;
+}
+.donate-button { background: #28a745; color: white; padding: 10px 20px; text-decoration: none; }
+footer { background: #333; color: white; text-align: center; padding: 20px 0; }
+.social-media { margin-bottom: 10px; }
+.social-media a { color: white; margin: 0 10px; 
+text-decoration: none; 
+nav { display: flex; flex-direction: column; align-items: flex-start; background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent */ padding: 10px; position: absolute; /* Optional for positioning */ left: 10px; /* Adjust position */ top: 70px; /* Adjust position below the header */ border-radius: 5px; }
+nav a { color: rgba(255, 255, 255, 0.7); /* Less visible */ margin: 5px 0; /* Vertical spacing */ text-decoration: none; transition: color 0.3s; /* Smooth hover effect */ }
+nav a:hover { color: white; /* Highlight on hover */ }
