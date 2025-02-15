@@ -6,11 +6,67 @@
   <title>House of Paws</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Home Page Styles */
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #1e3a8a; /* Royal Blue */
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1e3a8a; /* Royal Blue */
+      color: white;
+    }
+
+    /* Hero Section */
     .hero {
       text-align: center;
-      padding: 150px 20px; /* Increased padding for better spacing */
-      background-image: url('25.jpg'); /* Add your image here */
+      padding: 100px 20px;
+      background-image: url('images/hero-background.jpg'); /* Add your image here */
       background-size: cover;
       background-position: center;
       color: white;
@@ -34,12 +90,22 @@
       z-index: 1;
     }
 
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
     .hero button {
       background-color: #f59e0b; /* Gold */
       color: white;
       border: none;
       padding: 10px 20px;
-      font-size: 16px;
+      font-size: 1rem;
       cursor: pointer;
       border-radius: 5px;
     }
@@ -48,25 +114,31 @@
       background-color: #d97706; /* Darker Gold */
     }
 
+    /* Image Background Section */
     .image-background {
-      background-image: url('25.jpg'); /* Add your image here */
+      background-image: url('images/dog-background.jpg'); /* Add your image here */
       background-size: cover;
       background-position: center;
-      padding: 100px 20px;
+      padding: 80px 20px;
       text-align: center;
       color: white;
     }
 
     .image-background h2 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin-bottom: 20px;
     }
 
+    .image-background p {
+      font-size: 1.2rem;
+    }
+
+    /* Blue Section with Image Background */
     .blue-section {
-      background-image: url('25.jpg'); /* Add your image here */
+      background-image: url('images/dog-background-2.jpg'); /* Add your image here */
       background-size: cover;
       background-position: center;
-      padding: 100px 20px;
+      padding: 80px 20px;
       text-align: center;
       color: white;
       position: relative;
@@ -88,52 +160,134 @@
       z-index: 1;
     }
 
+    .blue-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .blue-section p {
+      font-size: 1.2rem;
+    }
+
+    /* 3D Image Gallery */
     .gallery-section {
       text-align: center;
-      margin: 20px 0; /* Reduced margin */
+      margin: 20px 0;
     }
 
     .gallery-section h3 {
-      font-size: 2.5rem; /* Larger heading */
+      font-size: 2rem; /* Larger heading */
       margin-bottom: 20px;
     }
 
     .gallery {
       position: relative;
       width: 100%;
-      height: 400px;
+      height: 300px; /* Adjusted height for mobile */
       perspective: 1000px;
-      margin: 20px 0; /* Reduced margin */
+      margin: 20px 0;
     }
 
     .gallery img {
       position: absolute;
-      width: 200px;
-      height: 200px;
+      width: 150px; /* Smaller images for mobile */
+      height: 150px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       transform-style: preserve-3d;
       transition: transform 1s;
     }
 
+    /* Vertical Video Section */
     .video-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 20px 0; /* Reduced margin */
+      margin: 20px 0;
     }
 
     .video-section h3 {
-      font-size: 2.5rem; /* Larger heading */
+      font-size: 2rem; /* Larger heading */
       margin-bottom: 20px;
     }
 
     .video-section video {
-      width: 80%;
+      width: 90%; /* Adjusted width for mobile */
       max-width: 600px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      margin: 10px 0; /* Reduced margin */
+      margin: 10px 0;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #1e3a8a;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .hero {
+        padding: 80px 20px;
+      }
+
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .image-background,
+      .blue-section {
+        padding: 60px 20px;
+      }
+
+      .image-background h2,
+      .blue-section h2 {
+        font-size: 1.8rem;
+      }
+
+      .image-background p,
+      .blue-section p {
+        font-size: 1rem;
+      }
+
+      .gallery-section h3,
+      .video-section h3 {
+        font-size: 1.8rem;
+      }
+
+      .gallery {
+        height: 250px; /* Adjusted height for smaller screens */
+      }
+
+      .gallery img {
+        width: 120px; /* Smaller images for smaller screens */
+        height: 120px;
+      }
+
+      .video-section video {
+        width: 100%; /* Full width for smaller screens */
+      }
     }
   </style>
 </head>
@@ -176,12 +330,12 @@
   <section class="gallery-section">
     <h3>Meet Our Dogs</h3>
     <div class="gallery" id="gallery">
-      <img src="25.jpg" alt="Dog 1">
-      <img src="25.jpg" alt="Dog 2">
-      <img src="25.jpg" alt="Dog 3">
-      <img src="25.jpg" alt="Dog 4">
-      <img src="25.jpg" alt="Dog 5">
-      <img src="25.jpg" alt="Dog 6">
+      <img src="images/dog1.jpg" alt="Dog 1">
+      <img src="images/dog2.jpg" alt="Dog 2">
+      <img src="images/dog3.jpg" alt="Dog 3">
+      <img src="images/dog4.jpg" alt="Dog 4">
+      <img src="images/dog5.jpg" alt="Dog 5">
+      <img src="images/dog6.jpg" alt="Dog 6">
     </div>
   </section>
 
