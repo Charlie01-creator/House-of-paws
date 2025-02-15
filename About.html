@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>House of Paws</title>
+  <title>About Us - House of Paws</title>
   <style>
     /* Global Styles */
     body, html {
@@ -23,7 +23,6 @@
       padding: 10px 20px;
       text-align: center;
       position: relative;
-      z-index: 1000; /* Ensure header is above other sections */
     }
 
     header h1 {
@@ -38,7 +37,7 @@
       position: absolute;
       top: 10px; /* Adjusted position */
       right: 20px;
-      z-index: 1001; /* Higher z-index to ensure it's in front */
+      z-index: 1000; /* Ensure it's above other elements */
       background-color: black; /* Black background */
       padding: 10px; /* Add padding for better click area */
       border-radius: 5px; /* Rounded corners */
@@ -62,166 +61,69 @@
       font-size: 1rem;
     }
 
-    /* Hero Section */
-    .hero {
+    /* Main Content Styles */
+    .about-section {
+      padding: 60px 20px;
       text-align: center;
-      padding: 80px 20px; /* Adjusted padding for mobile */
-      background-image: url('images/hero-background.jpg'); /* Add your image here */
-      background-size: cover;
-      background-position: center;
-      color: white;
-      position: relative;
-      z-index: 1; /* Ensure hero is below the hamburger and navigation */
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-      z-index: -1; /* Ensure overlay is below the content */
-    }
-
-    .hero h2,
-    .hero p,
-    .hero button {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h2 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
+    .about-section h2 {
+      font-size: 2rem;
       margin-bottom: 20px;
+      color: #1e3a8a; /* Royal Blue */
     }
 
-    .hero p {
-      font-size: 1rem; /* Adjusted font size for mobile */
-      margin-bottom: 20px;
-    }
-
-    .hero button {
-      background-color: #f59e0b; /* Gold */
-      color: white;
-      border: none;
-      padding: 10px 20px;
+    .about-section p {
       font-size: 1rem;
-      cursor: pointer;
-      border-radius: 5px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 20px;
     }
 
-    .hero button:hover {
-      background-color: #d97706; /* Darker Gold */
-    }
-
-    /* Image Background Section */
-    .image-background {
-      background-image: url('images/dog-background.jpg'); /* Add your image here */
-      background-size: cover;
-      background-position: center;
-      padding: 60px 20px; /* Adjusted padding for mobile */
+    .team-section {
+      padding: 60px 20px;
+      background-color: #f1f1f1;
       text-align: center;
-      color: white;
     }
 
-    .image-background h2 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
+    .team-section h2 {
+      font-size: 2rem;
       margin-bottom: 20px;
+      color: #1e3a8a; /* Royal Blue */
     }
 
-    .image-background p {
-      font-size: 1rem; /* Adjusted font size for mobile */
-    }
-
-    /* Blue Section with Image Background */
-    .blue-section {
-      background-image: url('images/dog-background-2.jpg'); /* Add your image here */
-      background-size: cover;
-      background-position: center;
-      padding: 60px 20px; /* Adjusted padding for mobile */
-      text-align: center;
-      color: white;
-      position: relative;
-    }
-
-    .blue-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(30, 58, 138, 0.7); /* Royal Blue with 70% opacity */
-    }
-
-    .blue-section h2,
-    .blue-section p {
-      position: relative;
-      z-index: 1;
-    }
-
-    .blue-section h2 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
-      margin-bottom: 20px;
-    }
-
-    .blue-section p {
-      font-size: 1rem; /* Adjusted font size for mobile */
-    }
-
-    /* 3D Image Gallery */
-    .gallery-section {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .gallery-section h3 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
-      margin-bottom: 20px;
-    }
-
-    .gallery {
-      position: relative;
-      width: 100%;
-      height: 250px; /* Adjusted height for mobile */
-      perspective: 1000px;
-      margin: 20px auto; /* Center the gallery */
+    .team-grid {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
+      gap: 20px;
     }
 
-    .gallery img {
-      position: absolute;
-      width: 120px; /* Smaller images for mobile */
-      height: 120px;
+    .team-member {
+      background-color: white;
+      padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transform-style: preserve-3d;
-      transition: transform 1s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 250px;
+      text-align: center;
     }
 
-    /* Vertical Video Section */
-    .video-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 20px 0;
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
     }
 
-    .video-section h3 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
-      margin-bottom: 20px;
+    .team-member h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #1e3a8a; /* Royal Blue */
     }
 
-    .video-section video {
-      width: 100%; /* Full width for mobile */
-      max-width: 600px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      margin: 10px 0;
+    .team-member p {
+      font-size: 0.9rem;
+      color: #666;
     }
 
     /* Footer Styles */
@@ -242,51 +144,32 @@
         display: none; /* Hide menu by default */
         flex-direction: column;
         background-color: #1e3a8a;
-        position: fixed; /* Fix menu to top */
-        top: 0; /* Position below the header */
+        position: absolute;
+        top: 60px;
         left: 0;
         width: 100%;
         text-align: center;
-        padding: 20px 0;
-        z-index: 1002; /* Higher z-index to ensure it's above other sections */
-        transition: transform 0.3s ease; /* Smooth transition for sliding effect */
-        transform: translateY(-100%); /* Initially hidden */
       }
 
       nav ul.active {
-        display: flex;
-        transform: translateY(0); /* Slide in when active */
+        display: flex; /* Show menu when active */
       }
 
       nav ul li {
         margin: 10px 0;
       }
 
-      .hero h2 {
-        font-size: 1.5rem; /* Smaller font size for very small screens */
+      .about-section h2,
+      .team-section h2 {
+        font-size: 1.8rem; /* Smaller font size for mobile */
       }
 
-      .hero p {
-        font-size: 0.9rem; /* Smaller font size for very small screens */
+      .about-section p {
+        font-size: 0.9rem; /* Smaller font size for mobile */
       }
 
-      .image-background h2,
-      .blue-section h2 {
-        font-size: 1.5rem; /* Smaller font size for very small screens */
-      }
-
-      .image-background p,
-      .blue-section p {
-        font-size: 0.9rem; /* Smaller font size for very small screens */
-      }
-
-      .gallery {
-        height: 200px; /* Smaller height for very small screens */
-      }
-
-      .gallery img {
-        width: 100px; /* Smaller images for very small screens */
-        height: 100px;
+      .team-member {
+        max-width: 100%; /* Full width for mobile */
       }
     }
   </style>
@@ -308,53 +191,39 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h2>Help Us Save Homeless Dogs</h2>
-    <p>Since 2019, we've supported over 100 dogs. Join us in our mission!</p>
-    <button onclick="window.location.href='donate.html'">Donate Now</button>
+  <!-- About Section -->
+  <section class="about-section">
+    <h2>About Us</h2>
+    <p>
+      Welcome to <strong>House of Paws</strong>, a non-profit organization dedicated to rescuing and rehabilitating homeless dogs. 
+      Since our founding in 2019, we have provided shelter, medical care, and love to over 100 dogs, helping them find their forever homes.
+    </p>
+    <p>
+      Our mission is to create a world where every dog has a safe and loving environment. We believe that every dog deserves a second chance, 
+      and we work tirelessly to make that a reality.
+    </p>
   </section>
 
-  <!-- Image Background Section -->
-  <section class="image-background">
-    <h2>Every Dog Deserves a Home</h2>
-    <p>Your support can make a difference. Join us in our mission to rescue and rehabilitate homeless dogs.</p>
-  </section>
-
-  <!-- Blue Section -->
-  <section class="blue-section">
-    <h2>Our Mission</h2>
-    <p>We are dedicated to providing a safe and loving environment for homeless dogs while finding them forever homes.</p>
-  </section>
-
-  <!-- 3D Image Gallery -->
-  <section class="gallery-section">
-    <h3>Meet Our Dogs</h3>
-    <div class="gallery" id="gallery">
-      <img src="images/dog1.jpg" alt="Dog 1">
-      <img src="images/dog2.jpg" alt="Dog 2">
-      <img src="images/dog3.jpg" alt="Dog 3">
-      <img src="images/dog4.jpg" alt="Dog 4">
-      <img src="images/dog5.jpg" alt="Dog 5">
-      <img src="images/dog6.jpg" alt="Dog 6">
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2>Our Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="images/team1.jpg" alt="Team Member 1">
+        <h3>John Doe</h3>
+        <p>Founder & CEO</p>
+      </div>
+      <div class="team-member">
+        <img src="images/team2.jpg" alt="Team Member 2">
+        <h3>Jane Smith</h3>
+        <p>Veterinarian</p>
+      </div>
+      <div class="team-member">
+        <img src="images/team3.jpg" alt="Team Member 3">
+        <h3>Emily Brown</h3>
+        <p>Adoption Coordinator</p>
+      </div>
     </div>
-  </section>
-
-  <!-- Vertical Video Section -->
-  <section class="video-section">
-    <h3>Watch Our Journey</h3>
-    <video controls>
-      <source src="videos/video1.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <video controls>
-      <source src="videos/video2.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <video controls>
-      <source src="videos/video3.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
   </section>
 
   <!-- Footer -->
@@ -370,22 +239,6 @@
       navMenu.classList.toggle('active');
       hamburger.setAttribute('aria-expanded', navMenu.classList.contains('active'));
     }
-
-    // 3D Image Gallery Animation
-    const gallery = document.getElementById('gallery');
-    const images = gallery.getElementsByTagName('img');
-    let angle = 0;
-
-    setInterval(() => {
-      angle = (angle + 1) % 360;
-      for (let i = 0; i < images.length; i++) {
-        const imgAngle = (angle + (i * 60)) % 360; // 6 images, 60 degrees apart
-        const radius = window.innerWidth < 768 ? 100 : 200; /* Adjust radius for mobile */
-        const x = Math.sin((imgAngle * Math.PI) / 180) * radius;
-        const z = Math.cos((imgAngle * Math.PI) / 180) * radius;
-        images[i].style.transform = `rotateY(${imgAngle}deg) translateX(${x}px) translateZ(${z}px)`;
-      }
-    }, 50);
   </script>
 </body>
 </html>
