@@ -1,50 +1,107 @@
-● body {
- font-family: Arial, sans-serif; 
-margin: 0; 
-padding: 0;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
+
 header {
- background: #333;
- color: white;
- padding: 10px 20px;
- display: flex; 
-justify-content: space-between;
- align-items: center;
- }
-.auth-links a { color: white;
- text-decoration: none;
- margin-left: 20px; 
+  background-color: #6C9BCF;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.hero { 
-background: url('hero-image.jpg') no-repeat center center/cover;
- color: white;
- text-align: center; 
-padding: 50px 20px; 
+
+nav ul {
+  list-style: none;
+  display: flex;
 }
-.cta-button { 
-background: #ff5733; 
-color: white;
- padding: 10px 20px; 
-text-decoration: none;
- }
-.donation-tiers { 
-display: flex; 
-justify-content: 
-space-around; 
-padding: 20px;
- }
-.tier { 
-background: 
-#f4f4f4; 
-padding: 15px;
-border-radius: 5px; 
-text-align: center;
+
+nav ul li {
+  margin: 0 15px;
 }
-.donate-button { background: #28a745; color: white; padding: 10px 20px; text-decoration: none; }
-footer { background: #333; color: white; text-align: center; padding: 20px 0; }
-.social-media { margin-bottom: 10px; }
-.social-media a { color: white; margin: 0 10px; 
-text-decoration: none; 
-nav { display: flex; flex-direction: column; align-items: flex-start; background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent */ padding: 10px; position: absolute; /* Optional for positioning */ left: 10px; /* Adjust position */ top: 70px; /* Adjust position below the header */ border-radius: 5px; }
-nav a { color: rgba(255, 255, 255, 0.7); /* Less visible */ margin: 5px 0; /* Vertical spacing */ text-decoration: none; transition: color 0.3s; /* Smooth hover effect */ }
-nav a:hover { color: white; /* Highlight on hover */ }
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.hero {
+  background: url('dog-hero.jpg') no-repeat center center/cover;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.cta-button {
+  background-color: #FFA500;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+/* Gallery Container */
+.gallery-3d {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px; /* Adds depth for 3D effect */
+  margin: 50px auto;
+  width: 100%;
+  height: 300px;
+}
+
+.gallery-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d; /* Enables 3D transformations */
+  animation: rotateGallery 20s infinite linear; /* Slow rotation */
+}
+
+.gallery-item {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Position each image in 3D space */
+.gallery-item:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
+.gallery-item:nth-child(2) { transform: rotateY(60deg) translateZ(300px); }
+.gallery-item:nth-child(3) { transform: rotateY(120deg) translateZ(300px); }
+.gallery-item:nth-child(4) { transform: rotateY(180deg) translateZ(300px); }
+.gallery-item:nth-child(5) { transform: rotateY(240deg) translateZ(300px); }
+.gallery-item:nth-child(6) { transform: rotateY(300deg) translateZ(300px); }
+
+/* Animation for slow rotation */
+@keyframes rotateGallery {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
