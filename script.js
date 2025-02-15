@@ -1,27 +1,27 @@
-﻿function showCryptoForm() {
-    document.getElementById("crypto-form").classList.remove("hidden");
-    document.getElementById("bank-form").classList.add("hidden");
-    document.getElementById("credit-card-form").classList.add("hidden");
-    document.getElementById("paypal-form").classList.add("hidden");
+function toggleMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  navLinks.classList.toggle('active');
 }
 
-function showBankForm() {
-    document.getElementById("crypto-form").classList.add("hidden");
-    document.getElementById("bank-form").classList.remove("hidden");
-    document.getElementById("credit-card-form").classList.add("hidden");
-    document.getElementById("paypal-form").classList.add("hidden");
-}
+// Example progress bar update
+const progress = document.getElementById('progress');
+const raised = document.getElementById('raised');
+const remaining = document.getElementById('remaining');
 
-function showCreditCardForm() {
-    document.getElementById("crypto-form").classList.add("hidden");
-    document.getElementById("bank-form").classList.add("hidden");
-    document.getElementById("credit-card-form").classList.remove("hidden");
-    document.getElementById("paypal-form").classList.add("hidden");
-}
+let totalRaised = 5000; // Example amount
+const goal = 20000;
 
-function showPayPalForm() {
-    document.getElementById("crypto-form").classList.add("hidden");
-    document.getElementById("bank-form").classList.add("hidden");
-    document.getElementById("credit-card-form").classList.add("hidden");
-    document.getElementById("paypal-form").classList.remove("hidden");
-}
+progress.style.width = `${(totalRaised / goal) * 100}%`;
+raised.innerText = `$${totalRaised}`;
+remaining.innerText = `$${goal - totalRaised}`;
+const galleryContainer = document.querySelector('.gallery-container');
+
+// Pause rotation on hover
+galleryContainer.addEventListener('mouseenter', () => {
+  galleryContainer.style.animationPlayState = 'paused';
+});
+
+// Resume rotation on mouse leave
+galleryContainer.addEventListener('mouseleave', () => {
+  galleryContainer.style.animationPlayState = 'running';
+});
