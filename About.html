@@ -6,89 +6,239 @@
   <title>About Us - House of Paws</title>
   <style>
     /* Global Styles */
-    body {
-      font-family: Arial, sans-serif;
+    body, html {
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      width: 100%;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
     }
 
+    /* Header Styles */
     header {
-      background-color: #4CAF50;
+      background-color: #1e3a8a; /* Royal Blue */
       color: white;
-      padding: 10px 0;
+      padding: 10px 20px;
       text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .hamburger {
+      display: none; /* Hidden by default */
+      font-size: 2rem; /* Bigger hamburger icon */
+      cursor: pointer;
+      position: absolute;
+      top: 10px; /* Adjusted position */
+      right: 20px;
+      z-index: 1000; /* Ensure it's above other elements */
+      background-color: black; /* Black background */
+      padding: 10px; /* Add padding for better click area */
+      border-radius: 5px; /* Rounded corners */
     }
 
     nav ul {
       list-style: none;
       padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
     }
 
     nav ul li {
-      display: inline;
       margin: 0 15px;
     }
 
     nav ul li a {
       color: white;
       text-decoration: none;
+      font-size: 1rem;
     }
 
+    /* Main Content Styles */
+    .about-section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #1e3a8a; /* Royal Blue */
+    }
+
+    .about-section p {
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+
+    .team-section {
+      padding: 60px 20px;
+      background-color: #f1f1f1;
+      text-align: center;
+    }
+
+    .team-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #1e3a8a; /* Royal Blue */
+    }
+
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .team-member {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 250px;
+      text-align: center;
+    }
+
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .team-member h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #1e3a8a; /* Royal Blue */
+    }
+
+    .team-member p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Footer Styles */
     footer {
       text-align: center;
       padding: 20px;
-      background-color: #333;
+      background-color: #1e3a8a;
       color: white;
-      position: relative;
-      width: 100%;
-      bottom: 0;
     }
 
-    /* About Us Page Styles */
-    .about {
-      text-align: center;
-      padding: 50px 20px;
-    }
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block; /* Show hamburger on mobile */
+      }
 
-    .about h2 {
-      font-size: 2.5rem;
-      color: #4CAF50;
-    }
+      nav ul {
+        display: none; /* Hide menu by default */
+        flex-direction: column;
+        background-color: #1e3a8a;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
 
-    .about p {
-      font-size: 1.2rem;
-      line-height: 1.6;
+      nav ul.active {
+        display: flex; /* Show menu when active */
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+
+      .about-section h2,
+      .team-section h2 {
+        font-size: 1.8rem; /* Smaller font size for mobile */
+      }
+
+      .about-section p {
+        font-size: 0.9rem; /* Smaller font size for mobile */
+      }
+
+      .team-member {
+        max-width: 100%; /* Full width for mobile */
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
     <h1>House of Paws</h1>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle Menu" aria-expanded="false">&#9776;</div>
     <nav>
-      <ul>
+      <ul id="navMenu">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="donate.html">Donate</a></li>
         <li><a href="donors.html">Donor Wall</a></li>
         <li><a href="videos.html">Videos</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <section class="about">
+  <!-- About Section -->
+  <section class="about-section">
     <h2>About Us</h2>
-    <p>Since 2019, House of Paws has been dedicated to rescuing and rehabilitating homeless dogs. Our mission is to provide a safe and loving environment for these animals while finding them forever homes.</p>
-    <p>We have supported over 100 dogs and continue to grow with the help of our generous donors.</p>
+    <p>
+      Welcome to <strong>House of Paws</strong>, a non-profit organization dedicated to rescuing and rehabilitating homeless dogs. 
+      Since our founding in 2019, we have provided shelter, medical care, and love to over 100 dogs, helping them find their forever homes.
+    </p>
+    <p>
+      Our mission is to create a world where every dog has a safe and loving environment. We believe that every dog deserves a second chance, 
+      and we work tirelessly to make that a reality.
+    </p>
   </section>
 
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2>Our Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="images/team1.jpg" alt="Team Member 1">
+        <h3>John Doe</h3>
+        <p>Founder & CEO</p>
+      </div>
+      <div class="team-member">
+        <img src="images/team2.jpg" alt="Team Member 2">
+        <h3>Jane Smith</h3>
+        <p>Veterinarian</p>
+      </div>
+      <div class="team-member">
+        <img src="images/team3.jpg" alt="Team Member 3">
+        <h3>Emily Brown</h3>
+        <p>Adoption Coordinator</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 House of Paws. All rights reserved.</p>
   </footer>
 
   <script>
-    // Add any JavaScript specific to the About Us page here
+    // Toggle Hamburger Menu
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      navMenu.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', navMenu.classList.contains('active'));
+    }
   </script>
 </body>
 </html>
