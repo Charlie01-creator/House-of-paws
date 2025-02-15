@@ -9,7 +9,7 @@
     /* Home Page Styles */
     .hero {
       text-align: center;
-      padding: 50px 20px;
+      padding: 100px 20px;
       background-color: #e0f7fa;
     }
 
@@ -25,6 +25,20 @@
 
     .hero button:hover {
       background-color: #d97706; /* Darker Gold */
+    }
+
+    .image-background {
+      background-image: url('images/dog-background.jpg'); /* Add your image here */
+      background-size: cover;
+      background-position: center;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .image-background h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
 
     .gallery {
@@ -47,14 +61,17 @@
 
     .video-section {
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
+      align-items: center;
       margin: 50px 0;
     }
 
     .video-section video {
-      width: 30%;
+      width: 80%;
+      max-width: 600px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin: 20px 0;
     }
   </style>
 </head>
@@ -80,6 +97,12 @@
     <button onclick="window.location.href='donate.html'">Donate Now</button>
   </section>
 
+  <!-- Image Background Section -->
+  <section class="image-background">
+    <h2>Every Dog Deserves a Home</h2>
+    <p>Your support can make a difference. Join us in our mission to rescue and rehabilitate homeless dogs.</p>
+  </section>
+
   <!-- 3D Image Gallery -->
   <section class="gallery-section">
     <h3>Meet Our Dogs</h3>
@@ -93,23 +116,21 @@
     </div>
   </section>
 
-  <!-- Video Section -->
+  <!-- Vertical Video Section -->
   <section class="video-section">
     <h3>Watch Our Journey</h3>
-    <div class="video-container">
-      <video controls>
-        <source src="videos/video1.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <video controls>
-        <source src="videos/video2.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <video controls>
-        <source src="videos/video3.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    <video controls>
+      <source src="videos/video1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video controls>
+      <source src="videos/video2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video controls>
+      <source src="videos/video3.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </section>
 
   <footer>
