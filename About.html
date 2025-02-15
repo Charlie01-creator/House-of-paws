@@ -71,7 +71,7 @@
       background-position: center;
       color: white;
       position: relative;
-      z-index: 1; /* Ensure hero is below the hamburger */
+      z-index: 1; /* Ensure hero is below the hamburger and navigation */
     }
 
     .hero::before {
@@ -243,10 +243,11 @@
         flex-direction: column;
         background-color: #1e3a8a;
         position: absolute;
-        top: 60px;
+        top: 60px; /* Position below the header */
         left: 0;
         width: 100%;
         text-align: center;
+        z-index: 1002; /* Higher z-index to ensure it's above other sections */
       }
 
       nav ul.active {
