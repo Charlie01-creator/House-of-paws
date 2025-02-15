@@ -4,43 +4,194 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Donate - House of Paws</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+      position: relative;
+      width: 100%;
+      bottom: 0;
+    }
+
+    /* Donate Page Styles */
+    .donate {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .donate h2 {
+      font-size: 2.5rem;
+      color: #4CAF50;
+      text-align: center;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: #f3f3f3;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .progress {
+      width: 50%; /* Update this dynamically with JavaScript */
+      height: 30px;
+      background-color: #4CAF50;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+    }
+
+    .donation-options {
+      display: flex;
+      justify-content: space-around;
+      margin: 30px 0;
+    }
+
+    .donation-options button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .donation-options button:hover {
+      background-color: #45a049;
+    }
+
+    .donation-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .donation-form input {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .donation-form button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .donation-form button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
   <header>
+    <h1>House of Paws</h1>
     <nav>
-      <div class="logo">House of Paws</div>
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
-      <ul class="nav-links">
+      <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="donate.html">Donate</a></li>
-        <li><a href="stories.html">Success Stories</a></li>
+        <li><a href="donors.html">Donor Wall</a></li>
+        <li><a href="videos.html">Videos</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <section class="donate">
-    <h1>Donate to Save a Life</h1>
-    <p>Your donation helps us provide food, shelter, and medical care to homeless dogs. Every dollar counts!</p>
-    <div class="payment-options">
-      <button onclick="donateWithPayPal()">Donate with PayPal</button>
-      <button onclick="donateWithCrypto()">Donate with Cryptocurrency</button>
+    <h2>Donate Now</h2>
+    <div class="progress-bar">
+      <div class="progress" id="progress">50%</div>
     </div>
-    <h2>Donor Recognition</h2>
-    <p>We are grateful to our donors. Here are some of our recent supporters:</p>
-    <ul id="donor-list">
-      <li>John D. - $100</li>
-      <li>Jane S. - $50</li>
-      <li>Anonymous - $200</li>
-    </ul>
+    <p>Goal: $20,000 | Raised: $10,000</p>
+
+    <div class="donation-options">
+      <button onclick="window.location.href='https://www.paypal.com'">Donate via PayPal</button>
+      <button onclick="showCryptoForm()">Donate via Cryptocurrency</button>
+    </div>
+
+    <form class="donation-form" id="cryptoForm" style="display: none;">
+      <input type="text" id="cryptoAddress" placeholder="Enter Your Crypto Address" required>
+      <input type="number" id="amount" placeholder="Enter Amount (USD)" required>
+      <button type="submit">Proceed to Donate</button>
+    </form>
   </section>
 
   <footer>
-    <p>&copy; 2024 House of Paws. All rights reserved.</p>
+    <p>&copy; 2025 House of Paws. All rights reserved.</p>
   </footer>
 
-  <script src="scripts.js"></script>
+  <script>
+    // Progress Bar Update
+    const goal = 20000;
+    const raised = 10000;
+    const progress = (raised / goal) * 100;
+    document.getElementById('progress').style.width = `${progress}%`;
+    document.getElementById('progress').innerText = `${progress.toFixed(2)}%`;
+
+    // Show Crypto Form
+    function showCryptoForm() {
+      document.getElementById('cryptoForm').style.display = 'block';
+    }
+
+    // Crypto Form Submission
+    document.getElementById('cryptoForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent form submission
+
+      const cryptoAddress = document.getElementById('cryptoAddress').value;
+      const amount = document.getElementById('amount').value;
+
+      if (cryptoAddress && amount) {
+        alert(`Thank you! Your donation of $${amount} will be processed.`);
+        document.getElementById('cryptoForm').reset(); // Clear form
+      } else {
+        alert('Please fill out all fields.');
+      }
+    });
+  </script>
 </body>
 </html>
