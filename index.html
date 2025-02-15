@@ -4,38 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>House of Paws</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
-    /* Global Styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-
-    header {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 0;
-      text-align: center;
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    nav ul li {
-      display: inline;
-      margin: 0 15px;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-    }
-
+    /* Home Page Styles */
     .hero {
       text-align: center;
       padding: 50px 20px;
@@ -43,7 +14,7 @@
     }
 
     .hero button {
-      background-color: #4CAF50;
+      background-color: #f59e0b; /* Gold */
       color: white;
       border: none;
       padding: 10px 20px;
@@ -53,38 +24,9 @@
     }
 
     .hero button:hover {
-      background-color: #45a049;
+      background-color: #d97706; /* Darker Gold */
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #333;
-      color: white;
-      position: relative;
-      width: 100%;
-      bottom: 0;
-    }
-
-    /* Progress Bar Styles */
-    .progress-bar {
-      width: 100%;
-      background-color: #f3f3f3;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 20px 0;
-    }
-
-    .progress {
-      width: 50%; /* Update this dynamically with JavaScript */
-      height: 30px;
-      background-color: #4CAF50;
-      text-align: center;
-      line-height: 30px;
-      color: white;
-    }
-
-    /* 3D Gallery Styles */
     .gallery {
       position: relative;
       width: 100%;
@@ -103,7 +45,6 @@
       transition: transform 1s;
     }
 
-    /* Video Section Styles */
     .video-section {
       display: flex;
       justify-content: space-around;
@@ -120,13 +61,15 @@
 <body>
   <header>
     <h1>House of Paws</h1>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
     <nav>
-      <ul>
+      <ul id="navMenu">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="donate.html">Donate</a></li>
         <li><a href="donors.html">Donor Wall</a></li>
         <li><a href="videos.html">Videos</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -134,10 +77,6 @@
   <section class="hero">
     <h2>Help Us Save Homeless Dogs</h2>
     <p>Since 2019, we've supported over 100 dogs. Join us in our mission!</p>
-    <div class="progress-bar">
-      <div class="progress" id="progress">50%</div>
-    </div>
-    <p>Goal: $20,000 | Raised: $10,000</p>
     <button onclick="window.location.href='donate.html'">Donate Now</button>
   </section>
 
@@ -178,12 +117,11 @@
   </footer>
 
   <script>
-    // Progress Bar Update
-    const goal = 20000;
-    const raised = 10000;
-    const progress = (raised / goal) * 100;
-    document.getElementById('progress').style.width = `${progress}%`;
-    document.getElementById('progress').innerText = `${progress.toFixed(2)}%`;
+    // Toggle Hamburger Menu
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('active');
+    }
 
     // 3D Image Gallery Animation
     const gallery = document.getElementById('gallery');
