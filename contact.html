@@ -6,93 +6,116 @@
   <title>Contact Us - House of Paws</title>
   <style>
     /* Global Styles */
-    body {
-      font-family: Arial, sans-serif;
+    body, html {
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      width: 100%;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
     }
 
+    /* Header Styles */
     header {
-      background-color: #4CAF50;
+      background-color: #1e3a8a; /* Royal Blue */
       color: white;
-      padding: 10px 0;
+      padding: 10px 20px;
       text-align: center;
+      position: relative;
+      z-index: 1000; /* Ensure header is above other sections */
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .hamburger {
+      display: none; /* Hidden by default */
+      font-size: 2rem; /* Bigger hamburger icon */
+      cursor: pointer;
+      position: absolute;
+      top: 10px; /* Adjusted position */
+      right: 20px;
+      z-index: 1001; /* Higher z-index to ensure it's in front */
+      background-color: black; /* Black background */
+      padding: 10px; /* Add padding for better click area */
+      border-radius: 5px; /* Rounded corners */
     }
 
     nav ul {
       list-style: none;
       padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
     }
 
     nav ul li {
-      display: inline;
       margin: 0 15px;
     }
 
     nav ul li a {
       color: white;
       text-decoration: none;
+      font-size: 1rem;
     }
 
-    footer {
+    /* Contact Section */
+    .contact-section {
+      padding: 80px 20px;
       text-align: center;
-      padding: 20px;
-      background-color: #333;
-      color: white;
-      position: relative;
-      width: 100%;
-      bottom: 0;
-    }
-
-    /* Contact Page Styles */
-    .contact {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
       background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .contact h2 {
-      font-size: 2.5rem;
-      color: #4CAF50;
-      text-align: center;
-    }
-
-    .contact-info {
-      display: flex;
-      justify-content: space-around;
-      margin: 30px 0;
-    }
-
-    .contact-info div {
-      text-align: center;
-    }
-
-    .contact-info i {
+    .contact-section h2 {
       font-size: 2rem;
-      color: #4CAF50;
+      margin-bottom: 20px;
+      color: #1e3a8a; /* Royal Blue */
+    }
+
+    .contact-section p {
+      font-size: 1rem;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .contact-form {
-      display: flex;
-      flex-direction: column;
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      text-align: left;
     }
 
     .contact-form input,
     .contact-form textarea {
-      margin: 10px 0;
+      width: 100%;
       padding: 10px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 1rem;
     }
 
+    .contact-form textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
     .contact-form button {
-      background-color: #4CAF50;
+      background-color: #f59e0b; /* Gold */
       color: white;
       border: none;
       padding: 10px 20px;
@@ -102,15 +125,106 @@
     }
 
     .contact-form button:hover {
-      background-color: #45a049;
+      background-color: #d97706; /* Darker Gold */
+    }
+
+    .contact-info {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #1e3a8a; /* Royal Blue */
+    }
+
+    .contact-info p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      color: #666;
+    }
+
+    .contact-info a {
+      color: #1e3a8a; /* Royal Blue */
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .map {
+      width: 100%;
+      height: 300px;
+      margin-top: 40px;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    /* Footer Styles */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1e3a8a;
+      color: white;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block; /* Show hamburger on mobile */
+      }
+
+      nav ul {
+        display: none; /* Hide menu by default */
+        flex-direction: column;
+        background-color: #1e3a8a;
+        position: absolute;
+        top: 60px; /* Position below the header */
+        left: 0;
+        width: 100%;
+        text-align: center;
+        z-index: 1002; /* Higher z-index to ensure it's above other sections */
+      }
+
+      nav ul.active {
+        display: flex; /* Show menu when active */
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+
+      .contact-section h2 {
+        font-size: 1.8rem; /* Smaller font size for mobile */
+      }
+
+      .contact-section p {
+        font-size: 0.9rem; /* Smaller font size for mobile */
+      }
+
+      .contact-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .contact-form,
+      .contact-info {
+        max-width: 100%; /* Full width for mobile */
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
     <h1>House of Paws</h1>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle Menu" aria-expanded="false">&#9776;</div>
     <nav>
-      <ul>
+      <ul id="navMenu">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="donate.html">Donate</a></li>
@@ -121,59 +235,57 @@
     </nav>
   </header>
 
-  <section class="contact">
+  <!-- Contact Section -->
+  <section class="contact-section">
     <h2>Contact Us</h2>
-    <div class="contact-info">
-      <div>
-        <i class="fas fa-map-marker-alt"></i>
-        <h3>Address</h3>
-        <p>123 Paws Street, Dogtown, USA</p>
+    <p>
+      Have questions or want to get in touch? We'd love to hear from you! Fill out the form below, 
+      and we'll get back to you as soon as possible.
+    </p>
+    <div class="contact-container">
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <form action="#" method="post">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <input type="text" name="subject" placeholder="Subject" required>
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
       </div>
-      <div>
-        <i class="fas fa-phone"></i>
-        <h3>Phone</h3>
-        <p>(123) 456-7890</p>
-      </div>
-      <div>
-        <i class="fas fa-envelope"></i>
-        <h3>Email</h3>
-        <p>info@houseofpaws.com</p>
+
+      <!-- Contact Information -->
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p><strong>Address:</strong> 123 Dog Lane, Pet City, PC 12345</p>
+        <p><strong>Phone:</strong> <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+        <p><strong>Email:</strong> <a href="mailto:info@houseofpaws.com">info@houseofpaws.com</a></p>
+        <p><strong>Working Hours:</strong> Mon - Fri: 9 AM - 5 PM</p>
       </div>
     </div>
 
-    <form class="contact-form" id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+    <!-- Map -->
+    <iframe
+      class="map"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.8354345093747!2d144.9537353153166!3d-37.816279742021665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d6a32f7f1f8!2s123%20Dog%20Lane%2C%20Pet%20City%2C%20PC%2012345!5e0!3m2!1sen!2sus!4v1622549400000!5m2!1sen!2sus"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 House of Paws. All rights reserved.</p>
   </footer>
 
   <script>
-    // Contact Form Submission
-    document.getElementById('contactForm').addEventListener('submit', function (e) {
-      e.preventDefault(); // Prevent form submission
-
-      // Get form values
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
-
-      // Validate form
-      if (name && email && message) {
-        alert(`Thank you, ${name}! Your message has been sent.`);
-        document.getElementById('contactForm').reset(); // Clear form
-      } else {
-        alert('Please fill out all fields.');
-      }
-    });
+    // Toggle Hamburger Menu
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      navMenu.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', navMenu.classList.contains('active'));
+    }
   </script>
-
-  <!-- Font Awesome for Icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>
