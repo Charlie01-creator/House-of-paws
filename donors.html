@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donor Wall - House of Paws</title>
+  <style>
+    /* Global Styles */
+    body, html {
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: #1e3a8a; /* Royal Blue */
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1000; /* Ensure header is above other sections */
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .hamburger {
+      display: none; /* Hidden by default */
+      font-size: 2rem; /* Bigger hamburger icon */
+      cursor: pointer;
+      position: absolute;
+      top: 10px; /* Adjusted position */
+      right: 20px;
+      z-index: 1001; /* Higher z-index to ensure it's in front */
+      background-color: black; /* Black background */
+      padding: 10px; /* Add padding for better click area */
+      border-radius: 5px; /* Rounded corners */
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    /* Donor Wall Section */
+    .donor-wall-section {
+      padding: 80px 20px;
+      text-align: center;
+      background-color: white;
+    }
+
+    .donor-wall-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #1e3a8a; /* Royal Blue */
+    }
+
+    .donor-wall-section p {
+      font-size: 1rem;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .donor-categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .donor-category {
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 250px;
+      max-width: 300px;
+      text-align: left;
+    }
+
+    .donor-category h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #1e3a8a; /* Royal Blue */
+    }
+
+    .donor-category ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .donor-category ul li {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    .donor-category ul li strong {
+      color: #1e3a8a; /* Royal Blue */
+    }
+
+    /* Footer Styles */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1e3a8a;
+      color: white;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block; /* Show hamburger on mobile */
+      }
+
+      nav ul {
+        display: none; /* Hide menu by default */
+        flex-direction: column;
+        background-color: #1e3a8a;
+        position: absolute;
+        top: 60px; /* Position below the header */
+        left: 0;
+        width: 100%;
+        text-align: center;
+        z-index: 1002; /* Higher z-index to ensure it's above other sections */
+      }
+
+      nav ul.active {
+        display: flex; /* Show menu when active */
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+
+      .donor-wall-section h2 {
+        font-size: 1.8rem; /* Smaller font size for mobile */
+      }
+
+      .donor-wall-section p {
+        font-size: 0.9rem; /* Smaller font size for mobile */
+      }
+
+      .donor-categories {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .donor-category {
+        max-width: 100%; /* Full width for mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>House of Paws</h1>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle Menu" aria-expanded="false">&#9776;</div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="donors.html">Donor Wall</a></li>
+        <li><a href="videos.html">Videos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Donor Wall Section -->
+  <section class="donor-wall-section">
+    <h2>Donor Wall</h2>
+    <p>
+      We are incredibly grateful to our generous donors who have supported our mission to rescue and 
+      rehabilitate homeless dogs. Thank you for making a difference!
+    </p>
+    <div class="donor-categories">
+      <!-- Gold Donors -->
+      <div class="donor-category">
+        <h3>Gold Donors ($1,000+)</h3>
+        <ul>
+          <li><strong>John Doe</strong></li>
+          <li><strong>Jane Smith</strong></li>
+          <li><strong>Pet Lovers Inc.</strong></li>
+        </ul>
+      </div>
+
+      <!-- Silver Donors -->
+      <div class="donor-category">
+        <h3>Silver Donors ($500 - $999)</h3>
+        <ul>
+          <li><strong>Emily Brown</strong></li>
+          <li><strong>Michael Johnson</strong></li>
+          <li><strong>Happy Tails Foundation</strong></li>
+        </ul>
+      </div>
+
+      <!-- Bronze Donors -->
+      <div class="donor-category">
+        <h3>Bronze Donors ($100 - $499)</h3>
+        <ul>
+          <li><strong>Sarah Lee</strong></li>
+          <li><strong>David Wilson</strong></li>
+          <li><strong>Paws & Claws Rescue</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 House of Paws. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Toggle Hamburger Menu
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      navMenu.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', navMenu.classList.contains('active'));
+    }
+  </script>
+</body>
+</html>
