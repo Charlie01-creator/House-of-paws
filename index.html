@@ -3,388 +3,286 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>House of Paws</title>
+  <title>House of Paws - Rescue & Rehome</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Global Styles */
+    :root {
+      --primary: #1e3a8a;
+      --secondary: #f59e0b;
+      --light: #f8fafc;
+      --dark: #1e293b;
+      --accent: #10b981;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
     body, html {
-      overflow-x: hidden; /* Prevent horizontal scrolling */
+      overflow-x: hidden;
       width: 100%;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      scroll-behavior: smooth;
     }
-
+    
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    
+    p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .btn-primary {
+      background-color: var(--secondary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #d97706;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+    
+    .btn-secondary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .section {
+      padding: 80px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      margin: 15px auto;
+      border-radius: 2px;
+    }
+    
+    .text-center {
+      text-align: center;
+    }
+    
     /* Header Styles */
     header {
-      background-color: #1e3a8a; /* Royal Blue */
+      background-color: var(--primary);
       color: white;
-      padding: 10px 20px;
-      text-align: center;
-      position: relative;
-      z-index: 1000; /* Ensure header is above other sections */
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
-
-    header h1 {
-      margin: 0;
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+    
+    .logo {
       font-size: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
     }
-
+    
+    .logo i {
+      color: var(--secondary);
+      margin-right: 10px;
+    }
+    
     .hamburger {
-      display: none; /* Hidden by default */
-      font-size: 2rem; /* Bigger hamburger icon */
+      display: none;
+      font-size: 1.8rem;
       cursor: pointer;
-      position: absolute;
-      top: 10px; /* Adjusted position */
-      right: 20px;
-      z-index: 1001; /* Higher z-index to ensure it's in front */
-      background-color: black; /* Black background */
-      padding: 10px; /* Add padding for better click area */
-      border-radius: 5px; /* Rounded corners */
+      background: none;
+      border: none;
+      color: white;
+      z-index: 1001;
     }
-
+    
     nav ul {
       list-style: none;
-      padding: 0;
-      margin: 0;
       display: flex;
-      justify-content: center;
+      gap: 25px;
     }
-
-    nav ul li {
-      margin: 0 15px;
-    }
-
+    
     nav ul li a {
       color: white;
-      text-decoration: none;
-      font-size: 1rem;
+      font-weight: 500;
+      padding: 5px 0;
+      position: relative;
+      transition: all 0.3s ease;
     }
-
+    
+    nav ul li a:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--secondary);
+      transition: width 0.3s ease;
+    }
+    
+    nav ul li a:hover:after {
+      width: 100%;
+    }
+    
+    nav ul li a:hover {
+      color: var(--secondary);
+    }
+    
     /* Hero Section */
     .hero {
-      text-align: center;
-      padding: 80px 20px; /* Adjusted padding for mobile */
-      background-image: url('25.jpg'); /* Add your image here */
-      background-size: cover;
-      background-position: center;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1583511655826-05700442b31b') center/cover no-repeat;
       color: white;
-      position: relative;
-      z-index: 1; /* Ensure hero is below the hamburger and navigation */
+      text-align: center;
+      padding-top: 80px;
     }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-      z-index: -1; /* Ensure overlay is below the content */
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-
-    .hero h2,
-    .hero p,
-    .hero button {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h2 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
+    
+    .hero h1 {
+      font-size: 3rem;
       margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
-
+    
     .hero p {
-      font-size: 1rem; /* Adjusted font size for mobile */
-      margin-bottom: 20px;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
-
-    .hero button {
-      background-color: #f59e0b; /* Gold */
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .hero button:hover {
-      background-color: #d97706; /* Darker Gold */
-    }
-
-    /* Image Background Section */
-    .image-background {
-      background-image: url('25.jpg'); /* Add your image here */
-      background-size: cover;
-      background-position: center;
-      padding: 60px 20px; /* Adjusted padding for mobile */
-      text-align: center;
-      color: white;
-    }
-
-    .image-background h2 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
-      margin-bottom: 20px;
-    }
-
-    .image-background p {
-      font-size: 1rem; /* Adjusted font size for mobile */
-    }
-
-    /* Blue Section with Image Background */
-    .blue-section {
-      background-image: url('25.jpg'); /* Add your image here */
-      background-size: cover;
-      background-position: center;
-      padding: 60px 20px; /* Adjusted padding for mobile */
-      text-align: center;
-      color: white;
-      position: relative;
-    }
-
-    .blue-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(30, 58, 138, 0.7); /* Royal Blue with 70% opacity */
-    }
-
-    .blue-section h2,
-    .blue-section p {
-      position: relative;
-      z-index: 1;
-    }
-
-    .blue-section h2 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
-      margin-bottom: 20px;
-    }
-
-    .blue-section p {
-      font-size: 1rem; /* Adjusted font size for mobile */
-    }
-
-    /* 3D Image Gallery */
-    .gallery-section {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .gallery-section h3 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
-      margin-bottom: 20px;
-    }
-
-    .gallery {
-      position: relative;
-      width: 100%;
-      height: 250px; /* Adjusted height for mobile */
-      perspective: 1000px;
-      margin: 20px auto; /* Center the gallery */
+    
+    .hero-btns {
       display: flex;
+      gap: 15px;
       justify-content: center;
-      align-items: center;
+      flex-wrap: wrap;
     }
-
-    .gallery img {
-      position: absolute;
-      width: 120px; /* Smaller images for mobile */
-      height: 120px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transform-style: preserve-3d;
-      transition: transform 1s;
+    
+    /* About Section */
+    .about {
+      background-color: white;
     }
-
-    /* Vertical Video Section */
-    .video-section {
+    
+    .about-content {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       align-items: center;
-      margin: 20px 0;
+      gap: 40px;
     }
-
-    .video-section h3 {
-      font-size: 1.8rem; /* Adjusted font size for mobile */
-      margin-bottom: 20px;
+    
+    .about-text {
+      flex: 1;
+      min-width: 300px;
     }
-
-    .video-section video {
-      width: 100%; /* Full width for mobile */
-      max-width: 600px;
+    
+    .about-image {
+      flex: 1;
+      min-width: 300px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      margin: 10px 0;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
-
-    /* Footer Styles */
-    footer {
+    
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    
+    .about-image:hover img {
+      transform: scale(1.05);
+    }
+    
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      gap: 20px;
+    }
+    
+    .stat-item {
       text-align: center;
       padding: 20px;
-      background-color: #1e3a8a;
-      color: white;
+      background: var(--light);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      min-width: 150px;
+      transition: transform 0.3s ease;
     }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block; /* Show hamburger on mobile */
-      }
-
-      nav ul {
-        display: none; /* Hide menu by default */
-        flex-direction: column;
-        background-color: #1e3a8a;
-        position: fixed; /* Fix menu to top */
-        top: 0; /* Position below the header */
-        left: 0;
-        width: 100%;
-        text-align: center;
-        padding: 20px 0;
-        z-index: 1002; /* Higher z-index to ensure it's above other sections */
-        transition: transform 0.3s ease; /* Smooth transition for sliding effect */
-        transform: translateY(-100%); /* Initially hidden */
-      }
-
-      nav ul.active {
-        display: flex;
-        transform: translateY(0); /* Slide in when active */
-      }
-
-      nav ul li {
-        margin: 10px 0;
-      }
-
-      .hero h2 {
-        font-size: 1.5rem; /* Smaller font size for very small screens */
-      }
-
-      .hero p {
-        font-size: 0.9rem; /* Smaller font size for very small screens */
-      }
-
-      .image-background h2,
-      .blue-section h2 {
-        font-size: 1.5rem; /* Smaller font size for very small screens */
-      }
-
-      .image-background p,
-      .blue-section p {
-        font-size: 0.9rem; /* Smaller font size for very small screens */
-      }
-
-      .gallery {
-        height: 200px; /* Smaller height for very small screens */
-      }
-
-      .gallery img {
-        width: 100px; /* Smaller images for very small screens */
-        height: 100px;
-      }
+    
+    .stat-item:hover {
+      transform: translateY(-5px);
     }
-  </style>
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <h1>House of Paws</h1>
-    <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle Menu" aria-expanded="false">&#9776;</div>
-    <nav>
-      <ul id="navMenu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="donors.html">Donor Wall</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <h2>Help Us Save Homeless Dogs</h2>
-    <p>Since 2019, we've supported over 100 dogs. Join us in our mission!</p>
-    <button onclick="window.location.href='donate.html'">Donate Now</button>
-  </section>
-
-  <!-- Image Background Section -->
-  <section class="image-background">
-    <h2>Every Dog Deserves a Home</h2>
-    <p>Your support can make a difference. Join us in our mission to rescue and rehabilitate homeless dogs.</p>
-  </section>
-
-  <!-- Blue Section -->
-  <section class="blue-section">
-    <h2>Our Mission</h2>
-    <p>We are dedicated to providing a safe and loving environment for homeless dogs while finding them forever homes.</p>
-  </section>
-
-  <!-- 3D Image Gallery -->
-  <section class="gallery-section">
-    <h3>Meet Our Dogs</h3>
-    <div class="gallery" id="gallery">
-      <img src="25.jpg" alt="Dog 1">
-      <img src="25.jpg" alt="Dog 2">
-      <img src="25.jpg" alt="Dog 3">
-      <img src="25.jpg" alt="Dog 4">
-      <img src="25.jpg" alt="Dog 5">
-      <img src="25.jpg" alt="Dog 6">
-    </div>
-  </section>
-
-  <!-- Vertical Video Section -->
-  <section class="video-section">
-    <h3>Watch Our Journey</h3>
-    <video controls>
-      <source src="videos/video1.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <video controls>
-      <source src="videos/video2.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <video controls>
-      <source src="videos/video3.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 House of Paws. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // Toggle Hamburger Menu
-    function toggleMenu() {
-      const navMenu = document.getElementById('navMenu');
-      const hamburger = document.querySelector('.hamburger');
-      navMenu.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', navMenu.classList.contains('active'));
-    }
-
-    // 3D Image Gallery Animation
-    const gallery = document.getElementById('gallery');
-    const images = gallery.getElementsByTagName('img');
-    let angle = 0;
-
-    setInterval(() => {
-      angle = (angle + 1) % 360;
-      for (let i = 0; i < images.length; i++) {
-        const imgAngle = (angle + (i * 60)) % 360; // 6 images, 60 degrees apart
-        const radius = window.innerWidth < 768 ? 100 : 200; /* Adjust radius for mobile */
-        const x = Math.sin((imgAngle * Math.PI) / 180) * radius;
-        const z = Math.cos((imgAngle * Math.PI) / 180) * radius;
-        images[i].style.transform = `rotateY(${imgAngle}deg) translateX(${x}px) translateZ(${z}px)`;
-      }
-    }, 50);
-  </script>
-</body>
-</html>
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom:
