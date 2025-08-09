@@ -331,7 +331,50 @@
     .carousel-button.next {
       right: 10px;
     }
+.crypto-coin {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+  padding: 12px;
+  transition: all 0.2s ease;
+}
 
+.crypto-coin.active-touch {
+  transform: scale(0.95);
+  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.crypto-coin.long-touch {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.crypto-coin.copy-success {
+  animation: pulse 0.5s ease;
+  background: rgba(76, 175, 80, 0.2);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* For toast messages - mobile optimized */
+.toast-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  background: #333;
+  color: white;
+  border-radius: 50px;
+  z-index: 1000;
+  max-width: 90vw;
+  text-align: center;
+  word-break: break-all;
+}
     /* Donate Section */
     #donate {
       margin-bottom: 3rem;
@@ -944,6 +987,94 @@ cryptoCoins.forEach(coin => {
     }
   });
 });
+      /* Enhanced Crypto Address Copy - Mobile Optimized */
+const cryptoCoins = document.querySelectorAll('.crypto-coin');
+
+// Mobile-optimized touch feedback
+function addTouchFeedback(element) {
+  let touchTimer;
+  
+  element.addEventListener('touchstart', () => {
+    element.classList.add('active-touch');
+    touchTimer = setTimeout(() => {
+      element.classList.add('long-touch');
+    }, 500); // Long press threshold
+  });
+
+  const clearTouch = () => {
+    clearTimeout(touchTimer);
+    element.classList.remove('active-touch', 'long-touch');
+  };
+
+  element.addEventListener('touchend', clearTouch);
+  element.addEventListener('touchcancel', clearTouch);
+}
+
+// Improved copy function with mobile fallback
+async function copyToClipboard(text, element) {
+  try {
+    await navigator.clipboard.writeText(text);
+    
+    // Visual feedback optimized for mobile
+    element.classList.add('copy-success');
+    setTimeout(() => element.classList.remove('copy-success'), 1000);
+    
+    showToast(`Copied: ${text.substring(0, 6)}...${text.slice(-4)}`);
+  } catch (err) {
+    // Fallback for older browsers
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed'; // Prevent scrolling
+    document.body.appendChild(textarea);
+    textarea.select();
+    
+    try {
+      document.execCommand('copy');
+      showToast('Address copied!');
+    } catch (fallbackErr) {
+      showToast('Failed to copy. Please select and copy manually.');
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  }
+}
+
+// Apply to all crypto elements
+cryptoCoins.forEach(coin => {
+  // Add touch feedback
+  addTouchFeedback(coin);
+  
+  // Click/tap handler
+  const handleActivation = () => {
+    const address = coin.getAttribute('data-address');
+    if (!address) return;
+    
+    // Haptic feedback if available
+    if (window.navigator.vibrate) {
+      window.navigator.vibrate(50);
+    }
+    
+    copyToClipboard(address, coin);
+  };
+
+  // Mouse/touch events
+  coin.addEventListener('click', handleActivation);
+  
+  // Touch-only for mobile (prevents double triggers)
+  coin.addEventListener('touchend', (e) => {
+    if (!e.target.classList.contains('long-touch')) {
+      handleActivation();
+    }
+  });
+
+  // Keyboard support
+  coin.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleActivation();
+    }
+  });
+});
 
 
       /* Theme toggle */
@@ -981,5 +1112,6 @@ cryptoCoins.forEach(coin => {
   </script>
 </body>
 </html>
+
 
 
