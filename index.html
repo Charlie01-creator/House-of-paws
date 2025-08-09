@@ -5,6 +5,34 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HOUSE OF PAWS — Rescuing Dogs, Restoring Hope</title>
   <meta name="description" content="House of Paws rescue — help abandoned dogs. Donate, volunteer, and adopt. Fast, accessible, dark-themed site." />
+  
+  <!-- SEO & Social Meta -->
+  <meta property="og:title" content="HOUSE OF PAWS — Rescuing Dogs, Restoring Hope">
+  <meta property="og:description" content="Rescue, rehabilitate and rehome abandoned dogs. Your support pays for food, medicine and safe shelter.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://houseofpaws.org">
+  <meta property="og:image" content="https://houseofpaws.org/images/social-share.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AnimalShelter",
+      "name": "House of Paws",
+      "description": "Rescuing abandoned dogs and finding them loving homes",
+      "url": "https://houseofpaws.org",
+      "logo": "https://houseofpaws.org/images/logo.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Rescue Berry",
+        "addressLocality": "Kampala",
+        "addressCountry": "UG"
+      },
+      "telephone": "+256781915680",
+      "email": "houseofpaw256@gmail.com"
+    }
+  </script>
+
   <!-- Critical CSS inline for faster first paint -->
   <style>
     :root{
@@ -13,7 +41,7 @@
       --max-width:1200px; --radius:12px; --gap:18px; --shadow: 0 6px 20px rgba(2,6,10,0.6);
       --safe-min: 0.75rem;
     }
-    *{box-sizing:border-box}
+    *{box-sizing:border-box; margin:0; padding:0}
     html,body{height:100%}
     body{
       margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -24,97 +52,130 @@
     a{color:var(--accent); text-decoration:none}
     img{max-width:100%;display:block;height:auto}
     .container{width:94%;max-width:var(--max-width);margin:0 auto;padding:22px}
-    header{position:fixed;left:0;right:0;top:10px;z-index:99;padding:10px 0;backdrop-filter: blur(6px)}
+    
+    /* Header */
+    header{
+      position:fixed;left:0;right:0;top:0;z-index:99;
+      padding:10px 0;background:rgba(11,13,15,0.85);
+      backdrop-filter: blur(6px); border-bottom:1px solid rgba(255,255,255,0.03)
+    }
     .nav-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
-      width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
       display:grid;place-items:center;font-weight:700;color:#081014;box-shadow:var(--shadow);
     }
     .brand h1{font-size:1.05rem;margin:0;color:#fff;letter-spacing:0.6px}
-    nav{display:flex;gap:12px;align-items:center}
-    nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:var(--muted);font-size:0.95rem}
+    .brand-tagline{font-size:0.75rem;color:var(--muted)}
+    
+    /* Navigation */
+    nav{display:flex;gap:8px;align-items:center}
+    nav a{padding:8px 12px;border-radius:8px;font-weight:600;color:var(--muted);font-size:0.9rem}
     nav a:hover, nav a:focus{color:#fff;background:var(--glass)}
-    /* Hamburger */
-    .menu-btn{display:none;background:transparent;border:0;color:inherit;padding:8px;border-radius:8px}
-    .menu-btn:focus{outline:2px solid var(--accent); outline-offset:2px}
-    .btn{display:inline-grid;place-items:center;padding:10px 16px;border-radius:999px;font-weight:700;border:0;cursor:pointer}
+    
+    /* Buttons */
+    .btn{display:inline-grid;place-items:center;padding:10px 16px;border-radius:999px;font-weight:700;border:0;cursor:pointer;font-size:0.95rem}
     .btn.primary{background:linear-gradient(90deg,var(--accent),#ff8b7a);color:#081014}
     .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    /* Hero */
-    .hero{margin-top:86px;padding:56px 0 60px;display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center}
-    .hero-left h2{font-size:2.1rem;margin:0 0 12px;color:#fff}
-    .hero-left p{color:var(--muted);max-width:58ch;margin-bottom:18px}
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    
+    /* Hero Section */
+    .hero{margin-top:76px;padding:36px 0 40px;display:grid;grid-template-columns:1fr;gap:24px}
+    .hero-left h2{font-size:1.8rem;margin:0 0 12px;color:#fff;line-height:1.2}
+    .hero-left p{color:var(--muted);max-width:58ch;margin-bottom:18px;font-size:0.95rem}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
     .hero-media{border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03)}
     .hero-media img{width:100%;height:100%;object-fit:cover;display:block}
+    
     /* Stats */
-    .stats{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:28px 0;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .stat{flex:1;min-width:120px;text-align:center;padding:6px}
-    .stat h3{font-size:1.6rem;margin:0;color:#fff}
-    .stat p{color:var(--muted);font-size:0.9rem;margin-top:6px}
-    /* Gallery 3D */
-    .gallery-wrap{padding:26px 0}
-    .gallery-stage{height:340px;display:grid;place-items:center;perspective:1200px;position:relative}
-    .carousel{width:100%;max-width:820px;height:100%;position:relative;transform-style:preserve-3d;animation:spin 32s linear infinite}
+    .stats{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:24px 0;padding:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .stat{flex:1;min-width:100px;text-align:center;padding:4px}
+    .stat h3{font-size:1.4rem;margin:0;color:#fff}
+    .stat p{color:var(--muted);font-size:0.8rem;margin-top:4px}
+    
+    /* Gallery 3D - Mobile Optimized */
+    .gallery-wrap{padding:20px 0}
+    .gallery-stage{height:280px;display:grid;place-items:center;perspective:1000px;position:relative}
+    .carousel{width:100%;max-width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 32s linear infinite}
     .carousel.paused{animation-play-state:paused}
-    .card{position:absolute;width:300px;height:300px;left:50%;top:50%;transform-origin:center center;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,0.03);background:#071014;box-shadow: 0 12px 40px rgba(2,6,10,0.6)}
+    .card{position:absolute;width:220px;height:220px;left:50%;top:50%;transform-origin:center center;border-radius:10px;overflow:hidden;
+      border:2px solid rgba(255,255,255,0.03);background:#071014;box-shadow: 0 8px 24px rgba(2,6,10,0.6)}
     .card img{width:100%;height:100%;object-fit:cover}
+    
     /* positions */
-    .card:nth-child(1){transform:translate(-50%,-50%) rotateY(0deg) translateZ(360px)}
-    .card:nth-child(2){transform:translate(-50%,-50%) rotateY(60deg) translateZ(360px)}
-    .card:nth-child(3){transform:translate(-50%,-50%) rotateY(120deg) translateZ(360px)}
-    .card:nth-child(4){transform:translate(-50%,-50%) rotateY(180deg) translateZ(360px)}
-    .card:nth-child(5){transform:translate(-50%,-50%) rotateY(240deg) translateZ(360px)}
-    .card:nth-child(6){transform:translate(-50%,-50%) rotateY(300deg) translateZ(360px)}
+    .card:nth-child(1){transform:translate(-50%,-50%) rotateY(0deg) translateZ(280px)}
+    .card:nth-child(2){transform:translate(-50%,-50%) rotateY(60deg) translateZ(280px)}
+    .card:nth-child(3){transform:translate(-50%,-50%) rotateY(120deg) translateZ(280px)}
+    .card:nth-child(4){transform:translate(-50%,-50%) rotateY(180deg) translateZ(280px)}
+    .card:nth-child(5){transform:translate(-50%,-50%) rotateY(240deg) translateZ(280px)}
+    .card:nth-child(6){transform:translate(-50%,-50%) rotateY(300deg) translateZ(280px)}
     @keyframes spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+    
     /* Donate panel */
-    .donate-panel{margin-top:22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .donation-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-    .preset{min-width:110px;padding:12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);text-align:center;cursor:pointer}
-    .preset.selected{box-shadow:0 10px 30px rgba(0,0,0,0.6);border-color:rgba(255,255,255,0.06);background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
-    .preset h4{margin:0;color:#fff}
-    .preset p{margin:4px 0 0;color:var(--muted);font-size:0.9rem}
-    .progress-outer{height:12px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;margin-top:14px}
+    .donate-panel{margin-top:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .donation-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .preset{min-width:90px;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);text-align:center;cursor:pointer;font-size:0.9rem}
+    .preset.selected{box-shadow:0 8px 24px rgba(0,0,0,0.6);border-color:rgba(255,255,255,0.06);background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+    .preset h4{margin:0;color:#fff;font-size:1rem}
+    .preset p{margin:4px 0 0;color:var(--muted);font-size:0.8rem}
+    
+    /* Progress bar */
+    .progress-outer{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;margin-top:12px}
     .progress-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width 400ms linear}
-    .donation-actions{display:flex;gap:10px;margin-top:14px;align-items:center}
-    .input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit;min-width:140px}
-    /* crypto block */
-    .crypto-grid{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .crypto-item{display:flex;gap:10px;padding:10px;border-radius:8px;align-items:center;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
-    .crypto-address{margin-top:10px;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;word-break:break-all}
-    /* stories */
-    .stories{margin-top:28px;display:grid;gap:14px}
-    .story-list{display:flex;gap:12px;overflow:auto;padding-bottom:8px}
-    .story{min-width:280px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03)}
-    .story img{height:160px;object-fit:cover}
-    .story .meta{padding:12px}
-    .story h3{margin:0 0 6px;color:#fff}
-    .story p{margin:0;color:var(--muted);font-size:0.95rem}
-    /* footer */
-    footer{margin-top:34px;padding:30px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02)}
-    footer .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
-    /* small screens */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;gap:18px}
-      .carousel{max-width:520px}
-      .card{width:220px;height:220px}
-    }
-    @media (max-width:640px){
+    
+    /* Input fields */
+    .input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit;min-width:120px;font-size:0.95rem}
+    
+    /* Stories */
+    .stories{margin-top:24px;display:grid;gap:12px}
+    .story-list{display:flex;gap:10px;overflow:auto;padding-bottom:8px;scrollbar-width:thin}
+    .story{min-width:240px;border-radius:8px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03)}
+    .story img{height:140px;object-fit:cover}
+    .story .meta{padding:10px}
+    .story h3{margin:0 0 6px;color:#fff;font-size:1rem}
+    .story p{margin:0;color:var(--muted);font-size:0.85rem}
+    
+    /* Footer */
+    footer{margin-top:30px;padding:24px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);font-size:0.9rem}
+    footer .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+    
+    /* Toast */
+    .toast{position:fixed;right:14px;bottom:14px;background:#071719;color:#e6fff7;padding:10px 14px;border-radius:8px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:all 260ms;z-index:120;font-size:0.9rem}
+    .toast.show{opacity:1;transform:translateY(0)}
+    
+    /* Mobile Menu */
+    .menu-btn{display:none;background:transparent;border:0;color:inherit;padding:8px;border-radius:8px;cursor:pointer}
+    .menu-btn:focus{outline:2px solid var(--accent); outline-offset:2px}
+    #navMobile{display:none;background:rgba(11,13,15,0.95);padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+    #navMobile .container{display:flex;flex-direction:column;gap:8px}
+    #navMobile a{padding:8px 12px;border-radius:6px;display:block;color:var(--muted);font-size:0.95rem}
+    #navMobile a:hover, #navMobile a:focus{background:rgba(255,255,255,0.05);color:#fff}
+    
+    /* Responsive Adjustments */
+    @media (max-width:768px){
+      .container{padding:16px}
+      .hero{margin-top:66px;padding:24px 0 30px}
+      .hero-left h2{font-size:1.6rem}
+      .stats{flex-direction:column;gap:8px;padding:12px}
+      .stat{min-width:100%}
+      .gallery-stage{height:240px}
+      .card{width:180px;height:180px}
+      .card:nth-child(1){transform:translate(-50%,-50%) rotateY(0deg) translateZ(220px)}
+      .card:nth-child(2){transform:translate(-50%,-50%) rotateY(60deg) translateZ(220px)}
+      .card:nth-child(3){transform:translate(-50%,-50%) rotateY(120deg) translateZ(220px)}
+      .card:nth-child(4){transform:translate(-50%,-50%) rotateY(180deg) translateZ(220px)}
+      .card:nth-child(5){transform:translate(-50%,-50%) rotateY(240deg) translateZ(220px)}
+      .card:nth-child(6){transform:translate(-50%,-50%) rotateY(300deg) translateZ(220px)}
       nav{display:none}
       .menu-btn{display:inline-block}
-      .stats{flex-direction:column;gap:8px}
-      .carousel{max-width:360px}
-      .card{width:160px;height:160px}
     }
-    /* reduced motion */
+    
+    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       .carousel{animation:none}
       .card{transition:none}
     }
-    /* toast */
-    .toast{position:fixed;right:18px;bottom:18px;background:#071719;color:#e6fff7;padding:12px 16px;border-radius:10px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:all 260ms;z-index:120}
-    .toast.show{opacity:1;transform:translateY(0)}
   </style>
 </head>
 <body>
@@ -124,7 +185,7 @@
         <div class="logo" aria-hidden="true">HP</div>
         <div>
           <h1>HOUSE OF PAWS</h1>
-          <div style="font-size:0.8rem;color:var(--muted)">Rescuing Dogs, Restoring Hope</div>
+          <div class="brand-tagline">Rescuing Dogs, Restoring Hope</div>
         </div>
       </div>
 
@@ -136,18 +197,21 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <div style="display:flex;gap:10px;align-items:center">
+      <div style="display:flex;gap:8px;align-items:center">
         <a class="btn ghost" href="https://www.paypal.com/donate" aria-label="Donate via PayPal">PayPal</a>
         <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navMobile" title="Open menu">
-          <!-- small inline svg burger -->
-          <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true"><rect y="0" width="22" height="2" rx="1" fill="currentColor"/><rect y="6" width="22" height="2" rx="1" fill="currentColor"/><rect y="12" width="22" height="2" rx="1" fill="currentColor"/></svg>
+          <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+            <rect y="0" width="22" height="2" rx="1" fill="currentColor"/>
+            <rect y="6" width="22" height="2" rx="1" fill="currentColor"/>
+            <rect y="12" width="22" height="2" rx="1" fill="currentColor"/>
+          </svg>
         </button>
       </div>
     </div>
 
-    <!-- simple mobile nav (hidden on larger screens) -->
-    <div id="navMobile" style="display:none;background:linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.7));padding:14px;">
-      <div class="container" style="display:flex;flex-direction:column;gap:8px">
+    <!-- Mobile Navigation -->
+    <div id="navMobile" style="display:none">
+      <div class="container">
         <a href="#home">Home</a>
         <a href="#gallery">Meet Dogs</a>
         <a href="#donate">Donate</a>
@@ -175,10 +239,12 @@
       </div>
 
       <div class="hero-media" aria-hidden="false" role="img" aria-label="Smiling rescued dog">
-        <!-- responsive hero image - lazy loaded -->
         <picture>
           <source media="(min-width:800px)" srcset="https://images.unsplash.com/photo-1583511655826-05700442b31b?q=60&w=1200&auto=format&fit=crop 1x">
-          <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1583511655826-05700442b31b?q=40&w=800&auto=format&fit=crop" alt="Smiling rescued dog">
+          <source media="(min-width:500px)" srcset="https://images.unsplash.com/photo-1583511655826-05700442b31b?q=60&w=800&auto=format&fit=crop 1x">
+          <img loading="lazy" decoding="async" 
+               src="https://images.unsplash.com/photo-1583511655826-05700442b31b?q=40&w=500&auto=format&fit=crop" 
+               alt="Smiling rescued dog">
         </picture>
       </div>
     </section>
@@ -187,18 +253,36 @@
     <section id="gallery" class="gallery-wrap" aria-labelledby="galleryTitle">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
         <h2 id="galleryTitle" style="margin:0">Our happy residents</h2>
-        <div style="color:var(--muted);font-size:0.95rem">Hover or focus a card to pause</div>
+        <div style="color:var(--muted);font-size:0.9rem">Hover or focus a card to pause</div>
       </div>
 
-      <div class="gallery-stage" style="margin-top:14px">
+      <div class="gallery-stage" style="margin-top:12px">
         <div id="carousel" class="carousel" tabindex="0" aria-live="polite">
           <!-- each card uses a small placeholder and lazy-loads the real image -->
-          <figure class="card"><img data-src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?q=60&w=800&auto=format&fit=crop" alt="Rescued dog 1" loading="lazy"></figure>
-          <figure class="card"><img data-src="https://images.unsplash.com/photo-1552053831-71594a27632d?q=60&w=800&auto=format&fit=crop" alt="Rescued dog 2" loading="lazy"></figure>
-          <figure class="card"><img data-src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?q=60&w=800&auto=format&fit=crop" alt="Rescued dog 3" loading="lazy"></figure>
-          <figure class="card"><img data-src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?q=60&w=800&auto=format&fit=crop" alt="Rescued dog 4" loading="lazy"></figure>
-          <figure class="card"><img data-src="https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=60&w=800&auto=format&fit=crop" alt="Rescued dog 5" loading="lazy"></figure>
-          <figure class="card"><img data-src="https://images.unsplash.com/photo-1544568100-847a948585b9?q=60&w=800&auto=format&fit=crop" alt="Rescued dog 6" loading="lazy"></figure>
+          <figure class="card">
+            <img data-src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?q=60&w=500&auto=format&fit=crop" 
+                 alt="Rescued dog 1" loading="lazy">
+          </figure>
+          <figure class="card">
+            <img data-src="https://images.unsplash.com/photo-1552053831-71594a27632d?q=60&w=500&auto=format&fit=crop" 
+                 alt="Rescued dog 2" loading="lazy">
+          </figure>
+          <figure class="card">
+            <img data-src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?q=60&w=500&auto=format&fit=crop" 
+                 alt="Rescued dog 3" loading="lazy">
+          </figure>
+          <figure class="card">
+            <img data-src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?q=60&w=500&auto=format&fit=crop" 
+                 alt="Rescued dog 4" loading="lazy">
+          </figure>
+          <figure class="card">
+            <img data-src="https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=60&w=500&auto=format&fit=crop" 
+                 alt="Rescued dog 5" loading="lazy">
+          </figure>
+          <figure class="card">
+            <img data-src="https://images.unsplash.com/photo-1544568100-847a948585b9?q=60&w=500&auto=format&fit=crop" 
+                 alt="Rescued dog 6" loading="lazy">
+          </figure>
         </div>
       </div>
     </section>
@@ -206,10 +290,10 @@
     <!-- Donate -->
     <section id="donate" class="donate-panel" aria-labelledby="donateTitle">
       <h2 id="donateTitle">Your donation makes a difference</h2>
-      <p style="color:var(--muted);margin-top:6px">Choose an amount or enter a custom gift. We accept PayPal, credit card (via secure gateway), and crypto.</p>
+      <p style="color:var(--muted);margin-top:6px;font-size:0.95rem">Choose an amount or enter a custom gift. We accept PayPal, credit card (via secure gateway), and crypto.</p>
 
-      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;align-items:flex-start">
-        <div style="flex:1;min-width:260px">
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;align-items:flex-start">
+        <div style="flex:1;min-width:240px">
           <div class="donation-row" role="radiogroup" aria-label="Donation presets">
             <button class="preset" data-amount="25" role="radio" aria-checked="false"><h4>$25</h4><p>Feeds a dog for a week</p></button>
             <button class="preset" data-amount="50" role="radio" aria-checked="false"><h4>$50</h4><p>Basic medical care</p></button>
@@ -217,7 +301,7 @@
             <button class="preset" data-amount="custom" role="radio" aria-checked="false"><h4>Custom</h4><p>Choose your amount</p></button>
           </div>
 
-          <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+          <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
             <input id="donationAmount" class="input" type="number" min="5" value="25" aria-label="Donation amount in dollars">
             <button id="donateNow" class="btn primary">Donate</button>
             <button id="openCard" class="btn ghost" aria-expanded="false">Credit</button>
@@ -226,31 +310,31 @@
           <div class="progress-outer" aria-hidden="false" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="1" style="margin-top:10px">
             <div id="progressBar" class="progress-inner" style="width:1%"></div>
           </div>
-          <div style="display:flex;justify-content:space-between;color:var(--muted);margin-top:8px">
+          <div style="display:flex;justify-content:space-between;color:var(--muted);margin-top:8px;font-size:0.9rem">
             <div>Raised: <strong id="raisedLabel">$1,251</strong></div>
             <div>Goal: <strong>$100,000</strong></div>
           </div>
 
           <!-- credit form (progressive enhancement; NOT a payment processor) -->
           <form id="cardForm" style="display:none;margin-top:12px" aria-hidden="true" novalidate>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
               <input class="input" name="fullName" placeholder="Full name" required>
               <input class="input" name="email" type="email" placeholder="Email" required>
             </div>
-            <div style="display:flex;gap:10px;margin-top:8px">
+            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
               <input class="input" name="card" placeholder="Card number" inputmode="numeric" autocomplete="cc-number" required>
-              <input class="input" name="expiry" placeholder="MM/YY" required style="max-width:110px">
-              <input class="input" name="cvc" placeholder="CVC" inputmode="numeric" required style="max-width:100px">
+              <input class="input" name="expiry" placeholder="MM/YY" required style="max-width:100px">
+              <input class="input" name="cvc" placeholder="CVC" inputmode="numeric" required style="max-width:80px">
             </div>
-            <div style="margin-top:10px;display:flex;gap:10px">
+            <div style="margin-top:10px;display:flex;gap:8px">
               <button type="submit" class="btn primary">Pay (Demo)</button>
               <button type="button" class="btn ghost" id="cancelCard">Cancel</button>
             </div>
-            <div style="font-size:0.85rem;color:var(--muted);margin-top:8px">Note: This demo does not process payments. Integrate your payment gateway (Stripe, PayPal, etc.) on the server for real donations.</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-top:8px">Note: This demo does not process payments. Integrate your payment gateway (Stripe, PayPal, etc.) on the server for real donations.</div>
           </form>
         </div>
 
-        <aside style="width:320px;min-width:260px">
+        <aside style="width:300px;min-width:240px">
           <div style="background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)">
             <strong style="display:block">Donate via Crypto</strong>
             <div class="crypto-grid" role="list">
@@ -270,16 +354,16 @@
 
             <div id="cryptoAddressWrap" style="margin-top:12px;display:none">
               <div class="crypto-address" id="cryptoAddress"></div>
-              <div style="margin-top:8px;display:flex;gap:8px">
+              <div style="margin-top:8px;display:flex;gap:6px">
                 <button id="copyAddr" class="btn ghost">Copy</button>
-                <a id="viewOnExplorer" class="btn ghost" href="#" target="_blank" rel="noopener">View</a>
+                <a id="viewOnExplorer" class="btn ghost" href="#" target="_blank" rel="noopener noreferrer">View</a>
               </div>
             </div>
           </div>
 
           <div style="margin-top:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.03)">
             <strong>Secure giving</strong>
-            <p style="margin:8px 0 0;color:var(--muted)">We use industry-standard payment processors. For crypto, double-check the address before sending.</p>
+            <p style="margin:8px 0 0;color:var(--muted);font-size:0.9rem">We use industry-standard payment processors. For crypto, double-check the address before sending.</p>
           </div>
         </aside>
       </div>
@@ -288,11 +372,11 @@
     <!-- Stories -->
     <section id="stories" class="stories" aria-labelledby="storiesTitle">
       <h2 id="storiesTitle">Success stories</h2>
-      <p style="color:var(--muted);margin-top:6px">Real dogs, real families — rescued and rehomed.</p>
+      <p style="color:var(--muted);margin-top:6px;font-size:0.95rem">Real dogs, real families — rescued and rehomed.</p>
 
       <div class="story-list" aria-live="polite" tabindex="0">
         <article class="story" role="article">
-          <img data-src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?q=60&w=800&auto=format&fit=crop" alt="Jazz the dog" loading="lazy">
+          <img data-src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?q=60&w=500&auto=format&fit=crop" alt="Jazz the dog" loading="lazy">
           <div class="meta">
             <h3>Jazz's Story</h3>
             <p>Found malnourished and scared — Jazz now lives happily with a loving family in Seattle.</p>
@@ -300,7 +384,7 @@
         </article>
 
         <article class="story" role="article">
-          <img data-src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?q=60&w=800&auto=format&fit=crop" alt="Luna the dog" loading="lazy">
+          <img data-src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?q=60&w=500&auto=format&fit=crop" alt="Luna the dog" loading="lazy">
           <div class="meta">
             <h3>Luna's Journey</h3>
             <p>Abandoned and injured, Luna recovered and now plays with three kids every day.</p>
@@ -308,7 +392,7 @@
         </article>
 
         <article class="story" role="article">
-          <img data-src="https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=60&w=800&auto=format&fit=crop" alt="Rocky the dog" loading="lazy">
+          <img data-src="https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=60&w=500&auto=format&fit=crop" alt="Rocky the dog" loading="lazy">
           <div class="meta">
             <h3>Rocki's Recovery</h3>
             <p>Severely injured, fully recovered and adopted. Rocki reminds us why we rescue.</p>
@@ -318,15 +402,15 @@
     </section>
 
     <!-- Contact & footer -->
-    <section id="contact" style="margin-top:28px">
+    <section id="contact" style="margin-top:24px">
       <h2>Contact</h2>
-      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px">
-        <div style="flex:1;min-width:220px">
-          <p style="color:var(--muted)">123 Rescue Berry, Kampala</p>
-          <p style="color:var(--muted)"><strong>Phone:</strong> (+256) 781-915680</p>
-          <p style="color:var(--muted)"><strong>Email:</strong> houseofpaw256@gmail.com</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:1;min-width:200px">
+          <p style="color:var(--muted);font-size:0.95rem">123 Rescue Berry, Kampala</p>
+          <p style="color:var(--muted);font-size:0.95rem"><strong>Phone:</strong> (+256) 781-915680</p>
+          <p style="color:var(--muted);font-size:0.95rem"><strong>Email:</strong> houseofpaw256@gmail.com</p>
         </div>
-        <div style="width:300px;min-width:220px">
+        <div style="width:280px;min-width:200px">
           <a class="btn ghost" href="#donate">Support us</a>
           <a class="btn ghost" href="get-involved.html">Volunteer</a>
         </div>
@@ -334,21 +418,31 @@
     </section>
 
     <footer aria-label="Footer">
-      <div class="grid container" style="padding:8px 0 40px">
+      <div class="grid container" style="padding:8px 0 30px">
         <div>
           <strong style="color:#fff">HOUSE OF PAWS</strong>
-          <div style="color:var(--muted);margin-top:8px">Rescuing Dogs, Restoring Hope since 2020</div>
+          <div style="color:var(--muted);margin-top:8px;font-size:0.9rem">Rescuing Dogs, Restoring Hope since 2020</div>
         </div>
         <div>
           <strong style="color:#fff">Links</strong>
-          <div style="margin-top:8px;color:var(--muted)">About • Mission • Adopt • Contact</div>
+          <div style="margin-top:8px;color:var(--muted);font-size:0.9rem">
+            <a href="/about" style="display:block">About</a>
+            <a href="/mission" style="display:block">Mission</a>
+            <a href="/adopt" style="display:block">Adopt</a>
+            <a href="/contact" style="display:block">Contact</a>
+          </div>
         </div>
         <div>
           <strong style="color:#fff">Follow</strong>
-          <div style="margin-top:8px;color:var(--muted)">Facebook • Instagram • Twitter • YouTube</div>
+          <div style="margin-top:8px;color:var(--muted);font-size:0.9rem">
+            <a href="https://facebook.com/houseofpaws" target="_blank" rel="noopener noreferrer" style="display:block">Facebook</a>
+            <a href="https://instagram.com/houseofpaws" target="_blank" rel="noopener noreferrer" style="display:block">Instagram</a>
+            <a href="https://twitter.com/houseofpaws" target="_blank" rel="noopener noreferrer" style="display:block">Twitter</a>
+            <a href="https://youtube.com/houseofpaws" target="_blank" rel="noopener noreferrer" style="display:block">YouTube</a>
+          </div>
         </div>
       </div>
-      <div style="text-align:center;color:var(--muted)">© 2025 HOUSE OF PAWS. All rights reserved.</div>
+      <div style="text-align:center;color:var(--muted);font-size:0.85rem">© 2025 HOUSE OF PAWS. All rights reserved.</div>
     </footer>
   </main>
 
@@ -358,6 +452,18 @@
   <!-- Lightweight deferred JS -->
   <script defer>
     (function(){
+      // Content Security Policy would be set via HTTP header in production
+      // This is just for demonstration:
+      const csp = {
+        'default-src': "'self'",
+        'script-src': "'self' 'unsafe-inline'",
+        'style-src': "'self' 'unsafe-inline'",
+        'img-src': "'self' data: https://images.unsplash.com",
+        'connect-src': "'self'",
+        'frame-src': "https://www.paypal.com",
+        'form-action': "'self' https://www.paypal.com"
+      };
+      
       /* Utility */
       const $ = sel => document.querySelector(sel);
       const $$ = sel => Array.from(document.querySelectorAll(sel));
@@ -374,6 +480,16 @@
         const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
         menuBtn.setAttribute('aria-expanded', String(!expanded));
         navMobile.style.display = expanded ? 'none' : 'block';
+      });
+
+      /* Close mobile menu when clicking outside */
+      document.addEventListener('click', (e) => {
+        if(navMobile.style.display === 'block' && 
+           !navMobile.contains(e.target) && 
+           e.target !== menuBtn) {
+          navMobile.style.display = 'none';
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
       });
 
       /* Lazy load images using IntersectionObserver */
@@ -405,7 +521,11 @@
         carousel.addEventListener('mouseleave', play);
         carousel.addEventListener('focusout', play);
         carousel.addEventListener('keydown', e=>{
-          if(e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); carousel.classList.toggle('paused'); }
+          if(e.key === ' ' || e.key === 'Spacebar') { 
+            e.preventDefault(); 
+            carousel.classList.toggle('paused'); 
+            showToast(carousel.classList.contains('paused') ? 'Carousel paused' : 'Carousel playing');
+          }
         });
       }
 
@@ -464,7 +584,9 @@
         if(!visible) window.setTimeout(()=> cardForm.querySelector('input[name="fullName"]').focus(), 80);
       });
       cancelCard.addEventListener('click', ()=>{
-        cardForm.style.display = 'none'; cardForm.setAttribute('aria-hidden','true'); openCard.setAttribute('aria-expanded','false');
+        cardForm.style.display = 'none'; 
+        cardForm.setAttribute('aria-hidden','true'); 
+        openCard.setAttribute('aria-expanded','false');
       });
       cardForm.addEventListener('submit', (e)=>{
         e.preventDefault();
@@ -511,10 +633,23 @@
         }
       });
 
-      /* Stories images lazy load already handled above by IntersectionObserver */
+      /* Service Worker Registration */
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log('SW registered: ', registration.scope);
+          }).catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+        });
+      }
 
-      /* Prevent overly frequent reflows on resize (optional) */
-      let rAF; window.addEventListener('resize', ()=> { if(rAF) cancelAnimationFrame(rAF); rAF=requestAnimationFrame(()=>{ /* could recalc responsive sizes here */ }); });
+      /* Prevent overly frequent reflows on resize */
+      let rAF; 
+      window.addEventListener('resize', ()=> { 
+        if(rAF) cancelAnimationFrame(rAF); 
+        rAF=requestAnimationFrame(()=>{ /* could recalc responsive sizes here */ }); 
+      });
 
     })();
   </script>
