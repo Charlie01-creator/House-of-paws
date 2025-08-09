@@ -1,956 +1,942 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>House of Paws</title>
+  <title>HOUSE OF PAWS — Rescuing Dogs, Restoring Hope</title>
+  <meta name="description" content="House of Paws rescue — help abandoned dogs. Donate, volunteer, and adopt." />
   <style>
     :root {
-      --accent: #fa5e3b;
-      --muted: #aaa;
-      --bg-dark: #0b0d0f;
-      --bg-light: #fff;
-      --text-light: #fff;
-      --text-dark: #222;
-      --btn-primary-bg: var(--accent);
-      --btn-primary-color: #fff;
+      --bg: #0b0d0f; --panel: #0f1316; --muted: #9aa3a8; --accent: #ff6b6b; --accent-2: #4ecdc4;
+      --glass: rgba(255,255,255,0.03); --success: #22c55e; --danger: #ff4d4f; --card: #0b1113;
+      --max-width: 1200px; --radius: 12px; --gap: 18px; --shadow: 0 6px 20px rgba(2,6,10,0.6);
+      --safe-min: 0.75rem;
+      --text-light: #dfe7e9;
+      --btn-bg: var(--accent);
+      --btn-color: #081014;
+      --btn-hover-bg: #ff8585;
+      --btn-focus-outline: 2px solid var(--accent-2);
+      --paypal-color: #00457c;
+      --paypal-hover: #0067c5;
+      --toast-bg: rgba(255, 255, 255, 0.1);
+      --toast-color: var(--text-light);
+      --input-bg: #162029;
+      --input-border: #334556;
+      --input-color: var(--text-light);
+      --input-focus-border: var(--accent-2);
+    }
+    body.light {
+      --bg: #fdfdfd;
+      --panel: #fff;
+      --muted: #555;
+      --accent: #e94f37;
+      --accent-2: #ffb347;
+      --glass: rgba(0,0,0,0.03);
+      --success: #198754;
+      --danger: #d6336c;
+      --card: #f7f7f7;
+      --text-light: #202020;
+      --btn-bg: var(--accent);
+      --btn-color: #fff;
+      --btn-hover-bg: #f9735f;
+      --btn-focus-outline: 2px solid var(--accent-2);
+      --paypal-color: #003087;
+      --paypal-hover: #005ea6;
+      --toast-bg: rgba(0,0,0,0.1);
+      --toast-color: var(--text-light);
+      --input-bg: #f4f6f8;
+      --input-border: #ccc;
+      --input-color: #222;
+      --input-focus-border: var(--accent-2);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    html, body {
+      height: 100%;
     }
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg-dark);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
       color: var(--text-light);
-      transition: background 0.3s, color 0.3s;
-    }
-    body.light-theme {
-      background: var(--bg-light);
-      color: var(--text-dark);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background 0.3s ease, color 0.3s ease;
     }
     a {
       color: var(--accent);
       text-decoration: none;
+      transition: color 0.2s ease;
     }
     a:hover, a:focus {
-      text-decoration: underline;
+      color: var(--accent-2);
+      outline: none;
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 16px;
+    button, .btn {
+      cursor: pointer;
+      border-radius: var(--radius);
+      font-weight: 600;
+      padding: 0.6em 1.2em;
+      border: none;
+      font-size: 1rem;
+      transition: background-color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
     }
+    .btn.primary {
+      background-color: var(--btn-bg);
+      color: var(--btn-color);
+      box-shadow: var(--shadow);
+    }
+    .btn.primary:hover,
+    .btn.primary:focus {
+      background-color: var(--btn-hover-bg);
+      outline: var(--btn-focus-outline);
+      outline-offset: 2px;
+    }
+    .btn.ghost {
+      background: transparent;
+      border: 2px solid var(--muted);
+      color: var(--muted);
+    }
+    .btn.ghost:hover,
+    .btn.ghost:focus {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+      outline: none;
+    }
+    button:focus-visible, a:focus-visible {
+      outline: var(--btn-focus-outline);
+      outline-offset: 3px;
+    }
+
     header {
-      background: var(--bg-dark);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
       position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-row {
+      top: 0; left: 0; right: 0;
+      background: rgba(11, 13, 15, 0.85);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 16px;
+      padding: 10px 22px;
+      z-index: 99;
+    }
+    .nav-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
+      color: var(--text-light);
+      user-select: none;
     }
     .logo {
-      font-weight: bold;
-      font-size: 1.8rem;
-      color: var(--accent);
-      user-select: none;
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #081014;
+      box-shadow: var(--shadow);
+    }
+    nav {
+      display: flex;
+      gap: 18px;
     }
     nav a {
-      margin-left: 16px;
-      font-weight: 600;
-      font-size: 1rem;
       color: var(--text-light);
-    }
-    nav a:hover, nav a:focus {
-      color: var(--accent);
-      outline: none;
-    }
-    .btn {
-      cursor: pointer;
-      border: none;
-      border-radius: 6px;
-      padding: 10px 16px;
       font-weight: 600;
-      font-size: 1rem;
-      user-select: none;
-      transition: background-color 0.3s, color 0.3s;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
-    .btn.primary {
-      background: var(--btn-primary-bg);
-      color: var(--btn-primary-color);
-    }
-    .btn.primary:hover, .btn.primary:focus {
-      background: #e04a2d;
+    nav a:hover,
+    nav a:focus {
+      background-color: var(--glass);
+      color: var(--accent-2);
       outline: none;
-    }
-    .btn.ghost {
-      background: transparent;
-      color: var(--text-light);
-      border: 1px solid var(--text-light);
-    }
-    .btn.ghost:hover, .btn.ghost:focus {
-      background: var(--accent);
-      color: var(--btn-primary-color);
-      outline: none;
-      border-color: var(--accent);
     }
     .menu-btn {
-      display: none;
       background: transparent;
       border: none;
       color: var(--text-light);
-      padding: 8px;
-      border-radius: 8px;
       cursor: pointer;
+      display: none;
+      border-radius: 8px;
+      padding: 8px;
+      transition: background-color 0.2s ease;
     }
+    .menu-btn:hover,
     .menu-btn:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
+      background-color: var(--glass);
+      outline: none;
     }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .menu-btn { display: inline-block; }
+    }
+
+    /* Mobile nav */
     #navMobile {
       display: none;
-      background: rgba(11, 13, 15, 0.95);
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    #navMobile .container {
-      display: flex;
+      background: var(--panel);
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      padding: 1rem 2rem;
+      z-index: 98;
       flex-direction: column;
-      gap: 8px;
+      gap: 16px;
     }
     #navMobile a {
-      padding: 8px 12px;
-      border-radius: 6px;
+      color: var(--text-light);
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 8px;
       display: block;
-      color: var(--muted);
-      font-size: 0.95rem;
     }
     #navMobile a:hover,
     #navMobile a:focus {
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
+      background-color: var(--glass);
+      color: var(--accent-2);
       outline: none;
     }
-    .hero {
-      margin-top: 66px;
-      padding: 24px 0 30px;
+
+    main {
+      max-width: var(--max-width);
+      margin: auto;
+      padding-top: 80px;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    /* Hero / Intro */
+    #intro {
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 24px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+      gap: 1.2rem;
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 3rem;
     }
-    .hero-left {
-      flex: 1 1 400px;
-      max-width: 600px;
-    }
-    .hero-left h2 {
+    #intro h2 {
       font-size: 2rem;
-      margin-bottom: 12px;
-    }
-    .cta-row {
-      margin-top: 20px;
-      display: flex;
-      gap: 12px;
-    }
-    .stats {
-      display: flex;
-      gap: 24px;
-      margin-top: 30px;
-    }
-    .stat {
-      min-width: 100px;
-    }
-    .stat h3 {
-      margin: 0;
-      font-size: 1.5rem;
       color: var(--accent);
+      font-weight: 700;
     }
-    .stat p {
-      margin: 4px 0 0;
-      font-size: 0.9rem;
+    #intro p {
+      font-size: 1.1rem;
+      max-width: 700px;
       color: var(--muted);
+      line-height: 1.4;
     }
-    .hero-media {
-      flex: 1 1 300px;
-      max-width: 350px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    #intro .btn.primary {
+      font-size: 1.1rem;
+      padding: 0.8em 1.6em;
+      box-shadow: var(--shadow);
     }
-    .hero-media img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 16px;
+
+    /* Rotating Gallery (Carousel) */
+    #gallery {
+      margin-bottom: 3rem;
     }
-    /* Gallery */
-    .gallery-wrap {
-      margin-top: 12px;
-      padding: 0 0 30px;
-    }
-    .gallery-stage {
-      height: 280px;
-      position: relative;
-      perspective: 1200px;
-      margin-top: 12px;
-      user-select: none;
-      overflow: visible;
+    #gallery h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-align: center;
     }
     .carousel {
-      width: 100%;
-      height: 100%;
       position: relative;
-      transform-style: preserve-3d;
-      animation: rotate 20s linear infinite;
-    }
-    .carousel.paused {
-      animation-play-state: paused;
-    }
-    .card {
-      width: 220px;
-      height: 220px;
-      background: #111;
-      border-radius: 12px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform-style: preserve-3d;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+      max-width: 900px;
+      margin: 0 auto;
       overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--panel);
     }
-    .card img {
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+      will-change: transform;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      user-select: none;
+      outline: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+    .carousel-slide img {
       width: 100%;
-      height: 100%;
+      max-height: 350px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
       pointer-events: none;
       user-select: none;
     }
-    .card:nth-child(1){transform:translate(-50%,-50%) rotateY(0deg) translateZ(300px)}
-    .card:nth-child(2){transform:translate(-50%,-50%) rotateY(60deg) translateZ(300px)}
-    .card:nth-child(3){transform:translate(-50%,-50%) rotateY(120deg) translateZ(300px)}
-    .card:nth-child(4){transform:translate(-50%,-50%) rotateY(180deg) translateZ(300px)}
-    .card:nth-child(5){transform:translate(-50%,-50%) rotateY(240deg) translateZ(300px)}
-    .card:nth-child(6){transform:translate(-50%,-50%) rotateY(300deg) translateZ(300px)}
-    @keyframes rotate {
-      from { transform: rotateY(0deg);}
-      to { transform: rotateY(360deg);}
+    .carousel-slide h3 {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
     }
-    .gallery-wrap > div > div:first-child {
+    .carousel-slide p {
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--glass);
+      border: none;
+      padding: 0.8rem 1.1rem;
+      font-size: 1.5rem;
+      color: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s ease;
+      z-index: 10;
+    }
+    .carousel-button:hover,
+    .carousel-button:focus {
+      background-color: var(--accent-2);
+      color: #081014;
+      outline: none;
+    }
+    .carousel-button.prev {
+      left: 10px;
+    }
+    .carousel-button.next {
+      right: 10px;
+    }
+
+    /* Donate Section */
+    #donate {
+      margin-bottom: 3rem;
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: var(--shadow);
+    }
+    #donate h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    #donate p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      gap: 12px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 2px solid var(--muted);
+      color: var(--muted);
+      font-weight: 600;
+      padding: 0.6em 1.2em;
+      border-radius: var(--radius);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    .tab-btn[aria-selected="true"] {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: var(--btn-color);
+      box-shadow: var(--shadow);
+    }
+    .tab-btn:hover:not([aria-selected="true"]),
+    .tab-btn:focus-visible:not([aria-selected="true"]) {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+      outline: none;
+    }
+
+    /* Tab panels */
+    .tab-panel {
+      display: none;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* Forms */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    label {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="tel"] {
+      padding: 0.6em 0.9em;
+      border-radius: var(--radius);
+      border: 1.8px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--input-color);
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="number"]:focus,
+    input[type="tel"]:focus {
+      outline: none;
+      border-color: var(--input-focus-border);
+    }
+    input[type="submit"], button[type="submit"] {
+      background-color: var(--btn-bg);
+      color: var(--btn-color);
+      border: none;
+      padding: 0.8em 1.4em;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover,
+    button[type="submit"]:hover,
+    input[type="submit"]:focus,
+    button[type="submit"]:focus {
+      background-color: var(--btn-hover-bg);
+      outline: var(--btn-focus-outline);
+      outline-offset: 2px;
+    }
+
+    /* Crypto donate list */
+    .crypto-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .crypto-coin {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      background: var(--glass);
+      border-radius: var(--radius);
+      padding: 0.8rem 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+      user-select: all;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
     }
-    .gallery-wrap > div > div:first-child > h2 {
-      margin: 0;
+    .crypto-coin:hover,
+    .crypto-coin:focus {
+      background-color: var(--accent-2);
+      color: #081014;
+      outline: none;
     }
-    .gallery-wrap > div > div:first-child > div {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-    /* Donation */
-    .donate-panel {
-      margin-top: 30px;
-      background: #111;
-      padding: 24px;
-      border-radius: 16px;
+    .crypto-label {
       display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
     }
-    .donation-row {
+    .crypto-label img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    /* Contact & footer */
+    #contact {
+      margin-top: 3rem;
+    }
+    #contact h2 {
+      margin-bottom: 0.8rem;
+      color: var(--accent);
+    }
+    #contact > div {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
     }
-    .preset {
-      background: transparent;
-      border: 1px solid var(--muted);
-      border-radius: 10px;
-      padding: 12px 18px;
-      cursor: pointer;
+    #contact p {
       color: var(--muted);
-      user-select: none;
-      flex: 1 1 120px;
-      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    }
-    .preset.selected,
-    .preset:hover,
-    .preset:focus {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-      outline: none;
-    }
-    .input {
-      background: #222;
-      border: none;
-      border-radius: 10px;
-      color: #eee;
-      padding: 10px 14px;
-      font-size: 1rem;
-      width: 100%;
-      max-width: 120px;
-    }
-    .input:focus {
-      outline: 2px solid var(--accent);
-    }
-    .progress-outer {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      overflow: hidden;
-      height: 12px;
-      margin-top: 10px;
-      width: 100%;
-      max-width: 400px;
-    }
-    .progress-inner {
-      height: 100%;
-      background: var(--accent);
-      width: 0;
-      transition: width 0.4s ease;
-    }
-    aside {
-      flex: 1 1 300px;
-      min-width: 240px;
-      color: var(--muted);
-    }
-    aside strong {
-      color: var(--text-light);
-      display: block;
-      margin-bottom: 8px;
-    }
-    /* Crypto Donation Section Updated Styles */
-    .crypto-list {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .crypto-coin {
-      cursor: pointer;
-      border: 1px solid var(--muted);
-      padding: 12px;
-      border-radius: 8px;
-      flex: 1 1 250px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      user-select: none;
-      transition: background-color 0.3s, border-color 0.3s;
-      background: #222;
-    }
-    .crypto-coin:hover,
-    .crypto-coin:focus {
-      background-color: var(--accent);
-      border-color: var(--accent);
-      outline: none;
-      color: #fff;
-    }
-    .crypto-coin img {
-      flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 4px;
-      user-select: none;
-      pointer-events: none;
-    }
-    .crypto-coin code {
-      font-family: monospace;
-      user-select: all;
-      font-size: 0.9rem;
-      color: inherit;
-    }
-    /* Stories */
-    .stories {
-      margin-top: 30px;
-    }
-    .story-list {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-    .story {
-      background: #111;
-      border-radius: 12px;
-      overflow: hidden;
-      flex: 1 1 280px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.5);
-    }
-    .story img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .meta {
-      padding: 16px;
-      color: var(--text-light);
-    }
-    .meta h3 {
-      margin: 0 0 8px 0;
-    }
-    .meta p {
-      margin: 0;
       font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+    #contact .btn {
+      min-width: 140px;
+    }
+
+    footer[aria-label="Footer"] {
+      background: var(--panel);
+      padding: 24px 20px 30px;
       color: var(--muted);
-    }
-    /* Contact */
-    #contact {
-      margin-top: 48px;
-    }
-    #contact h2 {
-      margin-bottom: 12px;
-    }
-    /* Footer */
-    footer {
-      background: var(--bg-dark);
-      padding-top: 16px;
-      padding-bottom: 24px;
-      margin-top: 48px;
-    }
-    footer .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      user-select: none;
     }
     footer strong {
-      color: var(--text-light);
+      color: #fff;
       font-weight: 700;
+      margin-bottom: 0.6rem;
+      display: block;
     }
     footer a {
       color: var(--muted);
-      font-size: 0.9rem;
       display: block;
-      margin-top: 6px;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+      text-decoration: none;
     }
     footer a:hover,
     footer a:focus {
-      color: var(--accent);
+      color: var(--accent-2);
       outline: none;
     }
+    footer > div:last-child {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
     /* Toast */
-    .toast {
+    #toast {
       position: fixed;
-      bottom: 24px;
+      bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--accent);
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 20px;
+      background: var(--toast-bg);
+      color: var(--toast-color);
+      padding: 12px 18px;
+      border-radius: 24px;
       font-weight: 600;
+      font-size: 1rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
-      z-index: 1000;
+      user-select: none;
+      z-index: 9999;
+      max-width: 90vw;
+      text-align: center;
     }
-    .toast.show {
+    #toast.show {
       opacity: 1;
       pointer-events: auto;
     }
-    /* Responsive */
-    @media (max-width: 768px) {
-      .container {
-        padding: 16px;
-      }
-      .hero {
-        margin-top: 66px;
-        flex-direction: column;
-        padding: 24px 0 30px;
-      }
-      .hero-left h2 {
-        font-size: 1.6rem;
-      }
-      .stats {
-        flex-direction: column;
-        gap: 8px;
-        padding: 12px 0;
-      }
-      .stat {
-        min-width: 100%;
-      }
-      .gallery-stage {
-        height: 240px;
-      }
-      .card {
-        width: 180px;
-        height: 180px;
-      }
-      .card:nth-child(1) {
-        transform: translate(-50%, -50%) rotateY(0deg) translateZ(220px);
-      }
-      .card:nth-child(2) {
-        transform: translate(-50%, -50%) rotateY(60deg) translateZ(220px);
-      }
-      .card:nth-child(3) {
-        transform: translate(-50%, -50%) rotateY(120deg) translateZ(220px);
-      }
-      .card:nth-child(4) {
-        transform: translate(-50%, -50%) rotateY(180deg) translateZ(220px);
-      }
-      .card:nth-child(5) {
-        transform: translate(-50%, -50%) rotateY(240deg) translateZ(220px);
-      }
-      .card:nth-child(6) {
-        transform: translate(-50%, -50%) rotateY(300deg) translateZ(220px);
-      }
-      nav {
-        display: none;
-      }
-      .menu-btn {
-        display: inline-block;
-      }
+
+    /* PayPal floating button */
+    #paypalFloatingBtn {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background-color: var(--paypal-color);
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 32px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      z-index: 10000;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
+    #paypalFloatingBtn:hover,
+    #paypalFloatingBtn:focus {
+      background-color: var(--paypal-hover);
+      outline: none;
+    }
+
+    /* Theme toggle button */
+    #themeToggleBtn {
+      font-size: 1.6rem;
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+      padding: 0 6px;
+      margin-left: 16px;
+      line-height: 1;
+    }
+    #themeToggleBtn:focus-visible {
+      outline: var(--btn-focus-outline);
+      outline-offset: 3px;
+    }
+
   </style>
 </head>
 <body>
   <header>
-    <div class="container nav-row" role="navigation" aria-label="Main navigation">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">HP</div>
-        <div>
-          <h1>HOUSE OF PAWS</h1>
-          <div class="brand-tagline">Rescuing Dogs, Restoring Hope</div>
-        </div>
-      </div>
-
-      <nav aria-label="Primary">
-        <a href="#home">Home</a>
-        <a href="#gallery">Meet Dogs</a>
+    <div class="nav-row">
+      <a href="/" class="brand" aria-label="House of Paws homepage">
+        <div class="logo" aria-hidden="true">H</div>
+        <span>HOUSE OF PAWS</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#intro">Home</a>
+        <a href="#gallery">Gallery</a>
         <a href="#donate">Donate</a>
-        <a href="#stories">Stories</a>
         <a href="#contact">Contact</a>
       </nav>
-
-      <div style="display:flex;gap:8px;align-items:center">
-        <a class="btn ghost" href="https://www.paypal.com/donate" aria-label="Donate via PayPal">PayPal</a>
-        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navMobile" title="Open menu">
-          <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
-            <rect y="0" width="22" height="2" rx="1" fill="currentColor"/>
-            <rect y="6" width="22" height="2" rx="1" fill="currentColor"/>
-            <rect y="12" width="22" height="2" rx="1" fill="currentColor"/>
-          </svg>
-        </button>
-      </div>
+      <button id="menuBtn" aria-expanded="false" aria-controls="navMobile" aria-label="Toggle menu" class="menu-btn">☰</button>
     </div>
-
-    <!-- Mobile Navigation -->
-    <div id="navMobile" style="display:none">
-      <div class="container">
-        <a href="#home">Home</a>
-        <a href="#gallery">Meet Dogs</a>
-        <a href="#donate">Donate</a>
-        <a href="#stories">Stories</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
+    <button id="themeToggleBtn" aria-pressed="false" aria-label="Toggle light and dark mode" title="Toggle theme">🌙</button>
   </header>
+  <nav id="navMobile" aria-label="Mobile navigation">
+    <a href="#intro">Home</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#donate">Donate</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-  <main id="home" class="container" tabindex="-1">
-    <!-- Hero -->
-    <section class="hero" aria-label="Welcome section">
-      <div class="hero-left">
-        <h2>Welcome to House of Paws</h2>
-        <p>Dedicated to rescuing dogs and giving them a loving home.</p>
-        <div class="cta-row">
-          <a href="#donate" class="btn primary">Donate Now</a>
-          <a href="#stories" class="btn ghost">Read Stories</a>
-        </div>
-        <div class="stats" aria-label="Impact stats">
-          <div class="stat">
-            <h3>320+</h3>
-            <p>Dogs Rescued</p>
-          </div>
-          <div class="stat">
-            <h3>280+</h3>
-            <p>Dogs Adopted</p>
-          </div>
-          <div class="stat">
-            <h3>95%</h3>
-            <p>Adoption Rate</p>
-          </div>
-        </div>
-      </div>
-      <div class="hero-media">
-        <img src="https://images.unsplash.com/photo-1502672023488-70e25813eb80?q=60&w=500&auto=format&fit=crop" alt="Happy rescued dog" loading="lazy" />
-      </div>
+  <main>
+    <!-- Intro Section -->
+    <section id="intro" tabindex="-1" aria-labelledby="introTitle">
+      <h2 id="introTitle">Welcome to House of Paws</h2>
+      <p>We rescue abandoned and abused dogs, providing them with care, love, and forever homes. Your support helps us continue this vital mission.</p>
+      <a href="#donate" class="btn primary" role="button">Support Us</a>
     </section>
 
-    <!-- Gallery -->
-    <section id="gallery" aria-label="Image gallery" class="gallery-wrap">
-      <h2>Meet Some of Our Rescued Dogs</h2>
-      <div class="gallery-stage" aria-live="polite" tabindex="0">
-        <div class="carousel" id="carousel" role="list">
-          <div class="card" role="listitem" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?q=60&w=500&auto=format&fit=crop" alt="Jazz the dog" />
+    <!-- Rotating Image Gallery -->
+    <section id="gallery" aria-label="Image gallery of rescued dogs">
+      <h2>Meet Our Rescued Dogs</h2>
+      <div class="carousel" aria-roledescription="carousel" aria-label="Dogs photo gallery">
+        <button class="carousel-button prev" aria-label="Previous slide">&#10094;</button>
+        <div class="carousel-track" tabindex="0">
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Bella">
+            <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=70" alt="Brown dog Bella looking curious" loading="lazy" />
+            <h3>Bella</h3>
+            <p>Rescued from the streets, Bella loves long walks and belly rubs.</p>
           </div>
-          <div class="card" role="listitem" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?q=60&w=500&auto=format&fit=crop" alt="Luna the dog" />
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Max">
+            <img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=800&q=70" alt="Happy golden retriever Max playing outside" loading="lazy" />
+            <h3>Max</h3>
+            <p>A friendly golden retriever who enjoys playing fetch with kids.</p>
           </div>
-          <div class="card" role="listitem" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=60&w=500&auto=format&fit=crop" alt="Rocky the dog" />
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Luna">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=70" alt="White and black dog Luna sitting" loading="lazy" />
+            <h3>Luna</h3>
+            <p>Sweet and gentle, Luna is looking for a loving forever home.</p>
           </div>
-          <div class="card" role="listitem" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?q=60&w=500&auto=format&fit=crop" alt="Buddy the dog" />
-          </div>
-          <div class="card" role="listitem" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1596495577886-d920f1aee73b?q=60&w=500&auto=format&fit=crop" alt="Bella the dog" />
-          </div>
-          <div class="card" role="listitem" tabindex="0">
-            <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?q=60&w=500&auto=format&fit=crop" alt="Charlie the dog" />
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Rocky">
+            <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=800&q=70" alt="Black dog Rocky with alert eyes" loading="lazy" />
+            <h3>Rocky</h3>
+            <p>Energetic and playful Rocky is ready to join your family adventures.</p>
           </div>
         </div>
+        <button class="carousel-button next" aria-label="Next slide">&#10095;</button>
       </div>
     </section>
 
     <!-- Donate Section -->
-    <section id="donate" aria-label="Donation section" class="donate-panel">
-      <div style="flex:1 1 320px; min-width:280px; color: var(--text-light);">
-        <h2>Support Our Cause</h2>
-        <p>Your generosity helps us rescue and care for more dogs.</p>
+    <section id="donate" aria-labelledby="donateTitle">
+      <h2 id="donateTitle">Support Our Cause</h2>
+      <p>Your generous donations help us care for abandoned dogs. Choose your preferred payment method below.</p>
 
-        <!-- Preset Donations -->
-        <div class="donation-row" role="radiogroup" aria-label="Preset donation amounts">
-          <button class="preset" role="radio" aria-checked="false" data-amount="5">$5</button>
-          <button class="preset" role="radio" aria-checked="false" data-amount="10">$10</button>
-          <button class="preset" role="radio" aria-checked="false" data-amount="25">$25</button>
-          <button class="preset" role="radio" aria-checked="false" data-amount="50">$50</button>
-          <button class="preset" role="radio" aria-checked="false" data-amount="custom">Custom</button>
-          <input id="donationAmount" class="input" type="number" min="5" max="10000" aria-label="Enter custom donation amount" placeholder="Amount" />
-        </div>
-
-        <button id="donateNow" class="btn primary" style="margin-top:12px;">Donate Now</button>
-
-        <!-- Donation Progress -->
-        <div aria-live="polite" aria-atomic="true" style="margin-top:24px;">
-          <div>Raised: <strong id="raisedLabel">$0</strong></div>
-          <div class="progress-outer" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Donation progress">
-            <div id="progressBar" class="progress-inner"></div>
-          </div>
-        </div>
+      <div class="tabs" role="tablist" aria-label="Donation payment methods">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="creditCardPanel" id="tabCreditCard" tabindex="0">Credit Card</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="paypalPanel" id="tabPaypal" tabindex="-1">PayPal</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="cryptoPanel" id="tabCrypto" tabindex="-1">Cryptocurrency</button>
       </div>
 
-      <!-- Payment Options Sidebar -->
-      <aside style="flex: 1 1 280px; min-width: 280px;">
-        <strong>Payment Options</strong>
-        <div style="margin-top:12px; display:flex; flex-direction: column; gap: 12px;">
-          <!-- Credit Card Form Trigger -->
-          <button id="openCard" class="btn ghost" aria-expanded="false" aria-controls="cardForm" aria-haspopup="dialog">Credit Card</button>
-
-          <!-- PayPal -->
-          <a href="https://www.paypal.com/donate" target="_blank" rel="noopener noreferrer" class="btn ghost" aria-label="Donate via PayPal">PayPal</a>
-
-          <!-- Crypto Panel -->
-          <div id="cryptoPanel" role="region" aria-label="Cryptocurrency donation options" tabindex="0" style="margin-top: 8px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03); color: var(--text-light);">
-            <strong style="display:block; margin-bottom: 8px;">Donate via Crypto</strong>
-            <p style="font-size: 0.9rem; margin-bottom: 12px;">Click or press Enter on an address to copy it.</p>
-            <div class="crypto-list" role="list" aria-label="Cryptocurrency addresses">
-              <div tabindex="0" role="listitem" class="crypto-coin" data-address="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" aria-label="Bitcoin address bc1qxy... copy to clipboard" style="color: var(--text-light);">
-                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=024" alt="Bitcoin logo" />
-                <div>
-                  <div style="font-weight:600;">Bitcoin (BTC)</div>
-                  <code>bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
-                </div>
-              </div>
-              <div tabindex="0" role="listitem" class="crypto-coin" data-address="0x71C7656EC7ab88b098defB751B7401B5f6d8976F" aria-label="Ethereum address 0x71C7... copy to clipboard" style="color: var(--text-light);">
-                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=024" alt="Ethereum logo" />
-                <div>
-                  <div style="font-weight:600;">Ethereum (ETH)</div>
-                  <code>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</code>
-                </div>
-              </div>
-              <div tabindex="0" role="listitem" class="crypto-coin" data-address="0xdAC17F958D2ee523a2206206994597C13D831ec7" aria-label="USDT address 0xdAC1... copy to clipboard" style="color: var(--text-light);">
-                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=024" alt="USDT logo" />
-                <div>
-                  <div style="font-weight:600;">USDT (Tether)</div>
-                  <code>0xdAC17F958D2ee523a2206206994597C13D831ec7</code>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Credit Card Form -->
-        <form id="cardForm" aria-hidden="true" style="display:none; margin-top: 16px; background: #111; padding: 16px; border-radius: 12px; color: var(--text-light);" aria-label="Credit card payment form">
-          <label for="fullName">Full Name</label><br />
-          <input id="fullName" name="fullName" type="text" required style="width:100%; margin-bottom: 12px; padding: 8px; border-radius: 8px; border: none;" />
-          <label for="email">Email</label><br />
-          <input id="email" name="email" type="email" required style="width:100%; margin-bottom: 12px; padding: 8px; border-radius: 8px; border: none;" />
-          <label for="cardNumber">Card Number</label><br />
-          <input id="cardNumber" name="cardNumber" type="text" maxlength="19" placeholder="1234 5678 9012 3456" required style="width:100%; margin-bottom: 12px; padding: 8px; border-radius: 8px; border: none;" />
-          <label for="expiry">Expiry Date</label><br />
-          <input id="expiry" name="expiry" type="text" maxlength="5" placeholder="MM/YY" required style="width:48%; margin-bottom: 12px; padding: 8px; border-radius: 8px; border: none; display: inline-block; margin-right: 4%;" />
-          <label for="cvv">CVV</label><br />
-          <input id="cvv" name="cvv" type="text" maxlength="4" placeholder="123" required style="width:48%; margin-bottom: 12px; padding: 8px; border-radius: 8px; border: none; display: inline-block;" />
-          <div style="display: flex; gap: 12px; justify-content: flex-end;">
-            <button type="submit" class="btn primary">Pay</button>
-            <button type="button" id="cancelCard" class="btn ghost">Cancel</button>
-          </div>
+      <!-- Credit Card Form -->
+      <div id="creditCardPanel" class="tab-panel active" role="tabpanel" aria-labelledby="tabCreditCard" tabindex="0">
+        <form id="creditCardForm" aria-label="Credit card donation form" novalidate>
+          <label for="ccName">Name on Card</label>
+          <input type="text" id="ccName" name="ccName" placeholder="Full name" autocomplete="cc-name" required />
+          <label for="ccNumber">Card Number</label>
+          <input type="text" id="ccNumber" name="ccNumber" placeholder="1234 5678 9012 3456" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19" autocomplete="cc-number" required />
+          <label for="ccExpiry">Expiry Date</label>
+          <input type="text" id="ccExpiry" name="ccExpiry" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" maxlength="5" autocomplete="cc-exp" required />
+          <label for="ccCVC">CVC</label>
+          <input type="text" id="ccCVC" name="ccCVC" placeholder="123" pattern="[0-9]{3,4}" maxlength="4" inputmode="numeric" autocomplete="cc-csc" required />
+          <label for="ccAmount">Donation Amount (USD)</label>
+          <input type="number" id="ccAmount" name="ccAmount" min="5" step="1" placeholder="Minimum $5" required />
+          <button type="submit" class="btn primary">Donate</button>
         </form>
-      </aside>
-    </section>
+      </div>
 
-    <!-- Stories -->
-    <section id="stories" class="stories" aria-label="Stories of rescued dogs">
-      <h2>Our Success Stories</h2>
-      <div class="story-list" aria-live="polite" tabindex="0">
-        <article class="story" role="article">
-          <img src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?q=60&w=500&auto=format&fit=crop" alt="Jazz the dog" loading="lazy" />
-          <div class="meta">
-            <h3>Jazz's Story</h3>
-            <p>Found malnourished and scared — Jazz now lives happily with a loving family in Seattle.</p>
+      <!-- PayPal Panel -->
+      <div id="paypalPanel" class="tab-panel" role="tabpanel" aria-labelledby="tabPaypal" tabindex="0" hidden>
+        <div style="text-align:center;">
+          <p>Donate securely via PayPal:</p>
+          <a href="https://www.paypal.com/donate?hosted_button_id=YOUR_BUTTON_ID" target="_blank" rel="noopener" class="btn primary" aria-label="Donate with PayPal">Donate with PayPal</a>
+        </div>
+      </div>
+
+      <!-- Crypto Panel -->
+      <div id="cryptoPanel" class="tab-panel" role="tabpanel" aria-labelledby="tabCrypto" tabindex="0" hidden>
+        <p>Support us with cryptocurrency. Click an address to copy it.</p>
+        <div class="crypto-list" role="list">
+          <div tabindex="0" role="listitem" class="crypto-coin" data-address="0x123456789abcdef123456789abcdef123456789a" aria-label="Ethereum address 0x1234... copy to clipboard">
+            <div class="crypto-label">
+              <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=024" alt="Ethereum logo" />
+              <span>Ethereum (ETH)</span>
+            </div>
+            <code>0x123456789abcdef123456789abcdef123456789a</code>
           </div>
-        </article>
-        <article class="story" role="article">
-          <img src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?q=60&w=500&auto=format&fit=crop" alt="Luna the dog" loading="lazy" />
-          <div class="meta">
-            <h3>Luna's Journey</h3>
-            <p>Abandoned and injured, Luna recovered and now plays with three kids every day.</p>
+          <div tabindex="0" role="listitem" class="crypto-coin" data-address="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" aria-label="Bitcoin address bc1qxy... copy to clipboard">
+            <div class="crypto-label">
+              <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=024" alt="Bitcoin logo" />
+              <span>Bitcoin (BTC)</span>
+            </div>
+            <code>bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
           </div>
-        </article>
-        <article class="story" role="article">
-          <img src="https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=60&w=500&auto=format&fit=crop" alt="Rocky the dog" loading="lazy" />
-          <div class="meta">
-            <h3>Rocki's Recovery</h3>
-            <p>Severely injured, fully recovered and adopted. Rocki reminds us why we rescue.</p>
+          <div tabindex="0" role="listitem" class="crypto-coin" data-address="DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk" aria-label="Dogecoin address DSh4f... copy to clipboard">
+            <div class="crypto-label">
+              <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png?v=024" alt="Dogecoin logo" />
+              <span>Dogecoin (DOGE)</span>
+            </div>
+            <code>DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk</code>
           </div>
-        </article>
+        </div>
       </div>
     </section>
 
-    <!-- Contact & footer -->
-    <section id="contact" style="margin-top:24px">
+    <!-- Contact Section -->
+    <section id="contact" aria-label="Contact information">
       <h2>Contact</h2>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px">
-        <div style="flex:1;min-width:200px">
-          <p style="color:var(--muted);font-size:0.95rem">123 Rescue Berry, Kampala</p>
-          <p style="color:var(--muted);font-size:0.95rem"><strong>Phone:</strong> (+256) 781-915680</p>
-          <p style="color:var(--muted);font-size:0.95rem"><strong>Email:</strong> houseofpaw256@gmail.com</p>
+      <div>
+        <div style="flex:1; min-width: 200px;">
+          <p>123 Rescue Berry, Kampala</p>
+          <p><strong>Phone:</strong> (+256) 781-915680</p>
+          <p><strong>Email:</strong> houseofpaw256@gmail.com</p>
         </div>
-        <div style="width:280px;min-width:200px">
+        <div style="min-width: 200px; display: flex; gap: 12px; flex-wrap: wrap; margin-top: 0.5rem;">
           <a class="btn ghost" href="#donate">Support us</a>
           <a class="btn ghost" href="get-involved.html">Volunteer</a>
         </div>
       </div>
     </section>
 
+    <!-- Footer -->
     <footer aria-label="Footer">
-      <div class="grid container" style="padding:8px 0 30px">
+      <div>
+        <strong>HOUSE OF PAWS</strong>
+        <div style="color: var(--muted); margin-top: 8px;">Rescuing Dogs, Restoring Hope since 2020</div>
+      </div>
+      <div>
+        <strong>Links</strong>
         <div>
-          <strong style="color:#fff">HOUSE OF PAWS</strong>
-          <div style="color:var(--muted);margin-top:8px;font-size:0.9rem">Rescuing Dogs, Restoring Hope since 2020</div>
-        </div>
-        <div>
-          <strong style="color:#fff">Links</strong>
-          <div style="margin-top:8px;color:var(--muted);font-size:0.9rem">
-            <a href="/about" style="display:block">About</a>
-            <a href="/mission" style="display:block">Mission</a>
-            <a href="/adopt" style="display:block">Adopt</a>
-            <a href="/contact" style="display:block">Contact</a>
-          </div>
-        </div>
-        <div>
-          <strong style="color:#fff">Follow</strong>
-          <div style="margin-top:8px;color:var(--muted);font-size:0.9rem">
-            <a href="https://facebook.com/houseofpaws" target="_blank" rel="noopener noreferrer" style="display:block">Facebook</a>
-            <a href="https://instagram.com/houseofpaws" target="_blank" rel="noopener noreferrer" style="display:block">Instagram</a>
-            <a href="https://twitter.com/houseofpaws" target="_blank" rel="noopener noreferrer" style="display:block">Twitter</a>
-            <a href="https://youtube.com/houseofpaws" target="_blank" rel="noopener noreferrer" style="display:block">YouTube</a>
-          </div>
+          <a href="/about" tabindex="0">About</a>
+          <a href="/mission" tabindex="0">Mission</a>
+          <a href="/adopt" tabindex="0">Adopt</a>
+          <a href="/contact" tabindex="0">Contact</a>
         </div>
       </div>
-      <div style="text-align:center;color:var(--muted);font-size:0.85rem">© 2025 HOUSE OF PAWS. All rights reserved.</div>
+      <div>
+        <strong>Follow</strong>
+        <div>
+          <a href="https://facebook.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Facebook</a>
+          <a href="https://instagram.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Instagram</a>
+          <a href="https://twitter.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Twitter</a>
+          <a href="https://youtube.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">YouTube</a>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top: 2rem; color: var(--muted); font-size: 0.85rem;">© 2025 HOUSE OF PAWS. All rights reserved.</div>
     </footer>
   </main>
 
-  <!-- Toast -->
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <!-- PayPal Floating Button -->
+  <a id="paypalFloatingBtn" href="https://www.paypal.com/donate?hosted_button_id=YOUR_BUTTON_ID" target="_blank" rel="noopener" aria-label="Donate with PayPal" title="Donate with PayPal">
+    PayPal 🅿️
+  </a>
 
-  <!-- Lightweight deferred JS -->
-  <script defer>
-    (function(){
-      /* Utility */
-      const $ = sel => document.querySelector(sel);
-      const $$ = sel => Array.from(document.querySelectorAll(sel));
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script>
+    (function() {
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => Array.from(document.querySelectorAll(s));
       const toastEl = $('#toast');
-      function showToast(msg, ms=2400){
-        toastEl.textContent = msg; toastEl.classList.add('show');
-        setTimeout(()=> toastEl.classList.remove('show'), ms);
+
+      // Toast helper
+      function showToast(msg, duration = 2500) {
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        setTimeout(() => {
+          toastEl.classList.remove('show');
+        }, duration);
       }
 
-      /* Mobile menu */
-      const menuBtn = document.getElementById('menuBtn');
-      const navMobile = document.getElementById('navMobile');
-      menuBtn.addEventListener('click', ()=>{
+      /* Mobile menu toggle */
+      const menuBtn = $('#menuBtn');
+      const navMobile = $('#navMobile');
+      menuBtn.addEventListener('click', () => {
         const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
         menuBtn.setAttribute('aria-expanded', String(!expanded));
-        navMobile.style.display = expanded ? 'none' : 'block';
+        navMobile.style.display = expanded ? 'none' : 'flex';
       });
-      document.addEventListener('click', (e) => {
-        if(navMobile.style.display === 'block' &&
-           !navMobile.contains(e.target) &&
-           e.target !== menuBtn) {
+      document.addEventListener('click', e => {
+        if (
+          navMobile.style.display === 'flex' &&
+          !navMobile.contains(e.target) &&
+          e.target !== menuBtn
+        ) {
           navMobile.style.display = 'none';
           menuBtn.setAttribute('aria-expanded', 'false');
         }
       });
 
-      /* Lazy load images using IntersectionObserver */
-      const lazyImgs = [].slice.call(document.querySelectorAll('img[data-src]'));
-      if('IntersectionObserver' in window && lazyImgs.length){
-        const io = new IntersectionObserver(entries=>{
-          entries.forEach(e=>{
-            if(e.isIntersecting){
-              const img = e.target;
-              img.src = img.dataset.src;
-              img.removeAttribute('data-src');
-              io.unobserve(img);
-            }
+      /* Carousel functionality */
+      const track = $('.carousel-track');
+      const slides = $$('.carousel-slide');
+      const btnPrev = $('.carousel-button.prev');
+      const btnNext = $('.carousel-button.next');
+      let currentIndex = 0;
+      let slideCount = slides.length;
+
+      function updateCarousel() {
+        const offset = -currentIndex * 100;
+        track.style.transform = `translateX(${offset}%)`;
+      }
+
+      btnPrev.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+        updateCarousel();
+      });
+      btnNext.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % slideCount;
+        updateCarousel();
+      });
+
+      // Auto rotate every 5 seconds
+      let autoRotate = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slideCount;
+        updateCarousel();
+      }, 5000);
+
+      // Pause auto rotate on focus or hover
+      track.addEventListener('mouseenter', () => clearInterval(autoRotate));
+      track.addEventListener('mouseleave', () => {
+        autoRotate = setInterval(() => {
+          currentIndex = (currentIndex + 1) % slideCount;
+          updateCarousel();
+        }, 5000);
+      });
+      track.addEventListener('focusin', () => clearInterval(autoRotate));
+      track.addEventListener('focusout', () => {
+        autoRotate = setInterval(() => {
+          currentIndex = (currentIndex + 1) % slideCount;
+          updateCarousel();
+        }, 5000);
+      });
+
+      /* Tabs logic for donation payment methods */
+      const tabButtons = $$('.tab-btn');
+      const tabPanels = $$('.tab-panel');
+
+      tabButtons.forEach((btn, i) => {
+        btn.addEventListener('click', () => {
+          tabButtons.forEach((b, idx) => {
+            const selected = idx === i;
+            b.setAttribute('aria-selected', selected);
+            b.tabIndex = selected ? 0 : -1;
+            tabPanels[idx].classList.toggle('active', selected);
+            if (selected) tabPanels[idx].removeAttribute('hidden');
+            else tabPanels[idx].setAttribute('hidden', '');
           });
-        }, {rootMargin:'200px'});
-        lazyImgs.forEach(i => io.observe(i));
-      } else {
-        lazyImgs.forEach(i=> i.src = i.dataset.src);
-      }
+          tabButtons[i].focus();
+        });
 
-      /* Carousel pause on hover/focus and keyboard controls */
-      const carousel = $('#carousel');
-      if(carousel){
-        const pause = ()=> carousel.classList.add('paused');
-        const play = ()=> carousel.classList.remove('paused');
-        carousel.addEventListener('mouseenter', pause);
-        carousel.addEventListener('focusin', pause);
-        carousel.addEventListener('mouseleave', play);
-        carousel.addEventListener('focusout', play);
-        carousel.addEventListener('keydown', e=>{
-          if(e.key === ' ' || e.key === 'Enter'){
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
             e.preventDefault();
-            if(carousel.classList.contains('paused')) play();
-            else pause();
-          }
-        });
-      }
-
-      /* Donation presets selection and amount input sync */
-      const presets = $$('.preset');
-      const input = $('#donationAmount');
-      let selectedAmount = 0;
-
-      function clearSelected() {
-        presets.forEach(p => {
-          p.classList.remove('selected');
-          p.setAttribute('aria-checked', 'false');
-        });
-      }
-
-      presets.forEach(preset => {
-        preset.addEventListener('click', () => {
-          clearSelected();
-          preset.classList.add('selected');
-          preset.setAttribute('aria-checked', 'true');
-
-          if (preset.dataset.amount === 'custom') {
-            input.value = '';
-            input.focus();
-          } else {
-            input.value = preset.dataset.amount;
-            selectedAmount = Number(preset.dataset.amount);
-          }
-        });
-
-        preset.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+            let next = (i + 1) % tabButtons.length;
+            tabButtons[next].click();
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
             e.preventDefault();
-            preset.click();
+            let prev = (i - 1 + tabButtons.length) % tabButtons.length;
+            tabButtons[prev].click();
           }
         });
       });
 
-      input.addEventListener('input', () => {
-        clearSelected();
-        selectedAmount = Number(input.value);
-      });
-
-      /* Donation "Donate Now" button */
-      const donateNow = $('#donateNow');
-      const raisedLabel = $('#raisedLabel');
-      const progressBar = $('#progressBar');
-      let raised = 0;
-      const goal = 5000; // example goal
-
-      donateNow.addEventListener('click', () => {
-        const amount = Number(input.value);
-        if (isNaN(amount) || amount < 5) {
-          showToast('Please enter a valid donation amount (minimum $5).');
-          input.focus();
+      /* Credit card form submission - mock */
+      const ccForm = $('#creditCardForm');
+      ccForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Simple validation check
+        if (!ccForm.checkValidity()) {
+          showToast('Please fill out all fields correctly.');
+          ccForm.reportValidity();
           return;
         }
-        raised += amount;
-        raisedLabel.textContent = `$${raised.toLocaleString()}`;
-        const percent = Math.min(100, (raised / goal) * 100);
-        progressBar.style.width = percent + '%';
-        progressBar.setAttribute('aria-valuenow', percent.toFixed(0));
-        showToast(`Thank you for your donation of $${amount}!`);
-        input.value = '';
-        clearSelected();
+        // Mock submission
+        showToast('Thank you for your generous donation!');
+        ccForm.reset();
       });
 
-      /* Credit Card form toggling */
-      const openCardBtn = $('#openCard');
-      const cardForm = $('#cardForm');
-      const cancelCardBtn = $('#cancelCard');
-      openCardBtn.addEventListener('click', () => {
-        const expanded = openCardBtn.getAttribute('aria-expanded') === 'true';
-        openCardBtn.setAttribute('aria-expanded', String(!expanded));
-        if (expanded) {
-          cardForm.style.display = 'none';
-          cardForm.setAttribute('aria-hidden', 'true');
-          openCardBtn.textContent = 'Credit Card';
-        } else {
-          cardForm.style.display = 'block';
-          cardForm.setAttribute('aria-hidden', 'false');
-          openCardBtn.textContent = 'Hide Credit Card Form';
-          cardForm.querySelector('input').focus();
-        }
-      });
-      cancelCardBtn.addEventListener('click', () => {
-        cardForm.style.display = 'none';
-        cardForm.setAttribute('aria-hidden', 'true');
-        openCardBtn.setAttribute('aria-expanded', 'false');
-        openCardBtn.textContent = 'Credit Card';
-      });
-      cardForm.addEventListener('submit', e => {
-        e.preventDefault();
-        showToast('Payment processing is not implemented.');
-      });
-
-      /* Cryptocurrency donation copy */
+      /* Crypto addresses copy on click */
       const cryptoCoins = $$('.crypto-coin');
       cryptoCoins.forEach(coin => {
         coin.addEventListener('click', () => {
-          const addr = coin.dataset.address;
-          navigator.clipboard.writeText(addr).then(() => {
-            showToast(`Copied ${addr} to clipboard`);
+          const address = coin.getAttribute('data-address');
+          if (!address) return;
+          navigator.clipboard.writeText(address).then(() => {
+            showToast(`Copied ${address} to clipboard!`);
           }).catch(() => {
-            showToast('Failed to copy. Please try manually.');
+            showToast('Failed to copy address.');
           });
         });
-        coin.addEventListener('keydown', e => {
+        coin.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             coin.click();
@@ -958,30 +944,36 @@
         });
       });
 
-      /* Dark mode toggle */
-      const btnDarkToggle = document.createElement('button');
-      btnDarkToggle.setAttribute('aria-label', 'Toggle dark and light mode');
-      btnDarkToggle.title = 'Toggle dark/light mode';
-      btnDarkToggle.className = 'btn ghost';
-      btnDarkToggle.style.marginLeft = '12px';
-      btnDarkToggle.textContent = '🌙';
-      document.querySelector('.nav-row').appendChild(btnDarkToggle);
+      /* Theme toggle */
+      const themeBtn = $('#themeToggleBtn');
+      const body = document.body;
 
-      function updateThemeIcon() {
-        btnDarkToggle.textContent = document.body.classList.contains('light-theme') ? '🌞' : '🌙';
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        body.classList.add('light');
+        themeBtn.textContent = '🌞';
+        themeBtn.setAttribute('aria-pressed', 'true');
       }
 
-      btnDarkToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
-        updateThemeIcon();
-        localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+      themeBtn.addEventListener('click', () => {
+        const isLight = body.classList.toggle('light');
+        themeBtn.textContent = isLight ? '🌞' : '🌙';
+        themeBtn.setAttribute('aria-pressed', isLight);
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
       });
 
-      // Load theme from localStorage
-      if(localStorage.getItem('theme') === 'light'){
-        document.body.classList.add('light-theme');
+      /* Accessibility focus */
+      // Focus main sections when navigated to via anchor
+      function focusSectionOnHash() {
+        const id = location.hash.substring(1);
+        if (!id) return;
+        const section = document.getElementById(id);
+        if (section) section.focus();
       }
-      updateThemeIcon();
+      window.addEventListener('hashchange', focusSectionOnHash);
+      // Initial call
+      focusSectionOnHash();
 
     })();
   </script>
