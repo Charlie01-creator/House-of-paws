@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HOUSE OF PAWS — Rescuing Dogs, Restoring Hope</title>
-  <meta name="description" content="House of Paws rescue — help abandoned dogs. Donate, volunteer, and adopt. Fast, accessible, dark-themed site." />
+  <meta name="description" content="House of Paws rescue — help abandoned dogs. Donate, volunteer, and adopt." />
   <style>
     :root {
       --bg: #0b0d0f; --panel: #0f1316; --muted: #9aa3a8; --accent: #ff6b6b; --accent-2: #4ecdc4;
@@ -20,6 +20,10 @@
       --paypal-hover: #0067c5;
       --toast-bg: rgba(255, 255, 255, 0.1);
       --toast-color: var(--text-light);
+      --input-bg: #162029;
+      --input-border: #334556;
+      --input-color: var(--text-light);
+      --input-focus-border: var(--accent-2);
     }
     body.light {
       --bg: #fdfdfd;
@@ -40,8 +44,13 @@
       --paypal-hover: #005ea6;
       --toast-bg: rgba(0,0,0,0.1);
       --toast-color: var(--text-light);
+      --input-bg: #f4f6f8;
+      --input-border: #ccc;
+      --input-color: #222;
+      --input-focus-border: var(--accent-2);
     }
-    * {
+
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0; padding: 0;
     }
@@ -78,6 +87,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      user-select: none;
     }
     .btn.primary {
       background-color: var(--btn-bg);
@@ -210,44 +220,275 @@
       padding-right: 1rem;
     }
 
-    /* Story List */
-    .story-list {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-    .story {
+    /* Hero / Intro */
+    #intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+      gap: 1.2rem;
       background: var(--panel);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+      margin-bottom: 3rem;
+    }
+    #intro h2 {
+      font-size: 2rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    #intro p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    #intro .btn.primary {
+      font-size: 1.1rem;
+      padding: 0.8em 1.6em;
+      box-shadow: var(--shadow);
+    }
+
+    /* Rotating Gallery (Carousel) */
+    #gallery {
+      margin-bottom: 3rem;
+    }
+    #gallery h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .carousel {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
       overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--panel);
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+      will-change: transform;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      user-select: none;
+      outline: none;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s ease;
+      align-items: center;
+      padding: 1rem;
     }
-    .story:hover,
-    .story:focus-within {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(2,6,10,0.8);
-    }
-    .story img {
+    .carousel-slide img {
       width: 100%;
-      height: 200px;
+      max-height: 350px;
       object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      pointer-events: none;
+      user-select: none;
+    }
+    .carousel-slide h3 {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .carousel-slide p {
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--glass);
+      border: none;
+      padding: 0.8rem 1.1rem;
+      font-size: 1.5rem;
+      color: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s ease;
+      z-index: 10;
+    }
+    .carousel-button:hover,
+    .carousel-button:focus {
+      background-color: var(--accent-2);
+      color: #081014;
+      outline: none;
+    }
+    .carousel-button.prev {
+      left: 10px;
+    }
+    .carousel-button.next {
+      right: 10px;
+    }
+
+    /* Donate Section */
+    #donate {
+      margin-bottom: 3rem;
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: var(--shadow);
+    }
+    #donate h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    #donate p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      gap: 12px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 2px solid var(--muted);
+      color: var(--muted);
+      font-weight: 600;
+      padding: 0.6em 1.2em;
+      border-radius: var(--radius);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    .tab-btn[aria-selected="true"] {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: var(--btn-color);
+      box-shadow: var(--shadow);
+    }
+    .tab-btn:hover:not([aria-selected="true"]),
+    .tab-btn:focus-visible:not([aria-selected="true"]) {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+      outline: none;
+    }
+
+    /* Tab panels */
+    .tab-panel {
+      display: none;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tab-panel.active {
       display: block;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    .meta {
-      padding: 12px 16px;
+
+    /* Forms */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-    .meta h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.4rem;
+    label {
+      font-weight: 600;
+      font-size: 1rem;
       color: var(--accent);
     }
-    .meta p {
-      font-size: 0.95rem;
-      color: var(--muted);
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="tel"] {
+      padding: 0.6em 0.9em;
+      border-radius: var(--radius);
+      border: 1.8px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--input-color);
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="number"]:focus,
+    input[type="tel"]:focus {
+      outline: none;
+      border-color: var(--input-focus-border);
+    }
+    input[type="submit"], button[type="submit"] {
+      background-color: var(--btn-bg);
+      color: var(--btn-color);
+      border: none;
+      padding: 0.8em 1.4em;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover,
+    button[type="submit"]:hover,
+    input[type="submit"]:focus,
+    button[type="submit"]:focus {
+      background-color: var(--btn-hover-bg);
+      outline: var(--btn-focus-outline);
+      outline-offset: 2px;
+    }
+
+    /* Crypto donate list */
+    .crypto-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .crypto-coin {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--glass);
+      border-radius: var(--radius);
+      padding: 0.8rem 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+      user-select: all;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .crypto-coin:hover,
+    .crypto-coin:focus {
+      background-color: var(--accent-2);
+      color: #081014;
+      outline: none;
+    }
+    .crypto-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .crypto-label img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      border-radius: 50%;
     }
 
     /* Contact & footer */
@@ -305,237 +546,219 @@
       grid-column: 1 / -1;
       text-align: center;
       font-size: 0.85rem;
+      color: var(--muted);
     }
 
     /* Toast */
     #toast {
       position: fixed;
-      bottom: 1.2rem;
+      bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--toast-bg);
       color: var(--toast-color);
-      padding: 0.8rem 1.6rem;
+      padding: 12px 18px;
       border-radius: 24px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
-      z-index: 1600;
+      user-select: none;
+      z-index: 9999;
+      max-width: 90vw;
+      text-align: center;
     }
     #toast.show {
       opacity: 1;
       pointer-events: auto;
     }
 
-    /* Donate Section */
-    #donate {
-      margin-top: 3rem;
-    }
-    #donate h2 {
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-    }
-    #donate p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
-    #donate .preset {
-      margin-right: 12px;
-      margin-bottom: 12px;
-      user-select: none;
-    }
-    #donate .preset.selected {
-      box-shadow: 0 0 10px var(--accent-2);
-      border: 2px solid var(--accent-2);
-      outline: none;
-    }
-    #donate input[type="number"] {
-      padding: 0.5rem;
-      border-radius: 8px;
-      border: 1px solid var(--muted);
-      max-width: 120px;
-      font-size: 1rem;
-      margin-right: 12px;
-      color: var(--text-light);
-      background: var(--panel);
-      transition: border-color 0.3s ease;
-    }
-    #donate input[type="number"]:focus {
-      outline: none;
-      border-color: var(--accent-2);
-    }
-    #donate button#donateNow {
-      min-width: 110px;
-    }
-
     /* PayPal floating button */
     #paypalFloatingBtn {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--paypal-color);
-      color: white;
-      border-radius: 50px;
-      padding: 12px 18px;
+      bottom: 22px;
+      right: 22px;
+      background-color: var(--paypal-color);
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 32px;
       font-weight: 700;
+      font-size: 1.1rem;
       box-shadow: var(--shadow);
-      z-index: 1500;
+      text-decoration: none;
+      z-index: 10000;
+      user-select: none;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 1.1rem;
+      gap: 6px;
+      cursor: pointer;
       transition: background-color 0.3s ease;
-      text-decoration: none;
     }
     #paypalFloatingBtn:hover,
     #paypalFloatingBtn:focus {
-      background: var(--paypal-hover);
+      background-color: var(--paypal-hover);
       outline: none;
     }
 
-    /* Dark/light toggle button */
+    /* Theme toggle button */
     #themeToggleBtn {
+      font-size: 1.6rem;
       background: transparent;
       border: none;
-      color: var(--muted);
-      font-size: 1.4rem;
+      color: var(--text-light);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px;
-      border-radius: 50%;
+      user-select: none;
       transition: color 0.3s ease;
-      margin-left: 12px;
+      padding: 0 6px;
+      margin-left: 16px;
+      line-height: 1;
     }
-    #themeToggleBtn:hover,
-    #themeToggleBtn:focus {
-      color: var(--accent-2);
-      outline: none;
+    #themeToggleBtn:focus-visible {
+      outline: var(--btn-focus-outline);
+      outline-offset: 3px;
     }
 
-    /* Images lazy load with fixed height */
-    img[data-src] {
-      filter: blur(8px);
-      transition: filter 0.3s ease;
-      min-height: 200px;
-      width: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: 8px 8px 0 0;
-    }
-    img[data-src].loaded {
-      filter: none;
-    }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand" aria-label="House of Paws branding">
-      <div class="logo" aria-hidden="true">HP</div>
-      <div>
-        <h1 style="font-size:1.2rem;">HOUSE OF PAWS</h1>
-        <div style="font-size:0.9rem; color: var(--muted)">Rescuing Dogs, Restoring Hope</div>
-      </div>
+    <div class="nav-row">
+      <a href="/" class="brand" aria-label="House of Paws homepage">
+        <div class="logo" aria-hidden="true">H</div>
+        <span>HOUSE OF PAWS</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#intro">Home</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#donate">Donate</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="menuBtn" aria-expanded="false" aria-controls="navMobile" aria-label="Toggle menu" class="menu-btn">☰</button>
     </div>
-
-    <nav aria-label="Primary navigation" id="primaryNav">
-      <a href="#home">Home</a>
-      <a href="#gallery">Meet Dogs</a>
-      <a href="#donate">Donate</a>
-      <a href="#stories">Stories</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <div style="display:flex; align-items:center; gap: 8px;">
-      <button id="themeToggleBtn" aria-label="Toggle dark/light theme" title="Toggle dark/light theme" aria-pressed="false">🌙</button>
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navMobile" title="Toggle mobile menu" aria-label="Toggle menu">
-        <svg width="22" height="14" aria-hidden="true" fill="currentColor" viewBox="0 0 22 14"><rect y="0" width="22" height="2" rx="1"></rect><rect y="6" width="22" height="2" rx="1"></rect><rect y="12" width="22" height="2" rx="1"></rect></svg>
-      </button>
-    </div>
+    <button id="themeToggleBtn" aria-pressed="false" aria-label="Toggle light and dark mode" title="Toggle theme">🌙</button>
   </header>
-
-  <!-- Mobile nav -->
   <nav id="navMobile" aria-label="Mobile navigation">
-    <a href="#home">Home</a>
-    <a href="#gallery">Meet Dogs</a>
+    <a href="#intro">Home</a>
+    <a href="#gallery">Gallery</a>
     <a href="#donate">Donate</a>
-    <a href="#stories">Stories</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <main id="home" tabindex="-1">
-    <!-- Your existing sections here, adjusted -->
+  <main>
+    <!-- Intro Section -->
+    <section id="intro" tabindex="-1" aria-labelledby="introTitle">
+      <h2 id="introTitle">Welcome to House of Paws</h2>
+      <p>We rescue abandoned and abused dogs, providing them with care, love, and forever homes. Your support helps us continue this vital mission.</p>
+      <a href="#donate" class="btn primary" role="button">Support Us</a>
+    </section>
 
-    <!-- Example image gallery -->
-    <section id="gallery" aria-label="Image gallery">
-      <h2>Meet Our Dogs</h2>
-      <div class="story-list" aria-live="polite" tabindex="0">
-        <article class="story" role="article" tabindex="0">
-          <img data-src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?q=60&w=500&auto=format&fit=crop" alt="Jazz the dog" loading="lazy" />
-          <div class="meta">
-            <h3>Jazz's Story</h3>
-            <p>Found malnourished and scared — Jazz now lives happily with a loving family in Seattle.</p>
+    <!-- Rotating Image Gallery -->
+    <section id="gallery" aria-label="Image gallery of rescued dogs">
+      <h2>Meet Our Rescued Dogs</h2>
+      <div class="carousel" aria-roledescription="carousel" aria-label="Dogs photo gallery">
+        <button class="carousel-button prev" aria-label="Previous slide">&#10094;</button>
+        <div class="carousel-track" tabindex="0">
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Bella">
+            <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=70" alt="Brown dog Bella looking curious" loading="lazy" />
+            <h3>Bella</h3>
+            <p>Rescued from the streets, Bella loves long walks and belly rubs.</p>
           </div>
-        </article>
-
-        <article class="story" role="article" tabindex="0">
-          <img data-src="https://images.unsplash.com/photo-1561037404-61cd46aa615b?q=60&w=500&auto=format&fit=crop" alt="Luna the dog" loading="lazy" />
-          <div class="meta">
-            <h3>Luna's Journey</h3>
-            <p>Abandoned and injured, Luna recovered and now plays with three kids every day.</p>
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Max">
+            <img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=800&q=70" alt="Happy golden retriever Max playing outside" loading="lazy" />
+            <h3>Max</h3>
+            <p>A friendly golden retriever who enjoys playing fetch with kids.</p>
           </div>
-        </article>
-
-        <article class="story" role="article" tabindex="0">
-          <img data-src="https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=60&w=500&auto=format&fit=crop" alt="Rocky the dog" loading="lazy" />
-          <div class="meta">
-            <h3>Rocki's Recovery</h3>
-            <p>Severely injured, fully recovered and adopted. Rocki reminds us why we rescue.</p>
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Luna">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=70" alt="White and black dog Luna sitting" loading="lazy" />
+            <h3>Luna</h3>
+            <p>Sweet and gentle, Luna is looking for a loving forever home.</p>
           </div>
-        </article>
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Rocky">
+            <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=800&q=70" alt="Black dog Rocky with alert eyes" loading="lazy" />
+            <h3>Rocky</h3>
+            <p>Energetic and playful Rocky is ready to join your family adventures.</p>
+          </div>
+        </div>
+        <button class="carousel-button next" aria-label="Next slide">&#10095;</button>
       </div>
     </section>
 
-    <!-- Donation Section -->
-    <section id="donate" aria-labelledby="donateTitle" style="margin-top: 3rem;">
+    <!-- Donate Section -->
+    <section id="donate" aria-labelledby="donateTitle">
       <h2 id="donateTitle">Support Our Cause</h2>
-      <p>Your generous donations help us save and care for abandoned dogs. Minimum donation is $5.</p>
+      <p>Your generous donations help us care for abandoned dogs. Choose your preferred payment method below.</p>
 
-      <div>
-        <div role="list" aria-label="Donation presets" style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom: 1rem;">
-          <button class="preset" role="radio" aria-checked="false" tabindex="0" data-amount="5">$5</button>
-          <button class="preset" role="radio" aria-checked="false" tabindex="-1" data-amount="10">$10</button>
-          <button class="preset" role="radio" aria-checked="false" tabindex="-1" data-amount="20">$20</button>
-          <button class="preset" role="radio" aria-checked="false" tabindex="-1" data-amount="custom">Custom</button>
-        </div>
-
-        <input id="donationAmount" type="number" min="5" placeholder="Enter amount ($)" aria-label="Donation amount" style="margin-right:12px;" />
-
-        <button id="donateNow" class="btn primary" aria-label="Make donation">Donate Now</button>
+      <div class="tabs" role="tablist" aria-label="Donation payment methods">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="creditCardPanel" id="tabCreditCard" tabindex="0">Credit Card</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="paypalPanel" id="tabPaypal" tabindex="-1">PayPal</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="cryptoPanel" id="tabCrypto" tabindex="-1">Cryptocurrency</button>
       </div>
 
-      <div style="margin-top: 16px; max-width: 320px;">
-        <div style="background: var(--glass); border-radius: 12px; overflow: hidden;" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Donation progress">
-          <div id="progressBar" style="height: 20px; background: var(--accent-2); width: 0%; transition: width 0.4s ease;"></div>
+      <!-- Credit Card Form -->
+      <div id="creditCardPanel" class="tab-panel active" role="tabpanel" aria-labelledby="tabCreditCard" tabindex="0">
+        <form id="creditCardForm" aria-label="Credit card donation form" novalidate>
+          <label for="ccName">Name on Card</label>
+          <input type="text" id="ccName" name="ccName" placeholder="Full name" autocomplete="cc-name" required />
+          <label for="ccNumber">Card Number</label>
+          <input type="text" id="ccNumber" name="ccNumber" placeholder="1234 5678 9012 3456" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19" autocomplete="cc-number" required />
+          <label for="ccExpiry">Expiry Date</label>
+          <input type="text" id="ccExpiry" name="ccExpiry" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" maxlength="5" autocomplete="cc-exp" required />
+          <label for="ccCVC">CVC</label>
+          <input type="text" id="ccCVC" name="ccCVC" placeholder="123" pattern="[0-9]{3,4}" maxlength="4" inputmode="numeric" autocomplete="cc-csc" required />
+          <label for="ccAmount">Donation Amount (USD)</label>
+          <input type="number" id="ccAmount" name="ccAmount" min="5" step="1" placeholder="Minimum $5" required />
+          <button type="submit" class="btn primary">Donate</button>
+        </form>
+      </div>
+
+      <!-- PayPal Panel -->
+      <div id="paypalPanel" class="tab-panel" role="tabpanel" aria-labelledby="tabPaypal" tabindex="0" hidden>
+        <div style="text-align:center;">
+          <p>Donate securely via PayPal:</p>
+          <a href="https://www.paypal.com/donate?hosted_button_id=YOUR_BUTTON_ID" target="_blank" rel="noopener" class="btn primary" aria-label="Donate with PayPal">Donate with PayPal</a>
         </div>
-        <div id="raisedLabel" aria-live="polite" style="margin-top: 8px; font-weight: 600; color: var(--accent-2);">Loading donations...</div>
+      </div>
+
+      <!-- Crypto Panel -->
+      <div id="cryptoPanel" class="tab-panel" role="tabpanel" aria-labelledby="tabCrypto" tabindex="0" hidden>
+        <p>Support us with cryptocurrency. Click an address to copy it.</p>
+        <div class="crypto-list" role="list">
+          <div tabindex="0" role="listitem" class="crypto-coin" data-address="0x123456789abcdef123456789abcdef123456789a" aria-label="Ethereum address 0x1234... copy to clipboard">
+            <div class="crypto-label">
+              <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=024" alt="Ethereum logo" />
+              <span>Ethereum (ETH)</span>
+            </div>
+            <code>0x123456789abcdef123456789abcdef123456789a</code>
+          </div>
+          <div tabindex="0" role="listitem" class="crypto-coin" data-address="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" aria-label="Bitcoin address bc1qxy... copy to clipboard">
+            <div class="crypto-label">
+              <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=024" alt="Bitcoin logo" />
+              <span>Bitcoin (BTC)</span>
+            </div>
+            <code>bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+          </div>
+          <div tabindex="0" role="listitem" class="crypto-coin" data-address="DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk" aria-label="Dogecoin address DSh4f... copy to clipboard">
+            <div class="crypto-label">
+              <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png?v=024" alt="Dogecoin logo" />
+              <span>Dogecoin (DOGE)</span>
+            </div>
+            <code>DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk</code>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" aria-label="Contact information" style="margin-top: 3rem;">
+    <section id="contact" aria-label="Contact information">
       <h2>Contact</h2>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px">
-        <div style="flex:1;min-width:200px">
-          <p style="color:var(--muted);font-size:0.95rem">123 Rescue Berry, Kampala</p>
-          <p style="color:var(--muted);font-size:0.95rem"><strong>Phone:</strong> (+256) 781-915680</p>
-          <p style="color:var(--muted);font-size:0.95rem"><strong>Email:</strong> houseofpaw256@gmail.com</p>
+      <div>
+        <div style="flex:1; min-width: 200px;">
+          <p>123 Rescue Berry, Kampala</p>
+          <p><strong>Phone:</strong> (+256) 781-915680</p>
+          <p><strong>Email:</strong> houseofpaw256@gmail.com</p>
         </div>
-        <div style="width:280px;min-width:200px; display:flex; gap:12px;">
+        <div style="min-width: 200px; display: flex; gap: 12px; flex-wrap: wrap; margin-top: 0.5rem;">
           <a class="btn ghost" href="#donate">Support us</a>
           <a class="btn ghost" href="get-involved.html">Volunteer</a>
         </div>
@@ -544,31 +767,29 @@
 
     <!-- Footer -->
     <footer aria-label="Footer">
-      <div class="grid container" style="padding:8px 0 30px; display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:24px;">
+      <div>
+        <strong>HOUSE OF PAWS</strong>
+        <div style="color: var(--muted); margin-top: 8px;">Rescuing Dogs, Restoring Hope since 2020</div>
+      </div>
+      <div>
+        <strong>Links</strong>
         <div>
-          <strong>HOUSE OF PAWS</strong>
-          <div style="color:var(--muted);margin-top:8px;font-size:0.9rem">Rescuing Dogs, Restoring Hope since 2020</div>
-        </div>
-        <div>
-          <strong>Links</strong>
-          <div style="margin-top:8px;color:var(--muted);font-size:0.9rem">
-            <a href="/about" tabindex="0">About</a>
-            <a href="/mission" tabindex="0">Mission</a>
-            <a href="/adopt" tabindex="0">Adopt</a>
-            <a href="/contact" tabindex="0">Contact</a>
-          </div>
-        </div>
-        <div>
-          <strong>Follow</strong>
-          <div style="margin-top:8px;color:var(--muted);font-size:0.9rem">
-            <a href="https://facebook.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Facebook</a>
-            <a href="https://instagram.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Instagram</a>
-            <a href="https://twitter.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Twitter</a>
-            <a href="https://youtube.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">YouTube</a>
-          </div>
+          <a href="/about" tabindex="0">About</a>
+          <a href="/mission" tabindex="0">Mission</a>
+          <a href="/adopt" tabindex="0">Adopt</a>
+          <a href="/contact" tabindex="0">Contact</a>
         </div>
       </div>
-      <div style="text-align:center;color:var(--muted);font-size:0.85rem">© 2025 HOUSE OF PAWS. All rights reserved.</div>
+      <div>
+        <strong>Follow</strong>
+        <div>
+          <a href="https://facebook.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Facebook</a>
+          <a href="https://instagram.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Instagram</a>
+          <a href="https://twitter.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Twitter</a>
+          <a href="https://youtube.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">YouTube</a>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top: 2rem; color: var(--muted); font-size: 0.85rem;">© 2025 HOUSE OF PAWS. All rights reserved.</div>
     </footer>
   </main>
 
@@ -577,166 +798,182 @@
     PayPal 🅿️
   </a>
 
-  <!-- Toast -->
-  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
-  <script defer>
-    (function(){
-      const $ = sel => document.querySelector(sel);
-      const $$ = sel => Array.from(document.querySelectorAll(sel));
+  <script>
+    (function() {
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => Array.from(document.querySelectorAll(s));
       const toastEl = $('#toast');
 
-      function showToast(msg, ms=2400){
+      // Toast helper
+      function showToast(msg, duration = 2500) {
         toastEl.textContent = msg;
         toastEl.classList.add('show');
-        setTimeout(()=> toastEl.classList.remove('show'), ms);
+        setTimeout(() => {
+          toastEl.classList.remove('show');
+        }, duration);
       }
 
       /* Mobile menu toggle */
       const menuBtn = $('#menuBtn');
       const navMobile = $('#navMobile');
-      menuBtn.addEventListener('click', ()=>{
+      menuBtn.addEventListener('click', () => {
         const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
         menuBtn.setAttribute('aria-expanded', String(!expanded));
         navMobile.style.display = expanded ? 'none' : 'flex';
       });
-      // Close mobile menu when clicking outside
-      document.addEventListener('click', (e) => {
-        if(navMobile.style.display === 'flex' && 
-           !navMobile.contains(e.target) && 
-           e.target !== menuBtn) {
+      document.addEventListener('click', e => {
+        if (
+          navMobile.style.display === 'flex' &&
+          !navMobile.contains(e.target) &&
+          e.target !== menuBtn
+        ) {
           navMobile.style.display = 'none';
           menuBtn.setAttribute('aria-expanded', 'false');
         }
       });
 
-      /* Lazy load images */
-      const lazyImgs = [].slice.call(document.querySelectorAll('img[data-src]'));
-      if('IntersectionObserver' in window && lazyImgs.length){
-        const io = new IntersectionObserver(entries=>{
-          entries.forEach(e=>{
-            if(e.isIntersecting){
-              const img = e.target;
-              img.src = img.dataset.src;
-              img.onload = () => img.classList.add('loaded');
-              img.removeAttribute('data-src');
-              io.unobserve(img);
-            }
+      /* Carousel functionality */
+      const track = $('.carousel-track');
+      const slides = $$('.carousel-slide');
+      const btnPrev = $('.carousel-button.prev');
+      const btnNext = $('.carousel-button.next');
+      let currentIndex = 0;
+      let slideCount = slides.length;
+
+      function updateCarousel() {
+        const offset = -currentIndex * 100;
+        track.style.transform = `translateX(${offset}%)`;
+      }
+
+      btnPrev.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+        updateCarousel();
+      });
+      btnNext.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % slideCount;
+        updateCarousel();
+      });
+
+      // Auto rotate every 5 seconds
+      let autoRotate = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slideCount;
+        updateCarousel();
+      }, 5000);
+
+      // Pause auto rotate on focus or hover
+      track.addEventListener('mouseenter', () => clearInterval(autoRotate));
+      track.addEventListener('mouseleave', () => {
+        autoRotate = setInterval(() => {
+          currentIndex = (currentIndex + 1) % slideCount;
+          updateCarousel();
+        }, 5000);
+      });
+      track.addEventListener('focusin', () => clearInterval(autoRotate));
+      track.addEventListener('focusout', () => {
+        autoRotate = setInterval(() => {
+          currentIndex = (currentIndex + 1) % slideCount;
+          updateCarousel();
+        }, 5000);
+      });
+
+      /* Tabs logic for donation payment methods */
+      const tabButtons = $$('.tab-btn');
+      const tabPanels = $$('.tab-panel');
+
+      tabButtons.forEach((btn, i) => {
+        btn.addEventListener('click', () => {
+          tabButtons.forEach((b, idx) => {
+            const selected = idx === i;
+            b.setAttribute('aria-selected', selected);
+            b.tabIndex = selected ? 0 : -1;
+            tabPanels[idx].classList.toggle('active', selected);
+            if (selected) tabPanels[idx].removeAttribute('hidden');
+            else tabPanels[idx].setAttribute('hidden', '');
           });
-        }, {rootMargin:'200px'});
-        lazyImgs.forEach(i => io.observe(i));
-      } else {
-        // fallback: load all
-        lazyImgs.forEach(i=>{
-          i.src = i.dataset.src;
-          i.classList.add('loaded');
+          tabButtons[i].focus();
         });
-      }
 
-      /* Donation logic */
-      const presets = $$('.preset');
-      const donationInput = $('#donationAmount');
-      const donateBtn = $('#donateNow');
-      const raisedLabel = $('#raisedLabel');
-      const progressBar = $('#progressBar');
-      const GOAL = 100000;
-      let raised = parseFloat(localStorage.getItem('ho_paws_raised') || '1251');
-
-      function updateRaisedUI(){
-        raisedLabel.textContent = new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',maximumFractionDigits:0}).format(raised);
-        const pct = Math.min(100, (raised/GOAL)*100);
-        progressBar.style.width = pct + '%';
-        progressBar.parentElement.setAttribute('aria-valuenow', Math.round(pct));
-      }
-      updateRaisedUI();
-
-      function selectPreset(preset){
-        presets.forEach(p=>{
-          p.classList.remove('selected');
-          p.setAttribute('aria-checked','false');
-          p.tabIndex = -1;
-        });
-        preset.classList.add('selected');
-        preset.setAttribute('aria-checked','true');
-        preset.tabIndex = 0;
-        if(preset.dataset.amount === 'custom'){
-          donationInput.value = '';
-          donationInput.focus();
-        } else {
-          donationInput.value = preset.dataset.amount;
-        }
-      }
-      presets.forEach((p,i) => {
-        p.addEventListener('click', () => selectPreset(p));
-        p.addEventListener('keydown', e => {
-          if(e.key === 'Enter' || e.key === ' ') {
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
             e.preventDefault();
-            selectPreset(p);
-          }
-          // Keyboard navigation inside radio group with arrow keys:
-          if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){
+            let next = (i + 1) % tabButtons.length;
+            tabButtons[next].click();
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
             e.preventDefault();
-            let next = (i + 1) % presets.length;
-            presets[next].focus();
-          }
-          if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){
-            e.preventDefault();
-            let prev = (i - 1 + presets.length) % presets.length;
-            presets[prev].focus();
+            let prev = (i - 1 + tabButtons.length) % tabButtons.length;
+            tabButtons[prev].click();
           }
         });
       });
-      // Default select first preset
-      selectPreset(presets[0]);
 
-      donateBtn.addEventListener('click', ()=>{
-        const amtRaw = donationInput.value;
-        const amt = Math.max(0, Math.floor(Number(amtRaw) || 0));
-        if(amt < 5){
-          showToast('Minimum donation is $5');
-          donationInput.focus();
+      /* Credit card form submission - mock */
+      const ccForm = $('#creditCardForm');
+      ccForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Simple validation check
+        if (!ccForm.checkValidity()) {
+          showToast('Please fill out all fields correctly.');
+          ccForm.reportValidity();
           return;
         }
-        // Update total raised and persist
-        raised += amt;
-        localStorage.setItem('ho_paws_raised', String(raised));
-        updateRaisedUI();
-        showToast(`Thanks — donation of $${amt} received (demo)`);
-        donationInput.value = '';
-        // Reset to first preset
-        selectPreset(presets[0]);
+        // Mock submission
+        showToast('Thank you for your generous donation!');
+        ccForm.reset();
       });
 
-      /* Dark/light theme toggle */
-      const themeToggleBtn = $('#themeToggleBtn');
-      const rootEl = document.documentElement;
-      // Load theme from localStorage or system preference
-      function getPreferredTheme(){
-        const stored = localStorage.getItem('ho_paws_theme');
-        if(stored) return stored;
-        // else check system
-        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
-      function applyTheme(theme){
-        if(theme === 'dark'){
-          document.body.classList.remove('light');
-          themeToggleBtn.textContent = '🌙';
-          themeToggleBtn.setAttribute('aria-pressed', 'false');
-        } else {
-          document.body.classList.add('light');
-          themeToggleBtn.textContent = '☀️';
-          themeToggleBtn.setAttribute('aria-pressed', 'true');
-        }
-        localStorage.setItem('ho_paws_theme', theme);
-      }
-      let currentTheme = getPreferredTheme();
-      applyTheme(currentTheme);
-
-      themeToggleBtn.addEventListener('click', ()=>{
-        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        applyTheme(currentTheme);
-        showToast(`Switched to ${currentTheme} mode`);
+      /* Crypto addresses copy on click */
+      const cryptoCoins = $$('.crypto-coin');
+      cryptoCoins.forEach(coin => {
+        coin.addEventListener('click', () => {
+          const address = coin.getAttribute('data-address');
+          if (!address) return;
+          navigator.clipboard.writeText(address).then(() => {
+            showToast(`Copied ${address} to clipboard!`);
+          }).catch(() => {
+            showToast('Failed to copy address.');
+          });
+        });
+        coin.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            coin.click();
+          }
+        });
       });
+
+      /* Theme toggle */
+      const themeBtn = $('#themeToggleBtn');
+      const body = document.body;
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        body.classList.add('light');
+        themeBtn.textContent = '🌞';
+        themeBtn.setAttribute('aria-pressed', 'true');
+      }
+
+      themeBtn.addEventListener('click', () => {
+        const isLight = body.classList.toggle('light');
+        themeBtn.textContent = isLight ? '🌞' : '🌙';
+        themeBtn.setAttribute('aria-pressed', isLight);
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+
+      /* Accessibility focus */
+      // Focus main sections when navigated to via anchor
+      function focusSectionOnHash() {
+        const id = location.hash.substring(1);
+        if (!id) return;
+        const section = document.getElementById(id);
+        if (section) section.focus();
+      }
+      window.addEventListener('hashchange', focusSectionOnHash);
+      // Initial call
+      focusSectionOnHash();
 
     })();
   </script>
