@@ -64,7 +64,7 @@
       color: var(--text-light);
       line-height: 1.45;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      -moz-osx-font-smoothing8: grayscale;
       transition: background 0.3s ease, color 0.3s ease;
     }
     a {
@@ -453,44 +453,6 @@
       outline-offset: 2px;
     }
 
-    /* Crypto donate list */
-    .crypto-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .crypto-coin {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--glass);
-      border-radius: var(--radius);
-      padding: 0.8rem 1rem;
-      font-weight: 600;
-      font-size: 1rem;
-      user-select: all;
-      color: var(--text-light);
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-    .crypto-coin:hover,
-    .crypto-coin:focus {
-      background-color: var(--accent-2);
-      color: #081014;
-      outline: none;
-    }
-    .crypto-label {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .crypto-label img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-      border-radius: 50%;
-    }
-
     /* Contact & footer */
     #contact {
       margin-top: 3rem;
@@ -618,7 +580,89 @@
       outline: var(--btn-focus-outline);
       outline-offset: 3px;
     }
+/* Improved Crypto Section */
+.crypto-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 100%;
+  overflow: hidden;
+}
 
+.crypto-coin {
+  display: flex;
+  flex-direction: column;
+  background: var(--glass);
+  border-radius: var(--radius);
+  padding: 1rem;
+  font-weight: 600;
+  user-select: all;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  overflow: hidden;
+}
+
+.crypto-coin:hover,
+.crypto-coin:focus {
+  background-color: var(--accent-2);
+  color: #081014;
+  outline: none;
+}
+
+.crypto-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.crypto-label img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: white;
+  padding: 2px;
+}
+
+.crypto-address {
+  font-family: monospace;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: rgba(0,0,0,0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.crypto-coin:hover .crypto-address,
+.crypto-coin:focus .crypto-address {
+  background: rgba(0,0,0,0.2);
+  white-space: normal;
+  overflow: visible;
+}
+
+.crypto-full-address {
+  display: none;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+}
+
+.crypto-coin.copied .crypto-address {
+  color: var(--success);
+}
+
+/* Tooltip for when hovering the address */
+.crypto-coin:hover .crypto-address::after {
+  content: "Click to copy";
+  display: block;
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
   </style>
 </head>
 <body>
@@ -722,32 +766,34 @@
 
       <!-- Crypto Panel -->
       <div id="cryptoPanel" class="tab-panel" role="tabpanel" aria-labelledby="tabCrypto" tabindex="0" hidden>
-        <p>Support us with cryptocurrency. Click an address to copy it.</p>
-        <div class="crypto-list" role="list">
-          <div tabindex="0" role="listitem" class="crypto-coin" data-address="0x123456789abcdef123456789abcdef123456789a" aria-label="Ethereum address 0x1234... copy to clipboard">
-            <div class="crypto-label">
-              <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=024" alt="Ethereum logo" />
-              <span>Ethereum (ETH)</span>
-            </div>
-            <code>0x123456789abcdef123456789abcdef123456789a</code>
-          </div>
-          <div tabindex="0" role="listitem" class="crypto-coin" data-address="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" aria-label="Bitcoin address bc1qxy... copy to clipboard">
-            <div class="crypto-label">
-              <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=024" alt="Bitcoin logo" />
-              <span>Bitcoin (BTC)</span>
-            </div>
-            <code>bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
-          </div>
-          <div tabindex="0" role="listitem" class="crypto-coin" data-address="DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk" aria-label="Dogecoin address DSh4f... copy to clipboard">
-            <div class="crypto-label">
-              <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png?v=024" alt="Dogecoin logo" />
-              <span>Dogecoin (DOGE)</span>
-            </div>
-            <code>DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk</code>
-          </div>
-        </div>
+  <p>Support us with cryptocurrency. Click an address to copy it.</p>
+  <div class="crypto-list" role="list">
+    <div tabindex="0" role="listitem" class="crypto-coin" data-address="0x123456789abcdef123456789abcdef123456789a">
+      <div class="crypto-label">
+        <img src="https://cryptologos.cc/logos/versions/ethereum-eth-logo-colored.svg" alt="Ethereum logo" loading="lazy" />
+        <span>Ethereum (ETH)</span>
       </div>
-    </section>
+      <div class="crypto-address">0x1234...89a</div>
+      <div class="crypto-full-address">0x123456789abcdef123456789abcdef123456789a</div>
+    </div>
+    <div tabindex="0" role="listitem" class="crypto-coin" data-address="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh">
+      <div class="crypto-label">
+        <img src="https://cryptologos.cc/logos/versions/bitcoin-btc-logo-colored.svg" alt="Bitcoin logo" loading="lazy" />
+        <span>Bitcoin (BTC)</span>
+      </div>
+      <div class="crypto-address">bc1qxy...0wlh</div>
+      <div class="crypto-full-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
+    </div>
+    <div tabindex="0" role="listitem" class="crypto-coin" data-address="DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk">
+      <div class="crypto-label">
+        <img src="https://cryptologos.cc/logos/versions/dogecoin-doge-logo-colored.svg" alt="Dogecoin logo" loading="lazy" />
+        <span>Dogecoin (DOGE)</span>
+      </div>
+      <div class="crypto-address">DSh4fg...Hjk</div>
+      <div class="crypto-full-address">DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk</div>
+    </div>
+  </div>
+</div>
 
     <!-- Contact Section -->
     <section id="contact" aria-label="Contact information">
@@ -925,25 +971,35 @@
       });
 
       /* Crypto addresses copy on click */
-      const cryptoCoins = $$('.crypto-coin');
-      cryptoCoins.forEach(coin => {
-        coin.addEventListener('click', () => {
-          const address = coin.getAttribute('data-address');
-          if (!address) return;
-          navigator.clipboard.writeText(address).then(() => {
-            showToast(`Copied ${address} to clipboard!`);
-          }).catch(() => {
-            showToast('Failed to copy address.');
-          });
-        });
-        coin.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            coin.click();
-          }
-        });
-      });
-
+      
+/* Crypto addresses copy on click */
+const cryptoCoins = $$('.crypto-coin');
+cryptoCoins.forEach(coin => {
+  coin.addEventListener('click', () => {
+    const address = coin.getAttribute('data-address');
+    if (!address) return;
+    
+    navigator.clipboard.writeText(address).then(() => {
+      // Visual feedback
+      coin.classList.add('copied');
+      showToast(`${coin.querySelector('.crypto-label span').textContent} address copied!`);
+      
+      // Remove copied class after 2 seconds
+      setTimeout(() => {
+        coin.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      showToast('Failed to copy address.');
+    });
+  });
+  
+  coin.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      coin.click();
+    }
+  });
+});
       /* Theme toggle */
       const themeBtn = $('#themeToggleBtn');
       const body = document.body;
@@ -979,3 +1035,4 @@
   </script>
 </body>
 </html>
+
