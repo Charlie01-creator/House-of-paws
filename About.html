@@ -3,241 +3,232 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - House of Paws</title>
+  <title>About Us - HOUSE OF PAWS</title>
   <style>
-    /* Global Styles */
-    body, html {
-      overflow-x: hidden; /* Prevent horizontal scrolling */
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
+    :root {
+      --bg: #0b0d0f; --panel: #0f1316; --muted: #9aa3a8; --accent: #ff6b6b; --accent-2: #4ecdc4;
+      --glass: rgba(255,255,255,0.03); --success: #22c55e; --danger: #ff4d4f; --card: #0b1113;
+      --max-width: 1200px; --radius: 12px; --gap: 18px; --shadow: 0 6px 20px rgba(2,6,10,0.6);
+      --text-light: #dfe7e9;
     }
-
-    /* Header Styles */
-    header {
-      background-color: #1e3a8a; /* Royal Blue */
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      position: relative;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
-
-    .hamburger {
-      display: none; /* Hidden by default */
-      font-size: 2rem; /* Bigger hamburger icon */
-      cursor: pointer;
-      position: absolute;
-      top: 10px; /* Adjusted position */
-      right: 20px;
-      z-index: 1000; /* Ensure it's above other elements */
-      background-color: black; /* Black background */
-      padding: 10px; /* Add padding for better click area */
-      border-radius: 5px; /* Rounded corners */
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-    }
-
-    nav ul li {
-      margin: 0 15px;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-
-    /* Main Content Styles */
-    .about-section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    .about-section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #1e3a8a; /* Royal Blue */
-    }
-
-    .about-section p {
-      font-size: 1rem;
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text-light);
       line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto 20px;
+      margin: 0;
+      padding: 0;
     }
-
-    .team-section {
-      padding: 60px 20px;
-      background-color: #f1f1f1;
-      text-align: center;
-    }
-
-    .team-section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #1e3a8a; /* Royal Blue */
-    }
-
-    .team-grid {
+    
+    /* Header - Reuse from index.html */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(11, 13, 15, 0.85);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 22px;
+      z-index: 99;
     }
-
-    .team-member {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      max-width: 250px;
+    
+    /* Main Content */
+    main {
+      max-width: var(--max-width);
+      margin: 80px auto 0;
+      padding: 0 1rem 3rem;
+    }
+    
+    /* Hero Section */
+    .about-hero {
+      background: linear-gradient(rgba(15, 19, 22, 0.85), rgba(15, 19, 22, 0.85)), 
+                  url('https://images.unsplash.com/photo-1453227588063-bb302b62f50b?auto=format&fit=crop&w=1350&q=70') no-repeat center/cover;
+      padding: 4rem 1rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin: 2rem 0 3rem;
       text-align: center;
-    }
-
-    .team-member img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-    }
-
-    .team-member h3 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-      color: #1e3a8a; /* Royal Blue */
-    }
-
-    .team-member p {
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    /* Footer Styles */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #1e3a8a;
       color: white;
     }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block; /* Show hamburger on mobile */
-      }
-
-      nav ul {
-        display: none; /* Hide menu by default */
-        flex-direction: column;
-        background-color: #1e3a8a;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        text-align: center;
-      }
-
-      nav ul.active {
-        display: flex; /* Show menu when active */
-      }
-
-      nav ul li {
-        margin: 10px 0;
-      }
-
-      .about-section h2,
-      .team-section h2 {
-        font-size: 1.8rem; /* Smaller font size for mobile */
-      }
-
-      .about-section p {
-        font-size: 0.9rem; /* Smaller font size for mobile */
-      }
-
-      .team-member {
-        max-width: 100%; /* Full width for mobile */
-      }
+    
+    .about-hero h1 {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    
+    /* Mission Section */
+    .mission-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .mission-card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+    
+    .mission-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .mission-card h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .team-member {
+      text-align: center;
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .team-member img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      margin-bottom: 1rem;
+    }
+    
+    /* Map Section */
+    .map-container {
+      margin: 3rem 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Footer - Reuse from index.html */
+    footer {
+      background: var(--panel);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
-    <h1>House of Paws</h1>
-    <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle Menu" aria-expanded="false">&#9776;</div>
+    <a href="index.html" class="brand">
+      <div class="logo">H</div>
+      <span>HOUSE OF PAWS</span>
+    </a>
     <nav>
-      <ul id="navMenu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="donors.html">Donor Wall</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="adopt.html">Adopt</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <!-- About Section -->
-  <section class="about-section">
-    <h2>About Us</h2>
-    <p>
-      Welcome to <strong>House of Paws</strong>, a non-profit organization dedicated to rescuing and rehabilitating homeless dogs. 
-      Since our founding in 2019, we have provided shelter, medical care, and love to over 100 dogs, helping them find their forever homes.
-    </p>
-    <p>
-      Our mission is to create a world where every dog has a safe and loving environment. We believe that every dog deserves a second chance, 
-      and we work tirelessly to make that a reality.
-    </p>
-  </section>
+  <main>
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <h1>Our Story</h1>
+      <p>Rescuing dogs and restoring hope in Mityana since 2020</p>
+    </section>
 
-  <!-- Team Section -->
-  <section class="team-section">
-    <h2>Our Team</h2>
-    <div class="team-grid">
-      <div class="team-member">
-        <img src="images/team1.jpg" alt="Team Member 1">
-        <h3>John Doe</h3>
-        <p>Founder & CEO</p>
+    <!-- Mission Section -->
+    <section>
+      <h2 style="text-align: center; color: var(--accent); margin-bottom: 1rem;">Our Mission</h2>
+      <div class="mission-cards">
+        <div class="mission-card">
+          <h3>🐾 Rescue</h3>
+          <p>We save abandoned and abused dogs from the streets of Mityana, providing immediate medical care and shelter.</p>
+        </div>
+        <div class="mission-card">
+          <h3>❤️ Rehabilitate</h3>
+          <p>Each dog receives individualized care, including medical treatment, training, and socialization.</p>
+        </div>
+        <div class="mission-card">
+          <h3>🏡 Rehome</h3>
+          <p>We carefully match dogs with loving forever families through our thorough adoption process.</p>
+        </div>
       </div>
-      <div class="team-member">
-        <img src="images/team2.jpg" alt="Team Member 2">
-        <h3>Jane Smith</h3>
-        <p>Veterinarian</p>
-      </div>
-      <div class="team-member">
-        <img src="images/team3.jpg" alt="Team Member 3">
-        <h3>Emily Brown</h3>
-        <p>Adoption Coordinator</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
+    <!-- Team Section -->
+    <section>
+      <h2 style="text-align: center; color: var(--accent); margin-bottom: 1rem;">Meet Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=70" alt="Dr. Sarah Kintu">
+          <h3>Dr. Sarah Kintu</h3>
+          <p>Founder & Veterinarian</p>
+        </div>
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=70" alt="James Muwanga">
+          <h3>James Muwanga</h3>
+          <p>Rescue Coordinator</p>
+        </div>
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=400&q=70" alt="David Ssemwanga">
+          <h3>David Ssemwanga</h3>
+          <p>Kennel Manager</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section>
+      <h2 style="text-align: center; color: var(--accent); margin-bottom: 1rem;">Our Location in Mityana</h2>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7536223157963!2d32.04272231526293!3d0.4177223640121406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177d9a9d2a1e3a3f%3A0x9e3a9b3a3b3a3b3a!2sMityana%2C%20Uganda!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section style="text-align: center; margin: 4rem 0;">
+      <h2 style="color: var(--accent); margin-bottom: 2rem;">Our Impact</h2>
+      <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;">
+        <div>
+          <h3 style="font-size: 2.5rem; color: var(--accent-2); margin: 0;">500+</h3>
+          <p>Dogs Rescued</p>
+        </div>
+        <div>
+          <h3 style="font-size: 2.5rem; color: var(--accent-2); margin: 0;">300+</h3>
+          <p>Successful Adoptions</p>
+        </div>
+        <div>
+          <h3 style="font-size: 2.5rem; color: var(--accent-2); margin: 0;">50+</h3>
+          <p>Volunteers</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer>
-    <p>&copy; 2025 House of Paws. All rights reserved.</p>
+    <p>© 2023 HOUSE OF PAWS | Mityana, Uganda</p>
+    <p>Rescuing Dogs, Restoring Hope</p>
   </footer>
-
-  <script>
-    // Toggle Hamburger Menu
-    function toggleMenu() {
-      const navMenu = document.getElementById('navMenu');
-      const hamburger = document.querySelector('.hamburger');
-      navMenu.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', navMenu.classList.contains('active'));
-    }
-  </script>
 </body>
 </html>
