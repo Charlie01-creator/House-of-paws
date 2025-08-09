@@ -925,25 +925,26 @@
         ccForm.reset();
       });
 
-      /* Crypto addresses copy on click */
-      const cryptoCoins = $$('.crypto-coin');
-      cryptoCoins.forEach(coin => {
-        coin.addEventListener('click', () => {
-          const address = coin.getAttribute('data-address');
-          if (!address) return;
-          navigator.clipboard.writeText(address).then(() => {
-            showToast(`Copied ${address} to clipboard!`);
-          }).catch(() => {
-            showToast('Failed to copy address.');
-          });
-        });
-        coin.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            coin.click();
-          }
-        });
-      });
+      /* Crypto addresses copy on click & keyboard */
+const cryptoCoins = document.querySelectorAll('.crypto-coin');
+cryptoCoins.forEach(coin => {
+  coin.addEventListener('click', () => {
+    const address = coin.getAttribute('data-address');
+    if (!address) return;
+    navigator.clipboard.writeText(address).then(() => {
+      showToast(`Copied ${address} to clipboard!`);
+    }).catch(() => {
+      showToast('Failed to copy address.');
+    });
+  });
+  coin.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      coin.click();
+    }
+  });
+});
+
 
       /* Theme toggle */
       const themeBtn = $('#themeToggleBtn');
@@ -980,4 +981,5 @@
   </script>
 </body>
 </html>
+
 
