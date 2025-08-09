@@ -1,121 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HOUSE OF PAWS — Rescuing Dogs, Restoring Hope</title>
-  <meta name="description" content="House of Paws rescue — help abandoned dogs. Donate, volunteer, and adopt." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - HOUSE OF PAWS</title>
   <style>
+    /* REUSED FROM INDEX.HTML */
     :root {
       --bg: #0b0d0f; --panel: #0f1316; --muted: #9aa3a8; --accent: #ff6b6b; --accent-2: #4ecdc4;
       --glass: rgba(255,255,255,0.03); --success: #22c55e; --danger: #ff4d4f; --card: #0b1113;
       --max-width: 1200px; --radius: 12px; --gap: 18px; --shadow: 0 6px 20px rgba(2,6,10,0.6);
       --safe-min: 0.75rem;
       --text-light: #dfe7e9;
-      --btn-bg: var(--accent);
-      --btn-color: #081014;
-      --btn-hover-bg: #ff8585;
-      --btn-focus-outline: 2px solid var(--accent-2);
-      --paypal-color: #00457c;
-      --paypal-hover: #0067c5;
-      --toast-bg: rgba(255, 255, 255, 0.1);
-      --toast-color: var(--text-light);
-      --input-bg: #162029;
-      --input-border: #334556;
-      --input-color: var(--text-light);
-      --input-focus-border: var(--accent-2);
-    }
-    body.light {
-      --bg: #fdfdfd;
-      --panel: #fff;
-      --muted: #555;
-      --accent: #e94f37;
-      --accent-2: #ffb347;
-      --glass: rgba(0,0,0,0.03);
-      --success: #198754;
-      --danger: #d6336c;
-      --card: #f7f7f7;
-      --text-light: #202020;
-      --btn-bg: var(--accent);
-      --btn-color: #fff;
-      --btn-hover-bg: #f9735f;
-      --btn-focus-outline: 2px solid var(--accent-2);
-      --paypal-color: #003087;
-      --paypal-hover: #005ea6;
-      --toast-bg: rgba(0,0,0,0.1);
-      --toast-color: var(--text-light);
-      --input-bg: #f4f6f8;
-      --input-border: #ccc;
-      --input-color: #222;
-      --input-focus-border: var(--accent-2);
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-    }
-    html, body {
-      height: 100%;
     }
     body {
-      margin: 0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       background: var(--bg);
       color: var(--text-light);
       line-height: 1.45;
+      margin: 0;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing8: grayscale;
-      transition: background 0.3s ease, color 0.3s ease;
+      -moz-osx-font-smoothing: grayscale;
     }
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-    a:hover, a:focus {
-      color: var(--accent-2);
-      outline: none;
-    }
-    button, .btn {
-      cursor: pointer;
-      border-radius: var(--radius);
-      font-weight: 600;
-      padding: 0.6em 1.2em;
-      border: none;
-      font-size: 1rem;
-      transition: background-color 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-    }
-    .btn.primary {
-      background-color: var(--btn-bg);
-      color: var(--btn-color);
-      box-shadow: var(--shadow);
-    }
-    .btn.primary:hover,
-    .btn.primary:focus {
-      background-color: var(--btn-hover-bg);
-      outline: var(--btn-focus-outline);
-      outline-offset: 2px;
-    }
-    .btn.ghost {
-      background: transparent;
-      border: 2px solid var(--muted);
-      color: var(--muted);
-    }
-    .btn.ghost:hover,
-    .btn.ghost:focus {
-      border-color: var(--accent-2);
-      color: var(--accent-2);
-      outline: none;
-    }
-    button:focus-visible, a:focus-visible {
-      outline: var(--btn-focus-outline);
-      outline-offset: 3px;
-    }
-
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -161,902 +67,243 @@
       border-radius: 8px;
       transition: background-color 0.2s ease, color 0.2s ease;
     }
-    nav a:hover,
-    nav a:focus {
+    nav a:hover, nav a:focus {
       background-color: var(--glass);
       color: var(--accent-2);
-      outline: none;
+    }
+    nav a.active {
+      color: var(--accent);
     }
     .menu-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-light);
-      cursor: pointer;
       display: none;
-      border-radius: 8px;
-      padding: 8px;
-      transition: background-color 0.2s ease;
     }
-    .menu-btn:hover,
-    .menu-btn:focus {
-      background-color: var(--glass);
-      outline: none;
+
+    /* NEW ABOUT PAGE STYLES */
+    main {
+      max-width: var(--max-width);
+      margin: 80px auto 0;
+      padding: 0 1rem 3rem;
     }
+    .about-hero {
+      background: linear-gradient(rgba(15, 19, 22, 0.85), rgba(15, 19, 22, 0.85)), 
+                  url('https://images.unsplash.com/photo-1453227588063-bb302b62f50b?auto=format&fit=crop&w=1350&q=70') no-repeat center/cover;
+      padding: 5rem 1rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin: 2rem 0 3rem;
+      text-align: center;
+    }
+    .about-hero h1 {
+      font-size: 2.8rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .about-hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+    .mission-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .mission-card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+    .mission-card:hover {
+      transform: translateY(-5px);
+    }
+    .mission-card h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.4rem;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .team-member {
+      text-align: center;
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .team-member img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      margin-bottom: 1rem;
+    }
+    .map-container {
+      margin: 3rem 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+      text-align: center;
+    }
+    .stat-item h3 {
+      font-size: 2.8rem;
+      color: var(--accent-2);
+      margin: 0;
+    }
+    footer {
+      background: var(--panel);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
     @media (max-width: 768px) {
       nav { display: none; }
       .menu-btn { display: inline-block; }
+      .about-hero h1 { font-size: 2rem; }
+      .about-hero p { font-size: 1rem; }
     }
-
-    /* Mobile nav */
-    #navMobile {
-      display: none;
-      background: var(--panel);
-      position: fixed;
-      top: 60px; left: 0; right: 0;
-      padding: 1rem 2rem;
-      z-index: 98;
-      flex-direction: column;
-      gap: 16px;
-    }
-    #navMobile a {
-      color: var(--text-light);
-      font-weight: 600;
-      padding: 10px 12px;
-      border-radius: 8px;
-      display: block;
-    }
-    #navMobile a:hover,
-    #navMobile a:focus {
-      background-color: var(--glass);
-      color: var(--accent-2);
-      outline: none;
-    }
-
-    main {
-      max-width: var(--max-width);
-      margin: auto;
-      padding-top: 80px;
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-    .crypto-label img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  border-radius: 50%;
-  background: white;
-  padding: 2px;
-  /* Fallback background color if image fails */
-  background-color: var(--panel);
-  /* Smooth transition for error state */
-  transition: all 0.2s ease;
-}
-
-/* Style for fallback icons */
-.crypto-label img[src*="cryptoicons.org"] {
-  background-color: transparent;
-  padding: 0;
-}
-
-    /* Hero / Intro */
-    #intro {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 3rem 1rem 4rem;
-      gap: 1.2rem;
-      background: var(--panel);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      margin-bottom: 3rem;
-    }
-    #intro h2 {
-      font-size: 2rem;
-      color: var(--accent);
-      font-weight: 700;
-    }
-    #intro p {
-      font-size: 1.1rem;
-      max-width: 700px;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-    #intro .btn.primary {
-      font-size: 1.1rem;
-      padding: 0.8em 1.6em;
-      box-shadow: var(--shadow);
-    }
-
-    /* Rotating Gallery (Carousel) */
-    #gallery {
-      margin-bottom: 3rem;
-    }
-    #gallery h2 {
-      color: var(--accent);
-      margin-bottom: 1rem;
-      font-weight: 700;
-      text-align: center;
-    }
-    .carousel {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      background: var(--panel);
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.4s ease-in-out;
-      will-change: transform;
-    }
-    .carousel-slide {
-      min-width: 100%;
-      user-select: none;
-      outline: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-    }
-    .carousel-slide img {
-      width: 100%;
-      max-height: 350px;
-      object-fit: cover;
-      border-radius: var(--radius);
-      margin-bottom: 1rem;
-      pointer-events: none;
-      user-select: none;
-    }
-    .carousel-slide h3 {
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-    }
-    .carousel-slide p {
-      max-width: 600px;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.4;
-      text-align: center;
-    }
-    .carousel-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--glass);
-      border: none;
-      padding: 0.8rem 1.1rem;
-      font-size: 1.5rem;
-      color: var(--accent);
-      border-radius: 50%;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.2s ease;
-      z-index: 10;
-    }
-    .carousel-button:hover,
-    .carousel-button:focus {
-      background-color: var(--accent-2);
-      color: #081014;
-      outline: none;
-    }
-    .carousel-button.prev {
-      left: 10px;
-    }
-    .carousel-button.next {
-      right: 10px;
-    }
-
-    /* Donate Section */
-    #donate {
-      margin-bottom: 3rem;
-      background: var(--panel);
-      border-radius: var(--radius);
-      padding: 2rem 1.5rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: var(--shadow);
-    }
-    #donate h2 {
-      color: var(--accent);
-      margin-bottom: 1rem;
-      font-weight: 700;
-      text-align: center;
-    }
-    #donate p {
-      color: var(--muted);
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Tabs */
-    .tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      gap: 12px;
-    }
-    .tab-btn {
-      background: transparent;
-      border: 2px solid var(--muted);
-      color: var(--muted);
-      font-weight: 600;
-      padding: 0.6em 1.2em;
-      border-radius: var(--radius);
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-    }
-    .tab-btn[aria-selected="true"] {
-      background-color: var(--accent);
-      border-color: var(--accent);
-      color: var(--btn-color);
-      box-shadow: var(--shadow);
-    }
-    .tab-btn:hover:not([aria-selected="true"]),
-    .tab-btn:focus-visible:not([aria-selected="true"]) {
-      border-color: var(--accent-2);
-      color: var(--accent-2);
-      outline: none;
-    }
-
-    /* Tab panels */
-    .tab-panel {
-      display: none;
-      max-width: 460px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .tab-panel.active {
-      display: block;
-    }
-
-    /* Forms */
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    label {
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--accent);
-    }
-    input[type="text"],
-    input[type="email"],
-    input[type="number"],
-    input[type="tel"] {
-      padding: 0.6em 0.9em;
-      border-radius: var(--radius);
-      border: 1.8px solid var(--input-border);
-      background: var(--input-bg);
-      color: var(--input-color);
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-    input[type="text"]:focus,
-    input[type="email"]:focus,
-    input[type="number"]:focus,
-    input[type="tel"]:focus {
-      outline: none;
-      border-color: var(--input-focus-border);
-    }
-    input[type="submit"], button[type="submit"] {
-      background-color: var(--btn-bg);
-      color: var(--btn-color);
-      border: none;
-      padding: 0.8em 1.4em;
-      font-weight: 700;
-      font-size: 1.1rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.3s ease;
-    }
-    input[type="submit"]:hover,
-    button[type="submit"]:hover,
-    input[type="submit"]:focus,
-    button[type="submit"]:focus {
-      background-color: var(--btn-hover-bg);
-      outline: var(--btn-focus-outline);
-      outline-offset: 2px;
-    }
-
-    /* Contact & footer */
-    #contact {
-      margin-top: 3rem;
-    }
-    #contact h2 {
-      margin-bottom: 0.8rem;
-      color: var(--accent);
-    }
-    #contact > div {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    #contact p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 0.3rem;
-    }
-    #contact .btn {
-      min-width: 140px;
-    }
-
-    footer[aria-label="Footer"] {
-      background: var(--panel);
-      padding: 24px 20px 30px;
-      color: var(--muted);
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      user-select: none;
-    }
-    footer strong {
-      color: #fff;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-      display: block;
-    }
-    footer a {
-      color: var(--muted);
-      display: block;
-      margin-bottom: 0.4rem;
-      font-weight: 500;
-      text-decoration: none;
-    }
-    footer a:hover,
-    footer a:focus {
-      color: var(--accent-2);
-      outline: none;
-    }
-    footer > div:last-child {
-      grid-column: 1 / -1;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    /* Toast */
-    #toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--toast-bg);
-      color: var(--toast-color);
-      padding: 12px 18px;
-      border-radius: 24px;
-      font-weight: 600;
-      font-size: 1rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      user-select: none;
-      z-index: 9999;
-      max-width: 90vw;
-      text-align: center;
-    }
-    #toast.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* PayPal floating button */
-    #paypalFloatingBtn {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      background-color: var(--paypal-color);
-      color: #fff;
-      padding: 14px 18px;
-      border-radius: 32px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: var(--shadow);
-      text-decoration: none;
-      z-index: 10000;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    #paypalFloatingBtn:hover,
-    #paypalFloatingBtn:focus {
-      background-color: var(--paypal-hover);
-      outline: none;
-    }
-
-    /* Theme toggle button */
-    #themeToggleBtn {
-      font-size: 1.6rem;
-      background: transparent;
-      border: none;
-      color: var(--text-light);
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s ease;
-      padding: 0 6px;
-      margin-left: 16px;
-      line-height: 1;
-    }
-    #themeToggleBtn:focus-visible {
-      outline: var(--btn-focus-outline);
-      outline-offset: 3px;
-    }
-/* Improved Crypto Section */
-.crypto-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.crypto-coin {
-  display: flex;
-  flex-direction: column;
-  background: var(--glass);
-  border-radius: var(--radius);
-  padding: 1rem;
-  font-weight: 600;
-  user-select: all;
-  color: var(--text-light);
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  overflow: hidden;
-}
-
-.crypto-coin:hover,
-.crypto-coin:focus {
-  background-color: var(--accent-2);
-  color: #081014;
-  outline: none;
-}
-
-.crypto-label {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.5rem;
-}
-
-.crypto-label img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  border-radius: 50%;
-  background: white;
-  padding: 2px;
-}
-
-.crypto-address {
-  font-family: monospace;
-  font-size: 0.85rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background: rgba(0,0,0,0.1);
-  padding: 0.5rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.crypto-coin:hover .crypto-address,
-.crypto-coin:focus .crypto-address {
-  background: rgba(0,0,0,0.2);
-  white-space: normal;
-  overflow: visible;
-}
-
-.crypto-full-address {
-  display: none;
-  font-size: 0.75rem;
-  margin-top: 0.3rem;
-}
-
-.crypto-coin.copied .crypto-address {
-  color: var(--success);
-}
-
-/* Tooltip for when hovering the address */
-.crypto-coin:hover .crypto-address::after {
-  content: "Click to copy";
-  display: block;
-  font-size: 0.7rem;
-  color: var(--muted);
-  margin-top: 0.3rem;
-}
   </style>
 </head>
 <body>
+  <!-- EXACT SAME HEADER AS HOMEPAGE -->
   <header>
     <div class="nav-row">
-      <a href="/" class="brand" aria-label="House of Paws homepage">
+      <a href="index.html" class="brand" aria-label="House of Paws homepage">
         <div class="logo" aria-hidden="true">H</div>
         <span>HOUSE OF PAWS</span>
       </a>
       <nav aria-label="Primary navigation">
-        <a href="#intro">Home</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#donate">Donate</a>
-        <a href="#contact">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="adopt.html">Adopt</a>
+        <a href="donate.html">Donate</a>
+        <a href="contact.html">Contact</a>
       </nav>
-      <button id="menuBtn" aria-expanded="false" aria-controls="navMobile" aria-label="Toggle menu" class="menu-btn">☰</button>
+      <button class="menu-btn" aria-expanded="false" aria-label="Toggle menu">☰</button>
     </div>
-    <button id="themeToggleBtn" aria-pressed="false" aria-label="Toggle light and dark mode" title="Toggle theme">🌙</button>
   </header>
-  <nav id="navMobile" aria-label="Mobile navigation">
-    <a href="#intro">Home</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#donate">Donate</a>
-    <a href="#contact">Contact</a>
-  </nav>
 
   <main>
-    <!-- Intro Section -->
-    <section id="intro" tabindex="-1" aria-labelledby="introTitle">
-      <h2 id="introTitle">Welcome to House of Paws</h2>
-      <p>We rescue abandoned and abused dogs, providing them with care, love, and forever homes. Your support helps us continue this vital mission.</p>
-      <a href="#donate" class="btn primary" role="button">Support Us</a>
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <h1>Our Story</h1>
+      <p>Rescuing dogs and restoring hope in Mityana since 2020</p>
     </section>
 
-    <!-- Rotating Image Gallery -->
-    <section id="gallery" aria-label="Image gallery of rescued dogs">
-      <h2>Meet Our Rescued Dogs</h2>
-      <div class="carousel" aria-roledescription="carousel" aria-label="Dogs photo gallery">
-        <button class="carousel-button prev" aria-label="Previous slide">&#10094;</button>
-        <div class="carousel-track" tabindex="0">
-          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Bella">
-            <img src="@8.jpg" alt="Brown dog Bella looking curious" loading="lazy" />
-            <h3>Bella</h3>
-            <p>Rescued from the streets, Bella loves long walks and belly rubs.</p>
-          </div>
-          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Max">
-            <img src="@13.jpg" alt="Happy golden retriever Max playing outside" loading="lazy" />
-            <h3>Max</h3>
-            <p>A friendly golden retriever who enjoys playing fetch with kids.</p>
-          </div>
-          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Luna">
-            <img src="@9.jpg" alt="White and black dog Luna sitting" loading="lazy" />
-            <h3>Luna</h3>
-            <p>Sweet and gentle, Luna is looking for a loving forever home.</p>
-          </div>
-          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Dog named Rocky">
-            <img src="@10.jpg" alt="Black dog Rocky with alert eyes" loading="lazy" />
-            <h3>Rocky</h3>
-            <p>Energetic and playful Rocky is ready to join your family adventures.</p>
-          </div>
+    <!-- Mission Section -->
+    <section>
+      <h2 class="section-title">Our Mission</h2>
+      <div class="mission-cards">
+        <div class="mission-card">
+          <h3>🐾 Rescue</h3>
+          <p>We save abandoned and abused dogs from the streets of Mityana, providing immediate medical care and shelter to those in need.</p>
         </div>
-        <button class="carousel-button next" aria-label="Next slide">&#10095;</button>
-      </div>
-    </section>
-
-    <!-- Donate Section -->
-    <section id="donate" aria-labelledby="donateTitle">
-      <h2 id="donateTitle">Support Our Cause</h2>
-      <p>Your generous donations help us care for abandoned dogs. Choose your preferred payment method below.</p>
-
-      <div class="tabs" role="tablist" aria-label="Donation payment methods">
-        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="creditCardPanel" id="tabCreditCard" tabindex="0">Credit Card</button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="paypalPanel" id="tabPaypal" tabindex="-1">PayPal</button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="cryptoPanel" id="tabCrypto" tabindex="-1">Cryptocurrency</button>
-      </div>
-
-      <!-- Credit Card Form -->
-      <div id="creditCardPanel" class="tab-panel active" role="tabpanel" aria-labelledby="tabCreditCard" tabindex="0">
-        <form id="creditCardForm" aria-label="Credit card donation form" novalidate>
-          <label for="ccName">Name on Card</label>
-          <input type="text" id="ccName" name="ccName" placeholder="Full name" autocomplete="cc-name" required />
-          <label for="ccNumber">Card Number</label>
-          <input type="text" id="ccNumber" name="ccNumber" placeholder="1234 5678 9012 3456" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19" autocomplete="cc-number" required />
-          <label for="ccExpiry">Expiry Date</label>
-          <input type="text" id="ccExpiry" name="ccExpiry" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" maxlength="5" autocomplete="cc-exp" required />
-          <label for="ccCVC">CVC</label>
-          <input type="text" id="ccCVC" name="ccCVC" placeholder="123" pattern="[0-9]{3,4}" maxlength="4" inputmode="numeric" autocomplete="cc-csc" required />
-          <label for="ccAmount">Donation Amount (USD)</label>
-          <input type="number" id="ccAmount" name="ccAmount" min="5" step="1" placeholder="Minimum $5" required />
-          <button type="submit" class="btn primary">Donate</button>
-        </form>
-      </div>
-
-      <!-- PayPal Panel -->
-      <div id="paypalPanel" class="tab-panel" role="tabpanel" aria-labelledby="tabPaypal" tabindex="0" hidden>
-        <div style="text-align:center;">
-          <p>Donate securely via PayPal:</p>
-          <a href="https://www.paypal.com/donate?hosted_button_id=YOUR_BUTTON_ID" target="_blank" rel="noopener" class="btn primary" aria-label="Donate with PayPal">Donate with PayPal</a>
+        <div class="mission-card">
+          <h3>❤️ Rehabilitate</h3>
+          <p>Each dog receives individualized care including medical treatment, proper nutrition, behavioral training, and socialization.</p>
         </div>
-      </div>
-
-      <!-- Crypto Panel -->
-      
-<div id="cryptoPanel" class="tab-panel" role="tabpanel" aria-labelledby="tabCrypto" tabindex="0" hidden>
-  <p>Support us with cryptocurrency. Click an address to copy it.</p>
-  <div class="crypto-list" role="list">
-    <div tabindex="0" role="listitem" class="crypto-coin" data-address="0x123456789abcdef123456789abcdef123456789a">
-      <div class="crypto-label">
-        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum logo" loading="lazy" onerror="this.src='https://cryptoicons.org/api/icon/eth/32'" />
-        <span>Ethereum (ETH)</span>
-      </div>
-      <div class="crypto-address">0x1234...89a</div>
-      <div class="crypto-full-address">0x123456789abcdef123456789abcdef123456789a</div>
-    </div>
-    <div tabindex="0" role="listitem" class="crypto-coin" data-address="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh">
-      <div class="crypto-label">
-        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin logo" loading="lazy" onerror="this.src='https://cryptoicons.org/api/icon/btc/32'" />
-        <span>Bitcoin (BTC)</span>
-      </div>
-      <div class="crypto-address">bc1qxy...0wlh</div>
-      <div class="crypto-full-address">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
-    </div>
-    <div tabindex="0" role="listitem" class="crypto-coin" data-address="DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk">
-      <div class="crypto-label">
-        <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="Dogecoin logo" loading="lazy" onerror="this.src='https://cryptoicons.org/api/icon/doge/32'" />
-        <span>Dogecoin (DOGE)</span>
-      </div>
-      <div class="crypto-address">DSh4fg...Hjk</div>
-      <div class="crypto-full-address">DSh4fghjlkjFGHjklfghjklLJKHjkLJKHjkLJKHjk</div>
-    </div>
-  </div>
-</div>
-    <!-- Contact Section -->
-    <section id="contact" aria-label="Contact information">
-      <h2>Contact</h2>
-      <div>
-        <div style="flex:1; min-width: 200px;">
-          <p>123 Rescue Berry, Kampala</p>
-          <p><strong>Phone:</strong> (+256) 781-915680</p>
-          <p><strong>Email:</strong> houseofpaw256@gmail.com</p>
-        </div>
-        <div style="min-width: 200px; display: flex; gap: 12px; flex-wrap: wrap; margin-top: 0.5rem;">
-          <a class="btn ghost" href="#donate">Support us</a>
-          <a class="btn ghost" href=volunteer.html">Volunteer</a>
+        <div class="mission-card">
+          <h3>🏡 Rehome</h3>
+          <p>We carefully match dogs with loving forever families through our thorough adoption screening process.</p>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer aria-label="Footer">
-      <div>
-        <strong>HOUSE OF PAWS</strong>
-        <div style="color: var(--muted); margin-top: 8px;">Rescuing Dogs, Restoring Hope since 2020</div>
-      </div>
-      <div>
-        <strong>Links</strong>
-        <div>
-          <a href="about.html" tabindex="0">About Us</a>
-          <a href="Mission.html" tabindex="0">Our Mission</a>
-          <a href="volunteer.html" tabindex="0">Volunteer</a>
+    <!-- Team Section -->
+    <section>
+      <h2 class="section-title">Meet Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=70" alt="Dr. Sarah Kintu">
+          <h3>Dr. Sarah Kintu</h3>
+          <p>Founder & Head Veterinarian</p>
+        </div>
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=70" alt="James Muwanga">
+          <h3>James Muwanga</h3>
+          <p>Rescue Operations Manager</p>
+        </div>
+        <div class="team-member">
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=400&q=70" alt="David Ssemwanga">
+          <h3>David Ssemwanga</h3>
+          <p>Kennel & Facilities Director</p>
         </div>
       </div>
-      <div>
-        <strong>Follow</strong>
-        <div>
-          <a href="https://facebook.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Facebook</a>
-          <a href="https://instagram.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Instagram</a>
-          <a href="https://twitter.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">Twitter</a>
-          <a href="https://youtube.com/houseofpaws" target="_blank" rel="noopener noreferrer" tabindex="0">YouTube</a>
+    </section>
+
+    <!-- Map Section -->
+    <section>
+      <h2 class="section-title">Our Location in Mityana</h2>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7536223157963!2d32.04272231526293!3d0.4177223640121406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177d9a9d2a1e3a3f%3A0x9e3a9b3a3b3a3b3a!2sMityana%2C%20Uganda!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section>
+      <h2 class="section-title">Our Impact</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>500+</h3>
+          <p>Dogs Rescued</p>
+        </div>
+        <div class="stat-item">
+          <h3>300+</h3>
+          <p>Successful Adoptions</p>
+        </div>
+        <div class="stat-item">
+          <h3>50+</h3>
+          <p>Dedicated Volunteers</p>
+        </div>
+        <div class="stat-item">
+          <h3>100%</h3>
+          <p>Passion for Dogs</p>
         </div>
       </div>
-      <div style="text-align:center; margin-top: 2rem; color: var(--muted); font-size: 0.85rem;">© 2025 HOUSE OF PAWS. All rights reserved.</div>
-    </footer>
+    </section>
   </main>
 
-  <!-- PayPal Floating Button -->
-  <a id="paypalFloatingBtn" href="https://www.paypal.com/donate?hosted_button_id=YOUR_BUTTON_ID" target="_blank" rel="noopener" aria-label="Donate with PayPal" title="Donate with PayPal">
-    PayPal 🅿️
-  </a>
-
-  <!-- Toast Notification -->
-  <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <footer>
+    <p>© 2023 HOUSE OF PAWS | Mityana, Uganda</p>
+    <p>Rescuing Dogs, Restoring Hope</p>
+  </footer>
 
   <script>
-    (function() {
-      const $ = (s) => document.querySelector(s);
-      const $$ = (s) => Array.from(document.querySelectorAll(s));
-      const toastEl = $('#toast');
-
-      // Toast helper
-      function showToast(msg, duration = 2500) {
-        toastEl.textContent = msg;
-        toastEl.classList.add('show');
-        setTimeout(() => {
-          toastEl.classList.remove('show');
-        }, duration);
-      }
-
-      /* Mobile menu toggle */
-      const menuBtn = $('#menuBtn');
-      const navMobile = $('#navMobile');
-      menuBtn.addEventListener('click', () => {
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-        menuBtn.setAttribute('aria-expanded', String(!expanded));
-        navMobile.style.display = expanded ? 'none' : 'flex';
-      });
-      document.addEventListener('click', e => {
-        if (
-          navMobile.style.display === 'flex' &&
-          !navMobile.contains(e.target) &&
-          e.target !== menuBtn
-        ) {
-          navMobile.style.display = 'none';
-          menuBtn.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      /* Carousel functionality */
-      const track = $('.carousel-track');
-      const slides = $$('.carousel-slide');
-      const btnPrev = $('.carousel-button.prev');
-      const btnNext = $('.carousel-button.next');
-      let currentIndex = 0;
-      let slideCount = slides.length;
-
-      function updateCarousel() {
-        const offset = -currentIndex * 100;
-        track.style.transform = `translateX(${offset}%)`;
-      }
-
-      btnPrev.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + slideCount) % slideCount;
-        updateCarousel();
-      });
-      btnNext.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % slideCount;
-        updateCarousel();
-      });
-
-      // Auto rotate every 5 seconds
-      let autoRotate = setInterval(() => {
-        currentIndex = (currentIndex + 1) % slideCount;
-        updateCarousel();
-      }, 5000);
-
-      // Pause auto rotate on focus or hover
-      track.addEventListener('mouseenter', () => clearInterval(autoRotate));
-      track.addEventListener('mouseleave', () => {
-        autoRotate = setInterval(() => {
-          currentIndex = (currentIndex + 1) % slideCount;
-          updateCarousel();
-        }, 5000);
-      });
-      track.addEventListener('focusin', () => clearInterval(autoRotate));
-      track.addEventListener('focusout', () => {
-        autoRotate = setInterval(() => {
-          currentIndex = (currentIndex + 1) % slideCount;
-          updateCarousel();
-        }, 5000);
-      });
-
-      /* Tabs logic for donation payment methods */
-      const tabButtons = $$('.tab-btn');
-      const tabPanels = $$('.tab-panel');
-
-      tabButtons.forEach((btn, i) => {
-        btn.addEventListener('click', () => {
-          tabButtons.forEach((b, idx) => {
-            const selected = idx === i;
-            b.setAttribute('aria-selected', selected);
-            b.tabIndex = selected ? 0 : -1;
-            tabPanels[idx].classList.toggle('active', selected);
-            if (selected) tabPanels[idx].removeAttribute('hidden');
-            else tabPanels[idx].setAttribute('hidden', '');
-          });
-          tabButtons[i].focus();
-        });
-
-        btn.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-            e.preventDefault();
-            let next = (i + 1) % tabButtons.length;
-            tabButtons[next].click();
-          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-            e.preventDefault();
-            let prev = (i - 1 + tabButtons.length) % tabButtons.length;
-            tabButtons[prev].click();
-          }
-        });
-      });
-
-      /* Credit card form submission - mock */
-      const ccForm = $('#creditCardForm');
-      ccForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        // Simple validation check
-        if (!ccForm.checkValidity()) {
-          showToast('Please fill out all fields correctly.');
-          ccForm.reportValidity();
-          return;
-        }
-        // Mock submission
-        showToast('Thank you for your generous donation!');
-        ccForm.reset();
-      });
-
-      /* Crypto addresses copy on click */
-      
-/* Crypto addresses copy on click */
-const cryptoCoins = $$('.crypto-coin');
-cryptoCoins.forEach(coin => {
-  coin.addEventListener('click', () => {
-    const address = coin.getAttribute('data-address');
-    if (!address) return;
-    
-    navigator.clipboard.writeText(address).then(() => {
-      // Visual feedback
-      coin.classList.add('copied');
-      showToast(`${coin.querySelector('.crypto-label span').textContent} address copied!`);
-      
-      // Remove copied class after 2 seconds
-      setTimeout(() => {
-        coin.classList.remove('copied');
-      }, 2000);
-    }).catch(() => {
-      showToast('Failed to copy address.');
+    // Mobile menu toggle (same as homepage)
+    const menuBtn = document.querySelector('.menu-btn');
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!expanded));
     });
-  });
-  
-  coin.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      coin.click();
-    }
-  });
-});
-      /* Theme toggle */
-      const themeBtn = $('#themeToggleBtn');
-      const body = document.body;
-
-      // Load saved theme
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
-        body.classList.add('light');
-        themeBtn.textContent = '🌞';
-        themeBtn.setAttribute('aria-pressed', 'true');
-      }
-
-      themeBtn.addEventListener('click', () => {
-        const isLight = body.classList.toggle('light');
-        themeBtn.textContent = isLight ? '🌞' : '🌙';
-        themeBtn.setAttribute('aria-pressed', isLight);
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      });
-
-      /* Accessibility focus */
-      // Focus main sections when navigated to via anchor
-      function focusSectionOnHash() {
-        const id = location.hash.substring(1);
-        if (!id) return;
-        const section = document.getElementById(id);
-        if (section) section.focus();
-      }
-      window.addEventListener('hashchange', focusSectionOnHash);
-      // Initial call
-      focusSectionOnHash();
-
-    })();
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
