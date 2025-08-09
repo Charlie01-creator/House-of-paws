@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteer - House of Paw</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #fff8f0;
+        color: #333;
+    }
+    header {
+        background: #ff8c42;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+    }
+    header h1 {
+        margin: 0;
+    }
+    section.intro {
+        padding: 20px;
+        text-align: center;
+        max-width: 800px;
+        margin: auto;
+    }
+    section.intro p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    form {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    form label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+    form input, form select, form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+    form textarea {
+        resize: vertical;
+        height: 100px;
+    }
+    form button {
+        background: #ff8c42;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 1rem;
+        border-radius: 4px;
+        margin-top: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    form button:hover {
+        background: #e57b34;
+    }
+    .whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #25d366;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 50px;
+        font-size: 1rem;
+        text-decoration: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .whatsapp-btn:hover {
+        background: #1ebc5b;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Become a Volunteer</h1>
+</header>
+
+<section class="intro">
+    <h2>Join the House of Paw Family</h2>
+    <p>We rely on passionate volunteers like you to help care for, rescue, and find homes for animals in need. Whether you can spare a few hours a week or help with special events, every effort makes a difference.</p>
+</section>
+
+<form action="https://formspree.io/f/yourFormID" method="POST">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="_replyto" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" required>
+
+    <label for="skills">Skills or Experience</label>
+    <input type="text" id="skills" name="skills" placeholder="e.g. animal care, fundraising, photography">
+
+    <label for="availability">Availability</label>
+    <select id="availability" name="availability" required>
+        <option value="">Select your availability</option>
+        <option value="Weekdays">Weekdays</option>
+        <option value="Weekends">Weekends</option>
+        <option value="Flexible">Flexible</option>
+    </select>
+
+    <label for="message">Additional Information</label>
+    <textarea id="message" name="message" placeholder="Tell us more about yourself..."></textarea>
+
+    <button type="submit">Submit Volunteer Application</button>
+</form>
+
+<a href="https://wa.me/256XXXXXXXXX" class="whatsapp-btn" target="_blank">💬 Chat on WhatsApp</a>
+
+</body>
+</html>
