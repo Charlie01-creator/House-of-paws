@@ -1,72 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Us - HOUSE OF PAWS</title>
   <style>
     :root {
       --bg: #0b0d0f; --panel: #0f1316; --muted: #9aa3a8; --accent: #ff6b6b; --accent-2: #4ecdc4;
       --glass: rgba(255,255,255,0.03); --success: #22c55e; --danger: #ff4d4f; --card: #0b1113;
       --max-width: 1200px; --radius: 12px; --gap: 18px; --shadow: 0 6px 20px rgba(2,6,10,0.6);
+      --safe-min: 0.75rem;
       --text-light: #dfe7e9;
     }
     body {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       background: var(--bg);
       color: var(--text-light);
-      line-height: 1.6;
+      line-height: 1.45;
       margin: 0;
-      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    
-    /* Header - Reuse from index.html */
+    /* HEADER */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
       background: rgba(11, 13, 15, 0.85);
       backdrop-filter: blur(6px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      z-index: 99;
+    }
+    .nav-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 22px;
-      z-index: 99;
     }
-    
-    /* Main Content */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-light);
+      user-select: none;
+      text-decoration: none;
+    }
+    .logo {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #081014;
+      box-shadow: var(--shadow);
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+    }
+    .nav-links a, .mobile-menu a {
+      color: var(--text-light);
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      text-decoration: none;
+      display: block;
+    }
+    .nav-links a:hover, .mobile-menu a:hover {
+      background-color: var(--glass);
+      color: var(--accent-2);
+    }
+    .nav-links a.active, .mobile-menu a.active {
+      color: var(--accent);
+    }
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .menu-btn { display: block; }
+      .mobile-menu {
+        background: var(--panel);
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .mobile-menu[hidden] { display: none; }
+    }
+
+    /* PAGE CONTENT */
     main {
       max-width: var(--max-width);
       margin: 80px auto 0;
       padding: 0 1rem 3rem;
     }
-    
-    /* Hero Section */
     .about-hero {
       background: linear-gradient(rgba(15, 19, 22, 0.85), rgba(15, 19, 22, 0.85)), 
                   url('https://images.unsplash.com/photo-1453227588063-bb302b62f50b?auto=format&fit=crop&w=1350&q=70') no-repeat center/cover;
-      padding: 4rem 1rem;
+      padding: 5rem 1rem;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       margin: 2rem 0 3rem;
       text-align: center;
-      color: white;
     }
-    
     .about-hero h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       color: var(--accent);
       margin-bottom: 1rem;
     }
-    
-    /* Mission Section */
+    .about-hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
     .mission-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin: 3rem 0;
     }
-    
     .mission-card {
       background: var(--card);
       padding: 2rem;
@@ -74,27 +140,23 @@
       box-shadow: var(--shadow);
       transition: transform 0.3s ease;
     }
-    
     .mission-card:hover {
       transform: translateY(-5px);
     }
-    
     .mission-card h3 {
       color: var(--accent);
       margin-bottom: 1rem;
       display: flex;
       align-items: center;
       gap: 0.8rem;
+      font-size: 1.4rem;
     }
-    
-    /* Team Section */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
       margin: 3rem 0;
     }
-    
     .team-member {
       text-align: center;
       background: var(--card);
@@ -102,17 +164,14 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
-    
     .team-member img {
-      width: 120px;
-      height: 120px;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
       border-radius: 50%;
       border: 3px solid var(--accent);
       margin-bottom: 1rem;
     }
-    
-    /* Map Section */
     .map-container {
       margin: 3rem 0;
       border-radius: var(--radius);
@@ -120,34 +179,59 @@
       box-shadow: var(--shadow);
       height: 400px;
     }
-    
     .map-container iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
-    
-    /* Footer - Reuse from index.html */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+      text-align: center;
+    }
+    .stat-item h3 {
+      font-size: 2.8rem;
+      color: var(--accent-2);
+      margin: 0;
+    }
     footer {
       background: var(--panel);
       padding: 2rem;
       text-align: center;
       margin-top: 3rem;
     }
+    @media (max-width: 768px) {
+      .about-hero h1 { font-size: 2rem; }
+      .about-hero p { font-size: 1rem; }
+    }
   </style>
 </head>
 <body>
+  <!-- HEADER -->
   <header>
-    <a href="index.html" class="brand">
-      <div class="logo">H</div>
-      <span>HOUSE OF PAWS</span>
-    </a>
-    <nav>
+    <div class="nav-row">
+      <a href="index.html" class="brand" aria-label="House of Paws homepage">
+        <div class="logo" aria-hidden="true">H</div>
+        <span>HOUSE OF PAWS</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="adopt.html">Adopt</a>
+        <a href="donate.html">Donate</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="menu-btn" aria-expanded="false" aria-label="Toggle menu">☰</button>
+    </div>
+    <div class="mobile-menu" hidden>
       <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="voluteer.html">Adopt</a>
+      <a href="about.html" class="active">About</a>
+      <a href="adopt.html">Adopt</a>
+      <a href="donate.html">Donate</a>
       <a href="contact.html">Contact</a>
-    </nav>
+    </div>
   </header>
 
   <main>
@@ -159,68 +243,72 @@
 
     <!-- Mission Section -->
     <section>
-      <h2 style="text-align: center; color: var(--accent); margin-bottom: 1rem;">Our Mission</h2>
+      <h2 class="section-title">Our Mission</h2>
       <div class="mission-cards">
         <div class="mission-card">
           <h3>🐾 Rescue</h3>
-          <p>We save abandoned and abused dogs from the streets of Mityana, providing immediate medical care and shelter.</p>
+          <p>We save abandoned and abused dogs from the streets of Mityana, providing immediate medical care and shelter to those in need.</p>
         </div>
         <div class="mission-card">
           <h3>❤️ Rehabilitate</h3>
-          <p>Each dog receives individualized care, including medical treatment, training, and socialization.</p>
+          <p>Each dog receives individualized care including medical treatment, proper nutrition, behavioral training, and socialization.</p>
         </div>
         <div class="mission-card">
           <h3>🏡 Rehome</h3>
-          <p>We carefully match dogs with loving forever families through our thorough adoption process.</p>
+          <p>We carefully match dogs with loving forever families through our thorough adoption screening process.</p>
         </div>
       </div>
     </section>
 
     <!-- Team Section -->
     <section>
-      <h2 style="text-align: center; color: var(--accent); margin-bottom: 1rem;">Meet Our Team</h2>
+      <h2 class="section-title">Meet Our Team</h2>
       <div class="team-grid">
         <div class="team-member">
           <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=70" alt="Dr. Sarah Kintu">
-          <h3>Dr. Charles Semakula</h3>
-          <p>Founder & Manager</p>
+          <h3>Dr. Sarah Kintu</h3>
+          <p>Founder & Head Veterinarian</p>
         </div>
         <div class="team-member">
           <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=70" alt="James Muwanga">
-          <h3>Vianney Mulekezi</h3>
-          <p>Rescue Coordinator</p>
+          <h3>James Muwanga</h3>
+          <p>Rescue Operations Manager</p>
         </div>
         <div class="team-member">
           <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=400&q=70" alt="David Ssemwanga">
-          <h3>Innocent Kahengere</h3>
-          <p>Kennel Manager</p>
+          <h3>David Ssemwanga</h3>
+          <p>Kennel & Facilities Director</p>
         </div>
       </div>
     </section>
 
     <!-- Map Section -->
     <section>
-      <h2 style="text-align: center; color: var(--accent); margin-bottom: 1rem;">Our Location in Mityana</h2>
+      <h2 class="section-title">Our Location in Mityana</h2>
       <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7536223157963!2d32.04272231526293!3d0.4177223640121406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177d9a9d2a1e3a3f%3A0x9e3a9b3a3b3a3b3a!2sMityana%2C%20Uganda!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
       </div>
     </section>
 
     <!-- Stats Section -->
-    <section style="text-align: center; margin: 4rem 0;">
-      <h2 style="color: var(--accent); margin-bottom: 2rem;">Our Impact</h2>
-      <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem;">
-        <div>
-          <h3 style="font-size: 2.5rem; color: var(--accent-2); margin: 0;">40+</h3>
+    <section>
+      <h2 class="section-title">Our Impact</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>500+</h3>
           <p>Dogs Rescued</p>
         </div>
-        <div>
-          <h3 style="font-size: 2.5rem; color: var(--accent-2); margin: 0;">16+</h3>
+        <div class="stat-item">
+          <h3>300+</h3>
           <p>Successful Adoptions</p>
         </div>
-        <div>
-          <h3 style="font-size: 2.5rem; color: var(--accent-2); margin: 0;">10+</h3>
-          <p>Volunteers</p>
+        <div class="stat-item">
+          <h3>50+</h3>
+          <p>Dedicated Volunteers</p>
+        </div>
+        <div class="stat-item">
+          <h3>100%</h3>
+          <p>Passion for Dogs</p>
         </div>
       </div>
     </section>
@@ -230,8 +318,15 @@
     <p>© 2023 HOUSE OF PAWS | Mityana, Uganda</p>
     <p>Rescuing Dogs, Restoring Hope</p>
   </footer>
+
+  <script>
+    const menuBtn = document.querySelector('.menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.hidden = expanded;
+    });
+  </script>
 </body>
 </html>
-
-
-
