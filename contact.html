@@ -3,288 +3,293 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - House of Paws</title>
+  <title>Contact Us - HOUSE OF PAWS</title>
   <style>
-    /* Global Styles */
-    body, html {
-      overflow-x: hidden; /* Prevent horizontal scrolling */
-      width: 100%;
+    /* THEME VARIABLES */
+    :root {
+      --bg: #0b0d0f; --panel: #0f1316; --muted: #9aa3a8; --accent: #ff6b6b; --accent-2: #4ecdc4;
+      --glass: rgba(255,255,255,0.03); --success: #22c55e; --danger: #ff4d4f; --card: #0b1113;
+      --max-width: 1200px; --radius: 12px; --gap: 18px; --shadow: 0 6px 20px rgba(2,6,10,0.6);
+      --text-light: #dfe7e9;
+      --btn-bg: var(--accent);
+      --btn-color: #081014;
+      --btn-hover-bg: #ff8585;
+    }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text-light);
+      line-height: 1.45;
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
     }
 
-    /* Header Styles */
+    /* HEADER */
     header {
-      background-color: #1e3a8a; /* Royal Blue */
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      position: relative;
-      z-index: 1000; /* Ensure header is above other sections */
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
-
-    .hamburger {
-      display: none; /* Hidden by default */
-      font-size: 2rem; /* Bigger hamburger icon */
-      cursor: pointer;
-      position: absolute;
-      top: 10px; /* Adjusted position */
-      right: 20px;
-      z-index: 1001; /* Higher z-index to ensure it's in front */
-      background-color: black; /* Black background */
-      padding: 10px; /* Add padding for better click area */
-      border-radius: 5px; /* Rounded corners */
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(11, 13, 15, 0.85);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       display: flex;
       justify-content: center;
+      z-index: 99;
     }
-
-    nav ul li {
-      margin: 0 15px;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-
-    /* Contact Section */
-    .contact-section {
-      padding: 80px 20px;
-      text-align: center;
-      background-color: white;
-    }
-
-    .contact-section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #1e3a8a; /* Royal Blue */
-    }
-
-    .contact-section p {
-      font-size: 1rem;
-      margin-bottom: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .contact-container {
+    .nav-row {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .contact-form {
-      flex: 1;
-      min-width: 300px;
-      max-width: 500px;
-      text-align: left;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
+      justify-content: space-between;
+      align-items: center;
       width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
+      max-width: var(--max-width);
+      padding: 10px 22px;
     }
-
-    .contact-form textarea {
-      height: 150px;
-      resize: vertical;
-    }
-
-    .contact-form button {
-      background-color: #f59e0b; /* Gold */
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .contact-form button:hover {
-      background-color: #d97706; /* Darker Gold */
-    }
-
-    .contact-info {
-      flex: 1;
-      min-width: 300px;
-      max-width: 500px;
-      text-align: left;
-    }
-
-    .contact-info h3 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      color: #1e3a8a; /* Royal Blue */
-    }
-
-    .contact-info p {
-      font-size: 1rem;
-      margin-bottom: 15px;
-      color: #666;
-    }
-
-    .contact-info a {
-      color: #1e3a8a; /* Royal Blue */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-light);
       text-decoration: none;
+      font-weight: 700;
     }
-
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
-
-    .map {
-      width: 100%;
-      height: 300px;
-      margin-top: 40px;
-      border: 0;
+    .logo {
+      width: 42px; height: 42px;
       border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #081014;
+      box-shadow: var(--shadow);
+    }
+    nav {
+      display: flex;
+      gap: 18px;
+    }
+    nav a {
+      color: var(--text-light);
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    nav a:hover {
+      background-color: var(--glass);
+      color: var(--accent-2);
+    }
+    nav a.active {
+      color: var(--accent);
+    }
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #25D366;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .whatsapp-btn:hover {
+      background: #128C7E;
+    }
+    .menu-btn {
+      display: none;
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
     }
 
-    /* Footer Styles */
+    /* CONTACT PAGE */
+    main {
+      max-width: var(--max-width);
+      margin: 80px auto 0;
+      padding: 0 1rem 3rem;
+    }
+    .contact-hero {
+      background: linear-gradient(rgba(15, 19, 22, 0.85), rgba(15, 19, 22, 0.85)),
+                  url('https://images.unsplash.com/photo-1583511655826-05700442b31b?auto=format&fit=crop&w=1350&q=70') no-repeat center/cover;
+      padding: 4rem 1rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin: 2rem 0 3rem;
+      text-align: center;
+    }
+    .contact-hero h1 {
+      font-size: 2.8rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin: 3rem 0;
+    }
+    .contact-info, .contact-form {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .contact-info h2, .contact-form h2 {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--accent-2);
+      margin-top: 0.2rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--muted);
+      background: var(--panel);
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+    textarea { min-height: 150px; resize: vertical; }
+    .btn {
+      background: var(--btn-bg);
+      color: var(--btn-color);
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .btn:hover { background: var(--btn-hover-bg); }
+    .map-container {
+      margin: 3rem 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
     footer {
       text-align: center;
-      padding: 20px;
-      background-color: #1e3a8a;
-      color: white;
+      padding: 1.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
-    /* Responsive Styles */
+    /* MOBILE */
     @media (max-width: 768px) {
-      .hamburger {
-        display: block; /* Show hamburger on mobile */
-      }
-
-      nav ul {
-        display: none; /* Hide menu by default */
-        flex-direction: column;
-        background-color: #1e3a8a;
-        position: absolute;
-        top: 60px; /* Position below the header */
-        left: 0;
-        width: 100%;
-        text-align: center;
-        z-index: 1002; /* Higher z-index to ensure it's above other sections */
-      }
-
-      nav ul.active {
-        display: flex; /* Show menu when active */
-      }
-
-      nav ul li {
-        margin: 10px 0;
-      }
-
-      .contact-section h2 {
-        font-size: 1.8rem; /* Smaller font size for mobile */
-      }
-
-      .contact-section p {
-        font-size: 0.9rem; /* Smaller font size for mobile */
-      }
-
-      .contact-container {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .contact-form,
-      .contact-info {
-        max-width: 100%; /* Full width for mobile */
-      }
+      nav { display: none; flex-direction: column; background: var(--panel); padding: 1rem; position: absolute; top: 60px; right: 10px; border-radius: var(--radius); }
+      nav.show { display: flex; }
+      .menu-btn { display: inline-block; }
+      .contact-hero h1 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
+
+  <!-- HEADER -->
   <header>
-    <h1>House of Paws</h1>
-    <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle Menu" aria-expanded="false">&#9776;</div>
-    <nav>
-      <ul id="navMenu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="donors.html">Donor Wall</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="nav-row">
+      <a href="index.html" class="brand">
+        <div class="logo">H</div>
+        <span>HOUSE OF PAWS</span>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="adopt.html">Adopt</a>
+        <a href="donate.html">Donate</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+      <a href="https://wa.me/256781915680?text=Hello%20House%20of%20Paws,%20I%20would%20like%20to%20inquire%20about..." 
+         class="whatsapp-btn" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c..."/></svg>
+        WhatsApp
+      </a>
+      <button class="menu-btn">☰</button>
+    </div>
   </header>
 
-  <!-- Contact Section -->
-  <section class="contact-section">
-    <h2>Contact Us</h2>
-    <p>
-      Have questions or want to get in touch? We'd love to hear from you! Fill out the form below, 
-      and we'll get back to you as soon as possible.
-    </p>
+  <main>
+    <section class="contact-hero">
+      <h1>Get In Touch</h1>
+      <p>We'd love to hear from you! Reach out for adoptions, volunteering, or general inquiries.</p>
+    </section>
+
     <div class="contact-container">
-      <!-- Contact Form -->
-      <div class="contact-form">
-        <form action="#" method="post">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="email" placeholder="Your Email" required>
-          <input type="text" name="subject" placeholder="Subject" required>
-          <textarea name="message" placeholder="Your Message" required></textarea>
-          <button type="submit">Send Message</button>
-        </form>
+      <div class="contact-info">
+        <h2>Contact Information</h2>
+        <div class="contact-item"><div class="contact-icon">📍</div><div><h3>Address</h3><p>123 Rescue Lane, Mityana, Uganda</p></div></div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div><h3>Phone</h3><p>+256 781 915680 (Call or Text)</p></div></div>
+        <div class="contact-item"><div class="contact-icon">✉️</div><div><h3>Email</h3><p>houseofpaw256@gmail.com</p></div></div>
+        <div class="contact-item"><div class="contact-icon">🕒</div><div><h3>Hours</h3><p>Mon - Sat: 9AM - 5PM</p><p>Sunday: Emergencies only</p></div></div>
       </div>
 
-      <!-- Contact Information -->
-      <div class="contact-info">
-        <h3>Contact Information</h3>
-        <p><strong>Address:</strong> 123 Dog Lane, Pet City, PC 12345</p>
-        <p><strong>Phone:</strong> <a href="tel:+1234567890">+1 (234) 567-890</a></p>
-        <p><strong>Email:</strong> <a href="mailto:info@houseofpaws.com">info@houseofpaws.com</a></p>
-        <p><strong>Working Hours:</strong> Mon - Fri: 9 AM - 5 PM</p>
+      <div class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form id="contactForm">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required>
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject" required>
+            <option value="">Select a topic</option>
+            <option value="adoption">Adoption Inquiry</option>
+            <option value="volunteer">Volunteering</option>
+            <option value="donation">Donation Question</option>
+            <option value="other">Other</option>
+          </select>
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" required></textarea>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
       </div>
     </div>
 
-    <!-- Map -->
-    <iframe
-      class="map"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.8354345093747!2d144.9537353153166!3d-37.816279742021665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d6a32f7f1f8!2s123%20Dog%20Lane%2C%20Pet%20City%2C%20PC%2012345!5e0!3m2!1sen!2sus!4v1622549400000!5m2!1sen!2sus"
-      allowfullscreen=""
-      loading="lazy">
-    </iframe>
-  </section>
+    <h2 style="text-align: center; color: var(--accent); margin-bottom: 1rem;">Our Location</h2>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18..." allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </main>
 
-  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 House of Paws. All rights reserved.</p>
+    <p>© 2023 HOUSE OF PAWS | Mityana, Uganda</p>
+    <p>Rescuing Dogs, Restoring Hope</p>
   </footer>
 
   <script>
-    // Toggle Hamburger Menu
-    function toggleMenu() {
-      const navMenu = document.getElementById('navMenu');
-      const hamburger = document.querySelector('.hamburger');
-      navMenu.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', navMenu.classList.contains('active'));
-    }
+    // Mobile menu toggle
+    const menuBtn = document.querySelector('.menu-btn');
+    const nav = document.querySelector('nav');
+    menuBtn.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+
+    // Form handling
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Thank you for your message! We will respond as soon as possible.');
+      e.target.reset();
+    });
   </script>
+
 </body>
 </html>
