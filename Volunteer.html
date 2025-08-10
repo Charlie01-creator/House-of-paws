@@ -3,201 +3,361 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volunteer - House of Paw</title>
+  <title>Contact Us - HOUSE OF PAWS</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #fff;
+    /* REUSED FROM INDEX.HTML */
+    :root {
+      --bg: #0b0d0f; --panel: #0f1316; --muted: #9aa3a8; --accent: #ff6b6b; --accent-2: #4ecdc4;
+      --glass: rgba(255,255,255,0.03); --success: #22c55e; --danger: #ff4d4f; --card: #0b1113;
+      --max-width: 1200px; --radius: 12px; --gap: 18px; --shadow: 0 6px 20px rgba(2,6,10,0.6);
+      --text-light: #dfe7e9;
+      --btn-bg: var(--accent);
+      --btn-color: #081014;
+      --btn-hover-bg: #ff8585;
     }
-
-    /* HEADER */
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text-light);
+      line-height: 1.45;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
     header {
-      background-color: #1f1f1f;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(11, 13, 15, 0.85);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      padding: 10px 22px;
+      z-index: 99;
     }
-
-    header img.logo {
-      height: 40px;
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      color: #f4b400;
-    }
-
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      margin: 4px 0;
-    }
-
-    /* Mobile Menu */
-    .nav-links {
-      display: flex;
-      gap: 20px;
-    }
-    .nav-links.active {
-      display: block;
-      background-color: #1f1f1f;
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      padding: 10px;
-      border-radius: 8px;
-    }
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-      }
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    /* FORM */
-    .volunteer-section {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #1e1e1e;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-
-    .volunteer-section h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #f4b400;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    input, textarea, select {
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #2c2c2c;
-      color: white;
-    }
-
-    input:focus, textarea:focus, select:focus {
-      outline: 2px solid #f4b400;
-    }
-
-    button {
-      padding: 10px;
-      background-color: #f4b400;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background-color: #d39e00;
-    }
-
-    /* WhatsApp Button */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25d366;
-      color: white;
-      border-radius: 50%;
-      width: 55px;
-      height: 55px;
+    .nav-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 28px;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-light);
+      user-select: none;
+    }
+    .logo {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #081014;
+      box-shadow: var(--shadow);
+    }
+    nav {
+      display: flex;
+      gap: 18px;
+    }
+    nav a {
+      color: var(--text-light);
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    nav a:hover, nav a:focus {
+      background-color: var(--glass);
+      color: var(--accent-2);
+    }
+    nav a.active {
+      color: var(--accent);
+    }
+    .menu-btn {
+      display: none;
+    }
+
+    /* CONTACT PAGE SPECIFIC STYLES */
+    main {
+      max-width: var(--max-width);
+      margin: 80px auto 0;
+      padding: 0 1rem 3rem;
+    }
+    .contact-hero {
+      background: linear-gradient(rgba(15, 19, 22, 0.85), rgba(15, 19, 22, 0.85)), 
+                  url('https://images.unsplash.com/photo-1583511655826-05700442b31b?auto=format&fit=crop&w=1350&q=70') no-repeat center/cover;
+      padding: 4rem 1rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin: 2rem 0 3rem;
+      text-align: center;
+    }
+    .contact-hero h1 {
+      font-size: 2.8rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin: 3rem 0;
+    }
+    .contact-info {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .contact-info h2 {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--accent-2);
+      margin-top: 0.2rem;
+    }
+    .contact-form {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .contact-form h2 {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--muted);
+      background: var(--panel);
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--btn-bg);
+      color: var(--btn-color);
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+    .btn:hover {
+      background: var(--btn-hover-bg);
+    }
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #25D366;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
       text-decoration: none;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      z-index: 1000;
+      margin-top: 1rem;
+      transition: background 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+    .whatsapp-btn:hover {
+      background: #128C7E;
+    }
+    .map-container {
+      margin: 3rem 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .menu-btn { display: inline-block; }
+      .contact-hero h1 { font-size: 2rem; }
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- HEADER -->
+  <!-- SAME HEADER AS HOMEPAGE -->
   <header>
-    <img src="logo.png" alt="House of Paw" class="logo">
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="volunteer.html">Volunteer</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div class="nav-row">
+      <a href="index.html" class="brand" aria-label="House of Paws homepage">
+        <div class="logo" aria-hidden="true">H</div>
+        <span>HOUSE OF PAWS</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="adopt.html">Adopt</a>
+        <a href="donate.html">Donate</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+      <button class="menu-btn" aria-expanded="false" aria-label="Toggle menu">☰</button>
     </div>
   </header>
 
-  <!-- VOLUNTEER FORM -->
-  <section class="volunteer-section">
-    <h2>Become a Volunteer</h2>
-    <form action="#" method="post">
-      <input type="text" name="name" placeholder="Full Name" required>
-      <input type="email" name="email" placeholder="Email Address" required>
-      <input type="tel" name="phone" placeholder="Phone Number" required>
-      <select name="skills" required>
-        <option value="">Select Your Skill</option>
-        <option value="animal-care">Animal Care</option>
-        <option value="fundraising">Fundraising</option>
-        <option value="event-organization">Event Organization</option>
-        <option value="other">Other</option>
-      </select>
-      <select name="availability" required>
-        <option value="">Select Availability</option>
-        <option value="weekdays">Weekdays</option>
-        <option value="weekends">Weekends</option>
-        <option value="anytime">Anytime</option>
-      </select>
-      <textarea name="message" rows="4" placeholder="Why do you want to volunteer?" required></textarea>
-      <button type="submit">Submit Application</button>
-    </form>
-  </section>
+  <main>
+    <!-- Hero Section -->
+    <section class="contact-hero">
+      <h1>Get In Touch</h1>
+      <p>We'd love to hear from you! Reach out for adoptions, volunteering, or general inquiries.</p>
+    </section>
 
-  <!-- WhatsApp Button -->
-  <a href="https://wa.me/256700000000" target="_blank" class="whatsapp-btn">💬</a>
+    <!-- Contact Content -->
+    <div class="contact-container">
+      <!-- Contact Information -->
+      <div class="contact-info">
+        <h2>Contact Information</h2>
+        
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h3>Address</h3>
+            <p>123 Kibati, Mityana, Uganda</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h3>Phone</h3>
+            <p>+256 781 915680 (Call or Text)</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <h3>Email</h3>
+            <p>houseofpaw256@gmail.com</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">🕒</div>
+          <div>
+            <h3>Hours</h3>
+            <p>Monday - Saturday: 9AM - 5PM</p>
+            <p>Sunday: Emergency calls only</p>
+          </div>
+        </div>
+
+        <!-- WhatsApp Button -->
+        <a href="https://wa.me/256781915680?text=Hello%20House%20of%20Paws,%20I%20would%20like%20to%20inquire%20about..." class="whatsapp-btn" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a topic</option>
+              <option value="adoption">Adoption Inquiry</option>
+              <option value="volunteer">Volunteering</option>
+              <option value="donation">Donation Question</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <section>
+      <h2 style="text-align: center; color: var(--accent); margin-bottom: 1rem;">Our Location</h2>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7536223157963!2d32.04272231526293!3d0.4177223640121406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177d9a9d2a1e3a3f%3A0x9e3a9b3a3b3a3b3a!2sMityana%2C%20Uganda!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2023 HOUSE OF PAWS | Mityana, Uganda</p>
+    <p>Rescuing Dogs, Restoring Hope</p>
+  </footer>
 
   <script>
-    function toggleMenu() {
-      document.querySelector(".nav-links").classList.toggle("active");
-    }
-  </script>
+    // Mobile menu toggle (same as homepage)
+    const menuBtn = document.querySelector('.menu-btn');
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!expanded));
+    });
 
+    // Form submission
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message! We will respond as soon as possible.');
+      contactForm.reset();
+    });
+  </script>
 </body>
 </html>
