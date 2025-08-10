@@ -3,206 +3,540 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volunteer - House of Paw</title>
+  <title>Volunteer - HOUSE OF PAWS</title>
   <style>
-    /* General Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* REUSED FROM INDEX.HTML */
+    :root {
+      --bg: #0b0d0f; --panel: #0f1316; --muted: #9aa3a8; --accent: #ff6b6b; --accent-2: #4ecdc4;
+      --glass: rgba(255,255,255,0.03); --success: #22c55e; --danger: #ff4d4f; --card: #0b1113;
+      --max-width: 1200px; --radius: 12px; --gap: 18px; --shadow: 0 6px 20px rgba(2,6,10,0.6);
+      --text-light: #dfe7e9;
+      --btn-bg: var(--accent);
+      --btn-color: #081014;
+      --btn-hover-bg: #ff8585;
     }
-
     body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #fff;
-      line-height: 1.6;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text-light);
+      line-height: 1.45;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-
-    /* Header */
     header {
-      background: #1e1e1e;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(11, 13, 15, 0.85);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      align-items: center;
+      padding: 10px 22px;
+      z-index: 99;
     }
-
-    .logo {
+    .nav-row {
       display: flex;
       align-items: center;
+      gap: 16px;
     }
-
-    .logo img {
-      height: 40px;
-      margin-right: 10px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-light);
+      user-select: none;
     }
-
+    .logo {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #081014;
+      box-shadow: var(--shadow);
+    }
     nav {
       display: flex;
-      gap: 15px;
+      gap: 18px;
     }
-
     nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
+      color: var(--text-light);
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
-
-    nav a:hover {
-      color: #ff9800;
+    nav a:hover, nav a:focus {
+      background-color: var(--glass);
+      color: var(--accent-2);
     }
-
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
+    nav a.active {
+      color: var(--accent);
     }
-
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: #fff;
-      margin: 4px 0;
-    }
-
-    /* Mobile Menu */
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        background: #1e1e1e;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 200px;
-        padding: 10px;
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    /* Volunteer Section */
-    .volunteer {
-      padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .volunteer h1 {
-      margin-bottom: 20px;
-      color: #ff9800;
-    }
-
-    .volunteer p {
-      margin-bottom: 30px;
-    }
-
-    .form-container {
-      background: #1e1e1e;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .form-container input,
-    .form-container textarea,
-    .form-container button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
+    .menu-btn {
+      background: transparent;
       border: none;
-      border-radius: 5px;
-    }
-
-    .form-container input,
-    .form-container textarea {
-      background: #2c2c2c;
-      color: #fff;
-    }
-
-    .form-container button {
-      background: #ff9800;
-      color: #121212;
+      color: var(--text-light);
       cursor: pointer;
-      font-weight: bold;
+      display: none;
+      font-size: 1.5rem;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
     }
-
-    .form-container button:hover {
-      background: #e68900;
+    .menu-btn:hover,
+    .menu-btn:focus {
+      background-color: var(--glass);
+      outline: none;
     }
-
-    /* WhatsApp Floating Button */
-    .whatsapp-btn {
+    #navMobile {
+      display: none;
+      background: var(--panel);
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
-      color: white;
-      border-radius: 50%;
-      padding: 15px;
+      top: 60px; left: 0; right: 0;
+      padding: 1rem 2rem;
+      z-index: 98;
+      flex-direction: column;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    #navMobile a {
+      color: var(--text-light);
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 8px;
+      display: block;
+    }
+    #navMobile a:hover,
+    #navMobile a:focus {
+      background-color: var(--glass);
+      color: var(--accent-2);
+    }
+
+    /* VOLUNTEER PAGE SPECIFIC STYLES */
+    main {
+      max-width: var(--max-width);
+      margin: 80px auto 0;
+      padding: 0 1rem 3rem;
+    }
+    .volunteer-hero {
+      background: linear-gradient(rgba(15, 19, 22, 0.85), rgba(15, 19, 22, 0.85)), 
+                  url('https://images.unsplash.com/photo-1551334787-21e5bd1c339c?auto=format&fit=crop&w=1350&q=70') no-repeat center/cover;
+      padding: 5rem 1rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin: 2rem 0 3rem;
       text-align: center;
-      font-size: 24px;
-      text-decoration: none;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-      z-index: 999;
+    }
+    .volunteer-hero h1 {
+      font-size: 2.8rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .volunteer-hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .role-card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+    .role-card:hover {
+      transform: translateY(-5px);
+    }
+    .role-card h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .benefits-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+    .benefit-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .benefit-icon {
+      color: var(--accent-2);
+      font-size: 1.5rem;
+      margin-top: 0.2rem;
+    }
+    .volunteer-form {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 800px;
+      margin: 3rem auto;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--muted);
+      background: var(--panel);
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--btn-bg);
+      color: var(--btn-color);
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+    .btn:hover {
+      background: var(--btn-hover-bg);
+    }
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+    .btn-ghost:hover {
+      background: var(--accent);
+      color: var(--btn-color);
+    }
+    .testimonial {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin: 2rem 0;
+      position: relative;
+    }
+    .testimonial:before {
+      content: """;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 4rem;
+      color: var(--accent-2);
+      opacity: 0.2;
+      font-family: serif;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .testimonial-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .menu-btn { display: inline-block; }
+      .volunteer-hero h1 { font-size: 2rem; }
+      .volunteer-hero p { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
-
+  <!-- SAME HEADER AS HOMEPAGE WITH WORKING HAMBURGER -->
   <header>
-    <div class="logo">
-      <img src="logo.png" alt="House of Paw Logo">
-      <h2>House of Paw</h2>
-    </div>
-    <nav id="navMenu">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="volunteer.html">Volunteer</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <div class="hamburger" id="hamburger">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div class="nav-row">
+      <a href="index.html" class="brand" aria-label="House of Paws homepage">
+        <div class="logo" aria-hidden="true">H</div>
+        <span>HOUSE OF PAWS</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="adopt.html">Adopt</a>
+        <a href="volunteer.html" class="active">Volunteer</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-label="Toggle menu">☰</button>
     </div>
   </header>
 
-  <section class="volunteer">
-    <h1>Become a Volunteer</h1>
-    <p>Join us in making a difference in the lives of animals. Fill out the form below to get started!</p>
-    <div class="form-container">
-      <form>
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email" required>
-        <textarea placeholder="Why do you want to volunteer?" rows="5" required></textarea>
-        <button type="submit">Submit Application</button>
-      </form>
-    </div>
-  </section>
+  <!-- MOBILE NAV (SAME AS HOMEPAGE) -->
+  <nav id="navMobile" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="adopt.html">Adopt</a>
+    <a href="volunteer.html" class="active">Volunteer</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-  <!-- WhatsApp Button -->
-  <a href="https://wa.me/256xxxxxxxxx" class="whatsapp-btn" target="_blank">💬</a>
+  <main>
+    <!-- Hero Section -->
+    <section class="volunteer-hero">
+      <h1>Join Our Volunteer Team</h1>
+      <p>Your time and love can change a dog's life forever. Become part of our mission in Mityana.</p>
+      <a href="#volunteer-form" class="btn" style="margin-top: 1.5rem;">Apply Now</a>
+    </section>
+
+    <!-- Volunteer Roles -->
+    <section>
+      <h2 class="section-title">Volunteer Opportunities</h2>
+      <div class="roles-grid">
+        <div class="role-card">
+          <h3>🐕 Dog Walker</h3>
+          <p>Provide daily exercise and socialization for our rescue dogs. Morning and evening shifts available.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>2-4 hour shifts</li>
+            <li>No experience needed</li>
+            <li>Age 16+</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <h3>🏡 Foster Parent</h3>
+          <p>Temporarily care for dogs in your home until they find forever families. All supplies provided.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>Flexible duration</li>
+            <li>Training provided</li>
+            <li>Must have secure home</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <h3>✋ Event Volunteer</h3>
+          <p>Help at adoption events, fundraisers, and community outreach programs in Mityana.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>Weekend availability</li>
+            <li>Great for groups</li>
+            <li>Various roles</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <h3>🧼 Kennel Assistant</h3>
+          <p>Help with daily care including feeding, cleaning, and basic grooming at our shelter.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>Morning shifts</li>
+            <li>Physical activity</li>
+            <li>Age 18+</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <h3>📸 Photography Volunteer</h3>
+          <p>Capture beautiful photos of our dogs to help them get adopted. Equipment provided.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>Flexible schedule</li>
+            <li>Portfolio building</li>
+            <li>Basic skills needed</li>
+          </ul>
+        </div>
+        <div class="role-card">
+          <h3>🛠️ Maintenance Helper</h3>
+          <p>Assist with shelter repairs, building projects, and facility improvements.</p>
+          <ul style="margin-top: 1rem; padding-left: 1.2rem;">
+            <li>Weekday availability</li>
+            <li>Tools provided</li>
+            <li>All skill levels</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Volunteer Benefits -->
+    <section>
+      <h2 class="section-title">Why Volunteer With Us?</h2>
+      <div class="benefits-list">
+        <div class="benefit-item">
+          <div class="benefit-icon">❤️</div>
+          <div>
+            <h3>Make a Difference</h3>
+            <p>Directly impact the lives of abandoned and abused dogs in Mityana.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🤝</div>
+          <div>
+            <h3>Community</h3>
+            <p>Join a passionate team of animal lovers and make new friends.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🎓</div>
+          <div>
+            <h3>Learn New Skills</h3>
+            <p>Gain experience in animal care, training, and nonprofit work.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🐾</div>
+          <div>
+            <h3>Dog Time</h3>
+            <p>Get your daily dose of puppy love and canine companionship.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">📜</div>
+          <div>
+            <h3>Certification</h3>
+            <p>Receive volunteer certificates and references for your work.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🎉</div>
+          <div>
+            <h3>Special Events</h3>
+            <p>Invitations to volunteer appreciation parties and adoption celebrations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Volunteer Testimonial -->
+    <section>
+      <h2 class="section-title">Volunteer Stories</h2>
+      <div class="testimonial">
+        <p>"Volunteering at House of Paws has been the most rewarding experience. Seeing scared, abandoned dogs transform into happy, loving pets ready for adoption makes every hour worthwhile. The team feels like family, and I've learned so much about dog behavior and care."</p>
+        <div class="testimonial-author">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=70" alt="Grace N.">
+          <div>
+            <h4>Grace N.</h4>
+            <p>Volunteer since 2021</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Volunteer Form -->
+    <section id="volunteer-form">
+      <h2 class="section-title">Ready to Volunteer?</h2>
+      <div class="volunteer-form">
+        <form id="volunteerApplication">
+          <div class="form-group">
+            <label for="v-name">Full Name</label>
+            <input type="text" id="v-name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="v-email">Email Address</label>
+            <input type="email" id="v-email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="v-phone">Phone Number</label>
+            <input type="tel" id="v-phone" name="phone" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="v-role">Interested Role(s)</label>
+            <select id="v-role" name="role" multiple>
+              <option value="walker">Dog Walker</option>
+              <option value="foster">Foster Parent</option>
+              <option value="event">Event Volunteer</option>
+              <option value="kennel">Kennel Assistant</option>
+              <option value="photo">Photographer</option>
+              <option value="maintenance">Maintenance Helper</option>
+              <option value="other">Other</option>
+            </select>
+            <small>Hold Ctrl/Cmd to select multiple</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="v-availability">Availability</label>
+            <input type="text" id="v-availability" name="availability" placeholder="Days/times you're available">
+          </div>
+          
+          <div class="form-group">
+            <label for="v-experience">Previous Experience with Dogs</label>
+            <textarea id="v-experience" name="experience"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="v-why">Why do you want to volunteer with us?</label>
+            <textarea id="v-why" name="why" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn">Submit Application</button>
+          <button type="reset" class="btn btn-ghost" style="margin-left: 1rem;">Reset Form</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section style="text-align: center; margin: 3rem 0;">
+      <h2 style="color: var(--accent);">Not ready to commit?</h2>
+      <p>Try a one-time volunteer day to see if it's right for you!</p>
+      <a href="contact.html" class="btn">Contact Us to Arrange</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2023 HOUSE OF PAWS | Mityana, Uganda</p>
+    <p>Rescuing Dogs, Restoring Hope</p>
+  </footer>
 
   <script>
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
+    // Mobile menu toggle - NOW FULLY FUNCTIONAL
+    const menuBtn = document.getElementById('menuBtn');
+    const navMobile = document.getElementById('navMobile');
+    
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!expanded));
+      navMobile.style.display = expanded ? 'none' : 'flex';
+    });
 
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navMobile.style.display === 'flex' && 
+          !navMobile.contains(e.target) && 
+          e.target !== menuBtn) {
+        navMobile.style.display = 'none';
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Form submission
+    const volunteerForm = document.getElementById('volunteerApplication');
+    volunteerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your volunteer application! We will contact you within 3 business days.');
+      volunteerForm.reset();
     });
   </script>
-
 </body>
 </html>
